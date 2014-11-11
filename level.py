@@ -23,7 +23,7 @@ def load_level(mapa):
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group()
 	player_list = pygame.sprite.Group()
-	
+	id_given = 0
 	pos_y = 0
 	for linea in mapa:
 		pos_x = 0
@@ -31,20 +31,30 @@ def load_level(mapa):
 			if cuadro == 'W':
 				wall = Wall(pos_x*32, pos_y*32)
 				sprite_list.add(wall)
+				wall.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
+				id_given += 1 
 			if cuadro == 'P':
-				player = Player(pos_x*32, pos_y*32)
-				sprite_list.add(player)
-				updatable_list.add(player)
+				p_inicio = (pos_x*32, pos_y*32)
+				p_id = id_given
+				id_given += 1
 			pos_x += 1
 		pos_y += 1
-	return sprite_list, updatable_list, player
+	return sprite_list, updatable_list, p_inicio, p_id
 
 def Level(nombre):
 	clock = pygame.time.Clock()
 	exit_lvl = False
 	mapa, fondo = ReadFile(nombre + '.txt')
 	fondo = pygame.image.load('images/' + fondo)
-	sprite_list, updatable_list, player = load_level(mapa)
+	sprite_list, updatable_list, p_inicio, p_id = load_level(mapa)
+	
+	pos_x, pos_y = p_inicio
+	player = Player(pos_x, pos_y)
+	player.level = sprite_list #Definimos el nivel dentro del usuario para que tenga referencia de este
+	
+	sprite_list.add(player)
+	updatable_list.add(player)
+	
 	while not exit_lvl:
 		for event in pygame.event.get():
 			
@@ -81,9 +91,7 @@ def Level(nombre):
 					player.stop()
 				
 			'''
-		player.update()
 		
-		room.box_list.update(gravity)
 		lista_cajas = room.box_list.sprites()
 		
 		# --- Actualizar pantalla ---

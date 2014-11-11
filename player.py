@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
 			self.spd_y = 1
 		else:
 			self.spd_y += .10
+	#def collision(self):
 		
 	def update(self):
 		self.calc_grav()
