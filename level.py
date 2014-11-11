@@ -50,6 +50,7 @@ def Level(nombre):
 	
 	pos_x, pos_y = p_inicio
 	player = Player(pos_x, pos_y)
+	player.ID = p_id
 	player.level = sprite_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	
 	sprite_list.add(player)
