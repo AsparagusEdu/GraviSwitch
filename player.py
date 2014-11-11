@@ -10,12 +10,14 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
+	
 	def calc_grav(self):
 		if self.spd_y == 0:
 			self.spd_y = 1
 		else:
 			self.spd_y += .10
-	def collision(self):
+			
+	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
 			if block.ID != self.ID:
@@ -23,17 +25,29 @@ class Player(pygame.sprite.Sprite):
 					self.rect.bottom = block.rect.top
 				elif self.spd_y < 0:
 					self.rect.top = block.rect.bottom
-
 				# Detener movimiento vertical
 				self.spd_y = 0
+	
+	def collision_x(self):
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		for block in hit_list:
+			if block.ID != self.ID:
+				if self.spd_x > 0:
+					self.rect.right = block.rect.left
+				elif self.spd_x < 0:
+					self.rect.left = block.rect.right
+				# Detener movimiento horizontal
+				self.spd_x = 0
 		
 	def update(self):
-		self.collision()
+		self.rect.x += self.spd_x
+		self.collision_x()
+		
+		self.rect.y += self.spd_y
+		self.collision_y()
+		
 		self.calc_grav()
 		
-		self.rect.x += self.spd_x
-		self.rect.y += self.spd_y
-	
 	def go_left(self):
 		self.spd_x = -3
 	def go_right(self):
