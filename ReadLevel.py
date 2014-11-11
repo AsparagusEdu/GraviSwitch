@@ -1,5 +1,5 @@
 import pygame
-from classWall import *
+from Wall import *
 def ReadFile(nombre):
 	archivo = open("levels/" + nombre)
 	mapa = []

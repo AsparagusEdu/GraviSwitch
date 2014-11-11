@@ -1,6 +1,6 @@
 import pygame
-from classReadLevel import *
-from classWall import Wall
+from ReadLevel import *
+from Wall import Wall
 from constants import screen
 def Level(nombre):
 	clock = pygame.time.Clock()
