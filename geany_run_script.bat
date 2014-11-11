@@ -1,4 +1,4 @@
-python "pruebas.py"
+python "main.py"
 
 pause
 del "%0"
