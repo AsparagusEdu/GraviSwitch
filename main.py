@@ -1,21 +1,35 @@
-import pygame, os, sys
-import constants as C
-
+import pygame, os, sys, constants as C
+from classReadLevel import ReadFile
+from classWall import Wall
 screen = pygame.display.set_mode((C.SCREEN_WIDTH, C.SCREEN_HEIGHT))
+
+def load_level(mapa, fondo):
+	wall_list = pygame.sprite.Group()
+	pos_y = 0
+	for linea in mapa:
+		pos_x = 0
+		for cuadro in linea:
+			if cuadro == 'W':
+				wall = Wall(pos_x*32, pos_y*32)
+				wall_list.add(wall)
+			pos_x += 1
+		pos_y += 1
+	return wall_list
 
 def main():
 	pygame.init()
 	pygame.display.set_caption(C.GAME_NAME)
 	clock = pygame.time.Clock()
 	done = False
+	mapa1, fondo1 = ReadFile('level0.txt')
+	wall_list = load_level(mapa1, fondo1)
 	while not done:
 		for event in pygame.event.get():
-			
 			if event.type == pygame.QUIT:
-				sys.exit()
+				done = True
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					sys.exit()
+					done = True
 				'''
 				if event.key == pygame.K_r:
 					return False
@@ -51,6 +65,7 @@ def main():
 		room.wall_list.draw(screen)
 		room.box_list.draw(screen)
 		'''
+		wall_list.draw(screen)
 		pygame.display.flip()
 		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
@@ -64,4 +79,7 @@ def main():
 		'''
 		clock.tick(60)
 
+	
+	
+	
 main()
