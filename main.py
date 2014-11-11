@@ -1,7 +1,5 @@
 import pygame, os, sys, constants as C
-from ReadLevel import *
-from Wall import Wall
-from level import *
+from level import Level
 
 def main():
 	pygame.init()
