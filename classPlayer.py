@@ -1,5 +1,6 @@
 import pygame
-from main import load_image, BLOCK_SCALE, RESIZE
+from GraviSwitch import *
+import classObjects
 
 class Player(pygame.sprite.Sprite):
 	""" Jugador """

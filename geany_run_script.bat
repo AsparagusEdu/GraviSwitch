@@ -1,4 +1,4 @@
-python "main.py"
+python "GraviSwitch.py"
 
 pause
 del "%0"
