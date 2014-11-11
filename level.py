@@ -19,24 +19,24 @@ def ReadFile(nombre):
 	return mapa, fondo
 	
 def load_level(mapa):
-	wall_list = pygame.sprite.Group()
+	sprite_list = pygame.sprite.Group()
 	pos_y = 0
 	for linea in mapa:
 		pos_x = 0
 		for cuadro in linea:
 			if cuadro == 'W':
 				wall = Wall(pos_x*32, pos_y*32)
-				wall_list.add(wall)
+				sprite_list.add(wall)
 			pos_x += 1
 		pos_y += 1
-	return wall_list
+	return sprite_list
 
 def Level(nombre):
 	clock = pygame.time.Clock()
 	exit_lvl = False
 	mapa1, fondo1 = ReadFile(nombre + '.txt')
 	fondo1 = pygame.image.load('images/' + fondo1)
-	wall_list = load_level(mapa1)
+	sprite_list = load_level(mapa1)
 	while not exit_lvl:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -80,7 +80,7 @@ def Level(nombre):
 		room.wall_list.draw(screen)
 		room.box_list.draw(screen)
 		'''
-		wall_list.draw(screen)
+		sprite_list.draw(screen)
 		
 		pygame.display.flip()
 		'''
