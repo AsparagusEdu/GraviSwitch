@@ -8,6 +8,6 @@ W              W
 WW  W  WW  W  WW
 W            W W
 W           W  W
-W        I W   W
+W        P W   W
 WWWWWWWWWWWWWWWW
 #fondo_2.png

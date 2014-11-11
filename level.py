@@ -1,6 +1,7 @@
 import pygame
 from Wall import Wall
 from constants import screen
+from player import *
 
 def ReadFile(nombre):
 	archivo = open("levels/" + nombre)
@@ -27,6 +28,9 @@ def load_level(mapa):
 			if cuadro == 'W':
 				wall = Wall(pos_x*32, pos_y*32)
 				sprite_list.add(wall)
+			if cuadro == 'P':
+				player = Player(pos_x*32, pos_y*32)
+				sprite_list.add(player)
 			pos_x += 1
 		pos_y += 1
 	return sprite_list
@@ -74,6 +78,7 @@ def Level(nombre):
 		
 		# --- Actualizar pantalla ---
 		'''
+		sprite_list.update()
 		screen.blit(fondo1, (0,0))
 		'''
 		movingsprites.draw(screen)
