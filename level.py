@@ -21,6 +21,9 @@ def ReadFile(nombre):
 	
 def load_level(mapa):
 	sprite_list = pygame.sprite.Group()
+	updatable_list = pygame.sprite.Group()
+	player_list = pygame.sprite.Group()
+	
 	pos_y = 0
 	for linea in mapa:
 		pos_x = 0
@@ -31,18 +34,20 @@ def load_level(mapa):
 			if cuadro == 'P':
 				player = Player(pos_x*32, pos_y*32)
 				sprite_list.add(player)
+				updatable_list.add(player)
 			pos_x += 1
 		pos_y += 1
-	return sprite_list
+	return sprite_list, updatable_list, player
 
 def Level(nombre):
 	clock = pygame.time.Clock()
 	exit_lvl = False
-	mapa1, fondo1 = ReadFile(nombre + '.txt')
-	fondo1 = pygame.image.load('images/' + fondo1)
-	sprite_list = load_level(mapa1)
+	mapa, fondo = ReadFile(nombre + '.txt')
+	fondo = pygame.image.load('images/' + fondo)
+	sprite_list, updatable_list, player = load_level(mapa)
 	while not exit_lvl:
 		for event in pygame.event.get():
+			
 			if event.type == pygame.QUIT:
 				exit_lvl = True
 			if event.type == pygame.KEYDOWN:
@@ -51,10 +56,13 @@ def Level(nombre):
 				'''
 				if event.key == pygame.K_r:
 					return False
+				'''
+			
 				if event.key == pygame.K_LEFT:
 					player.go_left()
 				if event.key == pygame.K_RIGHT:
 					player.go_right()
+				'''
 				if event.key == pygame.K_UP:
 					player.jump()
 				if event.key == pygame.K_w:
@@ -65,12 +73,14 @@ def Level(nombre):
 					gravity = 'E'
 				if event.key == pygame.K_a:
 					gravity = 'O'
+				'''
 			if event.type == pygame.KEYUP:
-				if event.key == pygame.K_LEFT and player.change_x < 0:
+				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()
-				if event.key == pygame.K_RIGHT and player.change_x > 0:
+				if event.key == pygame.K_RIGHT and player.spd_x > 0:
 					player.stop()
-
+				
+			'''
 		player.update()
 		
 		room.box_list.update(gravity)
@@ -78,13 +88,8 @@ def Level(nombre):
 		
 		# --- Actualizar pantalla ---
 		'''
-		sprite_list.update()
-		screen.blit(fondo1, (0,0))
-		'''
-		movingsprites.draw(screen)
-		room.wall_list.draw(screen)
-		room.box_list.draw(screen)
-		'''
+		updatable_list.update()
+		screen.blit(fondo, (0,0))
 		sprite_list.draw(screen)
 		
 		pygame.display.flip()

@@ -1,6 +1,6 @@
 import pygame
 class Player(pygame.sprite.Sprite):
-	spd_x = 1
+	spd_x = 0
 	spd_y = 0
 	def __init__(self, x_init, y_init):
 		pygame.sprite.Sprite.__init__(self)
@@ -14,4 +14,12 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.rect.x += self.spd_x
 		self.rect.y += self.spd_y
+	
+	def go_left(self):
+		self.spd_x = -3
+	def go_right(self):
+		self.spd_x = 3
+	def stop(self):
+		self.spd_x = 0
+		
 		
