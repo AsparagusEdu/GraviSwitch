@@ -36,9 +36,7 @@ class Player(pygame.sprite.Sprite):
 					self.rect.right = block.rect.left
 				elif self.spd_x < 0:
 					self.rect.left = block.rect.right
-				# Detener movimiento horizontal
-				self.spd_x = 0
-		
+				
 	def update(self):
 		self.rect.x += self.spd_x
 		self.collision_x()
@@ -57,7 +55,6 @@ class Player(pygame.sprite.Sprite):
 	def jump(self):
 		self.rect.y +=2
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
-		print hit_list
 		self.rect.y -=2
 		for i in hit_list:
 			if i.ID != self.ID:
