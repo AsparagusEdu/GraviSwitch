@@ -10,6 +10,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
+		self.dead = False
 	
 	def calc_grav(self,grav):
 		if self.spd_y == 0:

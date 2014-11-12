@@ -5,9 +5,9 @@ from player import *
 from read_file import ReadFile
 
 def Level(nombre):
-	clock = pygame.time.Clock()
+	clock = pygame.time.Clock() #Reloj
 	exit_lvl = False
-	mapa, fondo = ReadFile(nombre + '.txt')
+	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
@@ -15,6 +15,11 @@ def Level(nombre):
 	player = Player(pos_x, pos_y)
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
+	
+	for box in box_list.sprites():
+		box.level = col_list
+		box.boxes = box_list
+	
 	
 	sprite_list.add(player)
 	updatable_list.add(player)
@@ -41,9 +46,26 @@ def Level(nombre):
 				if event.key == pygame.K_UP:
 					player.jump()
 				if event.key == pygame.K_w:
-					gravity = 'N'
+					
+					switch = True
+					for box in box_list.sprites():
+						print box.state
+						if box.state == 'AIR':
+							switch = False
+							
+					if switch:
+					
+						gravity = 'N'
 				if event.key == pygame.K_s:
-					gravity = 'S'
+					
+					switch = True
+					for box in box_list.sprites():
+						print box.state
+						if box.state == 'AIR':
+							switch = False
+							
+					if switch:
+						gravity = 'S'
 				if event.key == pygame.K_d:
 					gravity = 'E'
 				if event.key == pygame.K_a:
@@ -56,6 +78,8 @@ def Level(nombre):
 					player.stop()
 				
 		updatable_list.update(gravity)
+		if player.dead == True:
+			exit_lvl = True
 		screen.blit(fondo, (0,0))
 		sprite_list.draw(screen)
 		

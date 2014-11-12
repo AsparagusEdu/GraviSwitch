@@ -27,8 +27,9 @@ def load_level(mapa):
 			if cuadro == 'B':
 				box = Box(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(box)
-				col_list.add(wall)
+				col_list.add(box)
 				updatable_list.add(box)
+				box_list.add(box)
 				box.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1 
 			pos_x += 1
