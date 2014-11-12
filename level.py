@@ -45,31 +45,42 @@ def Level(nombre):
 					player.go_right()
 				if event.key == pygame.K_UP:
 					player.jump()
+				#-------
 				if event.key == pygame.K_w:
-					
 					switch = True
 					for box in box_list.sprites():
 						print box.state
 						if box.state == 'AIR':
 							switch = False
-							
 					if switch:
-					
 						gravity = 'N'
+				#-------
 				if event.key == pygame.K_s:
-					
 					switch = True
 					for box in box_list.sprites():
 						print box.state
 						if box.state == 'AIR':
 							switch = False
-							
 					if switch:
 						gravity = 'S'
+				#-------
 				if event.key == pygame.K_d:
-					gravity = 'E'
+					switch = True
+					for box in box_list.sprites():
+						print box.state
+						if box.state == 'AIR':
+							switch = False
+					if switch:
+						gravity = 'E'
+				#-------
 				if event.key == pygame.K_a:
-					gravity = 'O'
+					switch = True
+					for box in box_list.sprites():
+						print box.state
+						if box.state == 'AIR':
+							switch = False
+					if switch:
+						gravity = 'O'
 				
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
