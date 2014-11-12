@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
 	
-	def calc_grav(self):
+	def calc_grav(self,grav):
 		if self.spd_y == 0:
 			self.spd_y = 1
 		else:
@@ -37,14 +37,14 @@ class Player(pygame.sprite.Sprite):
 				elif self.spd_x < 0:
 					self.rect.left = block.rect.right
 				
-	def update(self):
+	def update(self,grav):
 		self.rect.x += self.spd_x
 		self.collision_x()
 		
 		self.rect.y += self.spd_y
 		self.collision_y()
 		
-		self.calc_grav()
+		self.calc_grav(grav)
 		
 	def go_left(self):
 		self.spd_x = -2
