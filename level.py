@@ -1,6 +1,6 @@
 import pygame
 from Wall import Wall
-from constants import screen, BLOCK_SIZE
+from constants import screen, BLOCK_SIZE, FPS
 from player import *
 
 def ReadFile(nombre):
@@ -45,7 +45,7 @@ def Level(nombre):
 	clock = pygame.time.Clock()
 	exit_lvl = False
 	mapa, fondo = ReadFile(nombre + '.txt')
-	fondo = pygame.image.load('images/' + fondo)
+	fondo = pygame.image.load('images/' + fondo).convert()
 	sprite_list, updatable_list, p_inicio, p_id = load_level(mapa)
 	
 	pos_x, pos_y = p_inicio
@@ -113,5 +113,5 @@ def Level(nombre):
 		if player.rect.left >= SCREEN_WIDTH:
 			return False
 		'''
-		clock.tick(60)
+		clock.tick(FPS)
 	

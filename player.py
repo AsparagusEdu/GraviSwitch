@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
 	def __init__(self, x_init, y_init):
 		pygame.sprite.Sprite.__init__(self)
 		
-		self.image = pygame.image.load('images/Isaac1.png')
+		self.image = pygame.image.load('images/Isaac1.png').convert_alpha()
 		self.rect = self.image.get_rect()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
