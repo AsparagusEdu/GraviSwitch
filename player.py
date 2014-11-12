@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
 		if self.spd_y == 0:
 			self.spd_y = 1
 		else:
-			self.spd_y += .3
+			self.spd_y += .15
 			
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -47,9 +47,9 @@ class Player(pygame.sprite.Sprite):
 		self.calc_grav()
 		
 	def go_left(self):
-		self.spd_x = -3
+		self.spd_x = -2
 	def go_right(self):
-		self.spd_x = 3
+		self.spd_x = 2
 	def stop(self):
 		self.spd_x = 0
 	def jump(self):
@@ -60,5 +60,5 @@ class Player(pygame.sprite.Sprite):
 			if i.ID != self.ID:
 				#if len(hit_list) > 0 and:
 				
-				self.spd_y = -4
+				self.spd_y = -3
 		

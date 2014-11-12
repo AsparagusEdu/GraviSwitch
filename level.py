@@ -1,6 +1,6 @@
 import pygame
 from Wall import Wall
-from constants import screen
+from constants import screen, BLOCK_SIZE
 from player import *
 
 def ReadFile(nombre):
@@ -29,12 +29,12 @@ def load_level(mapa):
 		pos_x = 0
 		for cuadro in linea:
 			if cuadro == 'W':
-				wall = Wall(pos_x*32, pos_y*32)
+				wall = Wall(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(wall)
 				wall.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1 
 			if cuadro == 'P':
-				p_inicio = (pos_x*32, pos_y*32)
+				p_inicio = (pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				p_id = id_given
 				id_given += 1
 			pos_x += 1
