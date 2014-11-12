@@ -73,9 +73,10 @@ def Level(nombre):
 					player.go_left()
 				if event.key == pygame.K_RIGHT:
 					player.go_right()
-				'''
 				if event.key == pygame.K_UP:
 					player.jump()
+					
+				'''
 				if event.key == pygame.K_w:
 					gravity = 'N'
 				if event.key == pygame.K_s:
