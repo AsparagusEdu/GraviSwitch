@@ -39,12 +39,15 @@ def Level(nombre):
 					return False
 				'''
 			
-				if event.key == pygame.K_LEFT:
+				if event.key == pygame.K_LEFT and not player.touch_O():
 					player.go_left()
-				if event.key == pygame.K_RIGHT:
+					print 'Tecla - Izquierda'
+				if event.key == pygame.K_RIGHT and not player.touch_E():
 					player.go_right()
-				if event.key == pygame.K_UP:
+					print 'Tecla - Derecha'
+				if event.key == pygame.K_UP and player.touch_S():
 					player.jump()
+					print 'Tecla - Salto'
 				#-------
 				if event.key == pygame.K_w:
 					switch = True
@@ -53,7 +56,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'N'
-						print 'NORTE' #DEBUG
+						print 'Gravedad - NORTE' #DEBUG
 				#-------
 				if event.key == pygame.K_s:
 					switch = True
@@ -62,7 +65,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'S'
-						print 'SUR' #DEBUG
+						print 'Gravedad - SUR' #DEBUG
 				#-------
 				if event.key == pygame.K_d:
 					switch = True
@@ -71,7 +74,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'E'
-						print 'ESTE'
+						print 'Gravedad - ESTE'
 				#-------
 				if event.key == pygame.K_a:
 					switch = True
@@ -80,7 +83,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'O'
-						print 'OESTE'
+						print 'Gravedad - OESTE'
 				
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
