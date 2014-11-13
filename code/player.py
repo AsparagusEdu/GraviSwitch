@@ -11,13 +11,37 @@ class Player(pygame.sprite.Sprite):
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
 		self.dead = False
-	
-	def calc_grav(self,grav):
-		if self.spd_y == 0:
-			self.spd_y = 1
-		else:
-			self.spd_y += .15
 			
+	def touch_N(self):
+		self.rect.y -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y +=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	def touch_S(self):
+		self.rect.y +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y -=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	def touch_E(self):
+		self.rect.x +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x -=1
+		if len(hit_list) <= 1:
+			return False
+		return True	
+	def touch_O(self):
+		self.rect.x -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x +=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	
+	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
@@ -28,7 +52,6 @@ class Player(pygame.sprite.Sprite):
 					self.rect.top = block.rect.bottom
 				# Detener movimiento vertical
 				self.spd_y = 0
-	
 	def collision_x(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
@@ -45,7 +68,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y += self.spd_y
 		self.collision_y()
 		
-		self.calc_grav(grav)
+		if not self.touch_S():
+			self.spd_y += .15
+			#self.calc_grav(grav)
 		
 	def go_left(self):
 		self.spd_x = -2

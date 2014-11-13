@@ -53,6 +53,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'N'
+						print 'NORTE' #DEBUG
 				#-------
 				if event.key == pygame.K_s:
 					switch = True
@@ -61,6 +62,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'S'
+						print 'SUR' #DEBUG
 				#-------
 				if event.key == pygame.K_d:
 					switch = True
@@ -69,6 +71,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'E'
+						print 'ESTE'
 				#-------
 				if event.key == pygame.K_a:
 					switch = True
@@ -77,6 +80,7 @@ def Level(nombre):
 							switch = False
 					if switch:
 						gravity = 'O'
+						print 'OESTE'
 				
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:

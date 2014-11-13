@@ -25,7 +25,7 @@ class Box(pygame.sprite.Sprite):
 				self.spd_x = 4
 				self.state = 'AIR'
 		elif grav == 'O':
-			if not self.touch_O() <= 1 and self.spd_y == 0:
+			if not self.touch_O() and self.spd_y == 0:
 				self.spd_x = -4
 				self.state = 'AIR'
 		
@@ -92,6 +92,7 @@ class Box(pygame.sprite.Sprite):
 		self.collision_y()
 		self.rect.x += self.spd_x
 		self.collision_x()
-		self.calc_grav(grav)
+		if self.state == 'STOP':
+			self.calc_grav(grav)
 		
 		
