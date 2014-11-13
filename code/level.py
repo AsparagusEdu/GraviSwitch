@@ -49,7 +49,6 @@ def Level(nombre):
 				if event.key == pygame.K_w:
 					switch = True
 					for box in box_list.sprites():
-						print box.state
 						if box.state == 'AIR':
 							switch = False
 					if switch:
@@ -58,7 +57,6 @@ def Level(nombre):
 				if event.key == pygame.K_s:
 					switch = True
 					for box in box_list.sprites():
-						print box.state
 						if box.state == 'AIR':
 							switch = False
 					if switch:
@@ -67,7 +65,6 @@ def Level(nombre):
 				if event.key == pygame.K_d:
 					switch = True
 					for box in box_list.sprites():
-						print box.state
 						if box.state == 'AIR':
 							switch = False
 					if switch:
@@ -76,7 +73,6 @@ def Level(nombre):
 				if event.key == pygame.K_a:
 					switch = True
 					for box in box_list.sprites():
-						print box.state
 						if box.state == 'AIR':
 							switch = False
 					if switch:

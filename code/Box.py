@@ -13,34 +13,54 @@ class Box(pygame.sprite.Sprite):
 	
 	def calc_grav(self, grav): 
 		if grav == 'N':
-			self.rect.y -=1
-			hit_list = pygame.sprite.spritecollide(self, self.level, False)
-			self.rect.y +=1
-			if len(hit_list) <= 1 and self.spd_y == 0:
+			if not self.touch_N() and self.spd_y == 0:
 				self.spd_y = -4
 				self.state = 'AIR'
 		elif grav == 'S':
-			self.rect.y +=1
-			hit_list = pygame.sprite.spritecollide(self, self.level, False)
-			self.rect.y -=1
-			if len(hit_list) <= 1 and self.spd_y == 0:
+			if not self.touch_S() and self.spd_y == 0:
 				self.spd_y = 4
 				self.state = 'AIR'
 		elif grav == 'E':
-			self.rect.x +=1
-			hit_list = pygame.sprite.spritecollide(self, self.level, False)
-			self.rect.x -=1
-			if len(hit_list) <= 1 and self.spd_y == 0:
+			if not self.touch_E() and self.spd_y == 0:
 				self.spd_x = 4
 				self.state = 'AIR'
 		elif grav == 'O':
-			self.rect.x -=1
-			hit_list = pygame.sprite.spritecollide(self, self.level, False)
-			self.rect.x +=1
-			if len(hit_list) <= 1 and self.spd_y == 0:
+			if not self.touch_O() <= 1 and self.spd_y == 0:
 				self.spd_x = -4
 				self.state = 'AIR'
 		
+	
+	
+	def touch_N(self):
+		self.rect.y -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y +=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	def touch_S(self):
+		self.rect.y +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y -=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	def touch_E(self):
+		self.rect.x +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x -=1
+		if len(hit_list) <= 1:
+			return False
+		return True	
+	def touch_O(self):
+		self.rect.x -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x +=1
+		if len(hit_list) <= 1:
+			return False
+		return True
+	
+	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:

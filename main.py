@@ -1,4 +1,4 @@
-import pygame, os, sys, code.constantes as C
+import pygame, os, sys, code.constants as C
 from code.level import Level
 
 def main():
