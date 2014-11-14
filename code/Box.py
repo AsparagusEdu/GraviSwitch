@@ -83,7 +83,6 @@ class Box(pygame.sprite.Sprite):
 				# Detener movimiento vertical
 				self.spd_y = 0
 				self.state = 'STOP'
-				
 	def collision_x(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
@@ -96,6 +95,8 @@ class Box(pygame.sprite.Sprite):
 				# Detener movimiento vertical
 				self.spd_x = 0
 				self.state = 'STOP'	
+	
+	
 	
 	def update(self, grav):
 		self.rect.y += self.spd_y

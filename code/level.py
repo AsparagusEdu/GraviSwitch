@@ -21,6 +21,7 @@ def Level(nombre):
 	for box in box_list.sprites():
 		box.level = col_list
 		box.boxes = box_list
+		box.player = player
 	
 	
 	sprite_list.add(player)
@@ -106,6 +107,7 @@ def Level(nombre):
 				return False
 			'''
 			clock.tick(FPS)
+		#Menu al morir D:
 		screen.blit(Retry, (0,0))
 		pygame.display.flip()
 		for event in pygame.event.get():
@@ -122,5 +124,5 @@ def Level(nombre):
 					for obj in updatable_list.sprites():
 						gravity = 'S'
 						obj.reboot(gravity)
-			clock.tick(FPS)
+			clock.tick(10)
 		
