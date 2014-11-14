@@ -61,8 +61,10 @@ class Player(pygame.sprite.Sprite):
 			elif bloxy.spd_x < 0:
 				self.rect.right = bloxy.rect.left
 			elif bloxy.spd_y > 0:
+				self.spd_y = 0
 				self.rect.top = bloxy.rect.bottom
 			elif bloxy.spd_y < 0:
+				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
 				
 		elif len(hit_list) >= 2:
