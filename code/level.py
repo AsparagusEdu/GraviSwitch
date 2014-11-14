@@ -114,9 +114,9 @@ def Level(nombre):
 				pygame.quit()
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					pygame.quit()
+					lvl_exit = True
 				elif event.key == pygame.K_n:
-					pygame.quit()
+					lvl_exit = True
 				elif event.key == pygame.K_y:
 					lvl_retry = True
 					for obj in updatable_list.sprites():

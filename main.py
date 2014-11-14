@@ -6,5 +6,5 @@ def main():
 	pygame.display.set_caption(C.GAME_NAME)
 	
 	Level('levelTest1')
-	
+	#Level('level0')
 main()
