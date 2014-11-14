@@ -13,6 +13,11 @@ main()
 
 #-------TO DO------
 '''
+- FPS!!!
+
+- BUG: A veces Player no es cuando salta mientras las cajas van hacia abajo
+- BUG: Uno es aplastado cuando salta entre 2 cajas adyacentes que van cayendo hacia abajo
+
 - Pantalla de titulo
 
 - Crear pinchos
