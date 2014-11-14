@@ -7,9 +7,21 @@ class Box(pygame.sprite.Sprite):
 
 		self.image = pygame.image.load('images/box.png').convert()
 		self.rect = self.image.get_rect()		
-		self.rect.y = y
 		self.rect.x = x
+		self.rect.y = y
 		self.state = 'STOP'
+		
+		self.init_x = x
+		self.init_y = y
+	
+	def reboot(self,grav):
+		
+		self.rect.x = self.init_x
+		self.rect.y = self.init_y
+		self.spd_y = 0
+		self.spd_x = 0
+		self.state = 'STOP'
+		
 	
 	def calc_grav(self, grav): 
 		if grav == 'N':
@@ -29,8 +41,6 @@ class Box(pygame.sprite.Sprite):
 				self.spd_x = -4
 				self.state = 'AIR'
 		
-	
-	
 	def touch_N(self):
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)

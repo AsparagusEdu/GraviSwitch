@@ -5,11 +5,13 @@ from player import *
 from read_file import ReadFile
 
 def Level(nombre):
-	clock = pygame.time.Clock() #Reloj
+	
 	
 	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	
+	Retry = pygame.image.load('images/retry.png').convert()
 	
 	pos_x, pos_y = p_inicio
 	player = Player(pos_x, pos_y)
@@ -26,29 +28,29 @@ def Level(nombre):
 	
 	gravity = 'S'
 	lvl_exit = False
-	
+	lvl_retry = True
 	while not lvl_exit:
-		lvl_retry = True
 		while lvl_retry:
+			clock = pygame.time.Clock() #Reloj
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					lvl_retry = False
 					lvl_exit = True
-				if event.type == pygame.KEYDOWN:
+				elif event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						lvl_retry = False
-					if event.key == pygame.K_r:
+					elif event.key == pygame.K_r:
 						player.dead = True
-					if event.key == pygame.K_LEFT and not player.touch_O():
+					elif event.key == pygame.K_LEFT and not player.touch_O():
 						player.go_left()
 						print 'Tecla - Izquierda'
-					if event.key == pygame.K_RIGHT and not player.touch_E():
+					elif event.key == pygame.K_RIGHT and not player.touch_E():
 						player.go_right()
 						print 'Tecla - Derecha'
-					if event.key == pygame.K_UP and player.touch_S():
+					elif event.key == pygame.K_UP and player.touch_S():
 						player.jump()
 						print 'Tecla - Salto'
-					if event.key == pygame.K_w:
+					elif event.key == pygame.K_w:
 						switch = True
 						for box in box_list.sprites():
 							if box.state == 'AIR':
@@ -56,7 +58,7 @@ def Level(nombre):
 						if switch:
 							gravity = 'N'
 							print 'Gravedad - NORTE' #DEBUG
-					if event.key == pygame.K_s:
+					elif event.key == pygame.K_s:
 						switch = True
 						for box in box_list.sprites():
 							if box.state == 'AIR':
@@ -64,7 +66,7 @@ def Level(nombre):
 						if switch:
 							gravity = 'S'
 							print 'Gravedad - SUR' #DEBUG
-					if event.key == pygame.K_d:
+					elif event.key == pygame.K_d:
 						switch = True
 						for box in box_list.sprites():
 							if box.state == 'AIR':
@@ -72,7 +74,7 @@ def Level(nombre):
 						if switch:
 							gravity = 'E'
 							print 'Gravedad - ESTE'
-					if event.key == pygame.K_a:
+					elif event.key == pygame.K_a:
 						switch = True
 						for box in box_list.sprites():
 							if box.state == 'AIR':
@@ -80,11 +82,10 @@ def Level(nombre):
 						if switch:
 							gravity = 'O'
 							print 'Gravedad - OESTE'
-					
-				if event.type == pygame.KEYUP:
+				elif event.type == pygame.KEYUP:
 					if event.key == pygame.K_LEFT and player.spd_x < 0:
 						player.stop()
-					if event.key == pygame.K_RIGHT and player.spd_x > 0:
+					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					
 			updatable_list.update(gravity)
@@ -105,4 +106,21 @@ def Level(nombre):
 				return False
 			'''
 			clock.tick(FPS)
-	
+		screen.blit(Retry, (0,0))
+		pygame.display.flip()
+		for event in pygame.event.get():
+			clock = pygame.time.Clock() #Reloj
+			if event.type == pygame.QUIT:
+				pygame.quit()
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_ESCAPE:
+					pygame.quit()
+				elif event.key == pygame.K_n:
+					pygame.quit()
+				elif event.key == pygame.K_y:
+					lvl_retry = True
+					for obj in updatable_list.sprites():
+						gravity = 'S'
+						obj.reboot(gravity)
+			clock.tick(FPS)
+		

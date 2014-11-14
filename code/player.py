@@ -10,8 +10,19 @@ class Player(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
+		
 		self.dead = False
-			
+		self.init_x = self.rect.x
+		self.init_y = self.rect.y
+		
+	def reboot(self, grav):
+		self.dead = False
+		self.spd_y = 0
+		self.spd_x = 0
+		self.rect.x = self.init_x
+		self.rect.y = self.init_y
+		
+	
 	def touch_N(self):
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
