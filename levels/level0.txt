@@ -16,4 +16,4 @@ W                              W
 W                              W
 W                              W
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-#fondo_0.png
+#fondo_test1.png

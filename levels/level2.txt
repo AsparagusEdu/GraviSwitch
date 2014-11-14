@@ -10,4 +10,4 @@ W            W W
 W           W  W
 W          W   W
 WWWWWWWWWWWWWWWW
-#
+#fondo_test0.png
