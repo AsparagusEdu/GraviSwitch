@@ -16,28 +16,28 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y +=1
-		if len(hit_list) <= 1:
+		if len(hit_list) == 0:
 			return False
 		return True
 	def touch_S(self):
 		self.rect.y +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y -=1
-		if len(hit_list) <= 1:
+		if len(hit_list) == 0:
 			return False
 		return True
 	def touch_E(self):
 		self.rect.x +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x -=1
-		if len(hit_list) <= 1:
+		if len(hit_list) == 0:
 			return False
 		return True	
 	def touch_O(self):
 		self.rect.x -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x +=1
-		if len(hit_list) <= 1:
+		if len(hit_list) == 0:
 			return False
 		return True
 	

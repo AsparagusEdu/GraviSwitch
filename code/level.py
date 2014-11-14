@@ -34,11 +34,8 @@ def Level(nombre):
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					exit_lvl = True
-				'''
 				if event.key == pygame.K_r:
-					return False
-				'''
-			
+					player.dead = True
 				if event.key == pygame.K_LEFT and not player.touch_O():
 					player.go_left()
 					print 'Tecla - Izquierda'
