@@ -52,6 +52,21 @@ class Player(pygame.sprite.Sprite):
 			return False
 		return True
 	
+	def crush(self):
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		if len(hit_list) == 1:
+			bloxy = hit_list[0]
+			if bloxy.spd_x > 0:
+				self.rect.left = bloxy.rect.right
+			elif bloxy.spd_x < 0:
+				self.rect.right = bloxy.rect.left
+			elif bloxy.spd_y > 0:
+				self.rect.top = bloxy.rect.bottom
+			elif bloxy.spd_y < 0:
+				self.rect.bottom = bloxy.rect.top
+				
+		elif len(hit_list) >= 2:
+			self.dead = True
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -73,6 +88,7 @@ class Player(pygame.sprite.Sprite):
 					self.rect.left = block.rect.right
 				
 	def update(self,grav):
+		self.crush()
 		self.rect.x += self.spd_x
 		self.collision_x()
 		
@@ -82,6 +98,7 @@ class Player(pygame.sprite.Sprite):
 		if not self.touch_S():
 			self.spd_y += .15
 			#self.calc_grav(grav)
+		
 		
 	def go_left(self):
 		self.spd_x = -2

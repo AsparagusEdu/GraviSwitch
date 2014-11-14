@@ -1,5 +1,7 @@
 import pygame
 class Wall(pygame.sprite.Sprite):
+	spd_x = 0
+	spd_y = 0
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
 
