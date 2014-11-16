@@ -9,7 +9,6 @@ def load_level(mapa):
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
 	box_list = pygame.sprite.Group()
 	col_list = pygame.sprite.Group()
-	world = pygame.sprite.Group()
 	
 	id_given = 0
 	pos_y = 0
@@ -20,7 +19,6 @@ def load_level(mapa):
 				wall = Wall(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(wall)
 				col_list.add(wall)
-				world.add(wall)
 				wall.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1 
 			if cuadro == 'P':
@@ -33,17 +31,15 @@ def load_level(mapa):
 				col_list.add(box)
 				updatable_list.add(box)
 				box_list.add(box)
-				world.add(box)
 				box.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1
 			if cuadro == 'S':
 				spike = Spike(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(spike)
 				col_list.add(spike)
-				world.add(spike)
 				spike.ID = id_given
 				id_given += 1
 			pos_x += 1
 		pos_y += 1
-	ex = world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id
+	ex = sprite_list, updatable_list, box_list, col_list, p_inicio, p_id
 	return ex

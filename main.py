@@ -18,7 +18,6 @@ main()
 '''
 - PROBAR FRAMESKIP EN EL RASPBERRY!!
 
-- "World Shift"
 - Crear un final de nivel exitoso
 
 - Crear un switch y un sistema de "corriente"
