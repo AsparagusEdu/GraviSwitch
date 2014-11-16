@@ -18,7 +18,7 @@ main()
 '''
 - PROBAR FRAMESKIP EN EL RASPBERRY!!
 
-- Pantalla de titulo
+- Crear un final de nivel exitoso
 
 - Crear un switch y un sistema de "corriente"
 - Puertas?
