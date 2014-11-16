@@ -1,6 +1,6 @@
 import pygame
 from load_level import load_level
-from constants import screen, BLOCK_SIZE, MAX_FPS
+from constants import screen, BLOCK_SIZE, MAX_FPS, SLOW_MODE
 from player import *
 from read_file import ReadFile
 from misc_functions import *
@@ -77,10 +77,13 @@ def Level(nombre):
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					
-			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
-			print milisecs #DEBUG
-			print times_to_update #DEBUG
-			for times in range(times_to_update):
+			if not SLOW_MODE:
+				times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
+				print milisecs #DEBUG
+				print times_to_update #DEBUG
+				for times in range(times_to_update):
+					updatable_list.update(gravity)
+			else:
 				updatable_list.update(gravity)
 				
 			if player.dead == True:
