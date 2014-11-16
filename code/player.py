@@ -1,4 +1,5 @@
 import pygame
+import Box
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -23,52 +24,75 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y = self.init_y
 		
 	
-	def touch_N(self):
+	def touch_N(self, colis): #colis == numero de colisiones originales
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y +=1
-		if len(hit_list) == 0:
+		if len(hit_list) == colis:
 			return False
 		return True
-	def touch_S(self):
+	def touch_S(self, colis):
 		self.rect.y +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y -=1
-		if len(hit_list) == 0:
+		if len(hit_list) == colis:
 			return False
 		return True
-	def touch_E(self):
+	def touch_E(self, colis):
 		self.rect.x +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x -=1
-		if len(hit_list) == 0:
+		if len(hit_list) == colis:
 			return False
 		return True	
-	def touch_O(self):
+	def touch_O(self, colis):
 		self.rect.x -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x +=1
-		if len(hit_list) == 0:
+		if len(hit_list) == colis:
 			return False
 		return True
 	
 	def crush(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
-		if len(hit_list) == 1:
+		colis = len(hit_list) #Numero de colisiones originalmente.
+		print colis
+		if colis >= 3:
+			self.dead = True
+			return True
+		elif colis == 2:
+			if type(hit_list[0]) is Box and type(hit_list[1]) is Box.Box:
+				bloxy = hit_list[0]
+				if bloxy.spd_x > 0:
+					self.rect.left = bloxy.rect.right
+				elif bloxy.spd_x < 0:
+					self.rect.right = bloxy.rect.left
+				elif bloxy.spd_y > 0:
+					self.spd_y = 0
+					self.rect.bottom = bloxy.rect.top + bloxy.spd_y
+				elif bloxy.spd_y < 0:
+					self.spd_y = 0
+					self.rect.top = bloxy.rect.bottom + bloxy.spd_y
+			else:
+				self.dead = True
+				return True
+		elif colis == 1:
 			bloxy = hit_list[0]
-			if bloxy.spd_x > 0:
+			if bloxy.spd_x > 0 and not self.touch_E(colis):
 				self.rect.left = bloxy.rect.right
-			elif bloxy.spd_x < 0:
+			elif bloxy.spd_x < 0 and not self.touch_O(colis):
 				self.rect.right = bloxy.rect.left
-			elif bloxy.spd_y > 0:
+			elif bloxy.spd_y > 0 and not self.touch_S(colis):
 				self.spd_y = 0
 				self.rect.top = bloxy.rect.bottom
-			elif bloxy.spd_y < 0:
+			elif bloxy.spd_y < 0 and not self.touch_N(colis):
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
+			else:
+				self.dead = True
+				return True
 				
-		elif len(hit_list) >= 2:
-			self.dead = True
+		return False
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -97,7 +121,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y += self.spd_y
 		self.collision_y()
 		
-		if not self.touch_S():
+		if not self.touch_S(0):
 			self.spd_y += .15
 		
 	def go_left(self):

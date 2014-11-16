@@ -1,6 +1,6 @@
 import pygame
 from load_level import load_level
-from constants import screen, BLOCK_SIZE, MAX_FPS, SLOW_MODE
+from constants import SCREEN, BLOCK_SIZE, MAX_FPS, SLOW_MODE
 from player import *
 from read_file import ReadFile
 from misc_functions import *
@@ -45,13 +45,13 @@ def Level(nombre):
 						lvl_retry = False
 					elif event.key == pygame.K_r:
 						player.dead = True
-					elif event.key == pygame.K_LEFT and not player.touch_O():
+					elif event.key == pygame.K_LEFT and not player.touch_O(0):
 						player.go_left()
 						print 'Tecla - Izquierda'
-					elif event.key == pygame.K_RIGHT and not player.touch_E():
+					elif event.key == pygame.K_RIGHT and not player.touch_E(0):
 						player.go_right()
 						print 'Tecla - Derecha'
-					elif event.key == pygame.K_UP and player.touch_S():
+					elif event.key == pygame.K_UP and player.touch_S(0):
 						player.jump()
 						print 'Tecla - Salto'
 					elif event.key == pygame.K_w:
@@ -88,8 +88,8 @@ def Level(nombre):
 				
 			if player.dead == True:
 				lvl_retry = False
-			screen.blit(fondo, (0,0))
-			sprite_list.draw(screen)
+			SCREEN.blit(fondo, (0,0))
+			sprite_list.draw(SCREEN)
 			
 			pygame.display.flip()
 			'''
@@ -105,7 +105,7 @@ def Level(nombre):
 			clock.tick(MAX_FPS)
 			milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 		#Menu al morir D:
-		screen.blit(Retry, (0,0))
+		SCREEN.blit(Retry, (0,0))
 		pygame.display.flip()
 		
 		
