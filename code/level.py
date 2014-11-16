@@ -9,6 +9,9 @@ def Level(nombre):
 	
 	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
+	music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
+	pygame.mixer.music.play(-1, 0.7)
+	
 	sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	Retry = pygame.image.load('images/retry.png').convert()
@@ -30,6 +33,7 @@ def Level(nombre):
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	lvl_retry = True #Variable para reintentar
 	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
+	
 	while not lvl_exit:
 		
 		while lvl_retry:

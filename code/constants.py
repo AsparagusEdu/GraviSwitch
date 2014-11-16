@@ -10,4 +10,4 @@ SCREEN_HEIGHT = BLOCK_SIZE * 18
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 MAX_FPS = 60
-SLOW_MODE = True
+SLOW_MODE = False
