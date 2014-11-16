@@ -3,9 +3,9 @@ from load_level import load_level
 from constants import screen, BLOCK_SIZE, MAX_FPS
 from player import *
 from read_file import ReadFile
+from misc_functions import *
 
 def Level(nombre):
-	
 	
 	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
@@ -18,7 +18,7 @@ def Level(nombre):
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	
-	for box in box_list.sprites(): #Añade propiedades del nivel a las cajas
+	for box in box_list.sprites(): #Annade propiedades del nivel a las cajas
 		box.level = col_list
 		box.boxes = box_list
 		box.player = player
@@ -56,34 +56,19 @@ def Level(nombre):
 						print 'Tecla - Salto'
 					elif event.key == pygame.K_w:
 						switch = True
-						for box in box_list.sprites():
-							if box.state == 'AIR':
-								switch = False
-						if switch:
+						if static_boxes(box_list):
 							gravity = 'N'
 							print 'Gravedad - NORTE' #DEBUG
 					elif event.key == pygame.K_s:
-						switch = True
-						for box in box_list.sprites():
-							if box.state == 'AIR':
-								switch = False
-						if switch:
+						if static_boxes(box_list):
 							gravity = 'S'
 							print 'Gravedad - SUR' #DEBUG
 					elif event.key == pygame.K_d:
-						switch = True
-						for box in box_list.sprites():
-							if box.state == 'AIR':
-								switch = False
-						if switch:
+						if static_boxes(box_list):
 							gravity = 'E'
 							print 'Gravedad - ESTE'
 					elif event.key == pygame.K_a:
-						switch = True
-						for box in box_list.sprites(): #Revisa si todas las cajas estan quietas.
-							if box.state == 'AIR':
-								switch = False
-						if switch:
+						if static_boxes(box_list):
 							gravity = 'O'
 							print 'Gravedad - OESTE'
 				elif event.type == pygame.KEYUP:
