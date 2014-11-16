@@ -13,7 +13,7 @@ def Level(nombre):
 	music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
 	pygame.mixer.music.play(-1, 0.7)
 	
-	sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	Retry = pygame.image.load('images/retry.png').convert()
 	
@@ -27,8 +27,6 @@ def Level(nombre):
 		box.boxes = box_list
 		box.player = player
 	
-	world = sprite_list
-	
 	sprite_list.add(player) 
 	updatable_list.add(player)
 	
@@ -36,6 +34,9 @@ def Level(nombre):
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	lvl_retry = True #Variable para reintentar
 	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
+	
+	world_x = 0
+	world_y = 0
 	
 	while not lvl_exit:
 		
@@ -87,18 +88,19 @@ def Level(nombre):
 				print 'Upda -', times_to_update #DEBUG
 				for times in range(times_to_update):
 					updatable_list.update(gravity)
+					for worldy in world.sprites():
+						worldy.shift_world(world_x, world_y)
+						
 			else:
 				updatable_list.update(gravity)
-				
+				for worldy in world.sprites(): #Mueve al mundo dependiendo del parametro.
+					worldy.world_shift(world_x, world_y)
+					
 			if player.dead == True:
 				lvl_retry = False
 			
 			if not player.dead:
 				SCREEN.blit(fondo, (0,0))
-				for worldy in world.sprites():
-					
-					pass
-					#print worldy
 				sprite_list.draw(SCREEN)
 				pygame.display.flip()
 			'''
@@ -129,7 +131,7 @@ def Level(nombre):
 					return False
 				elif event.key == pygame.K_y:
 					lvl_retry = True
-					for obj in updatable_list.sprites():
+					for obj in sprite_list.sprites():
 						gravity = 'S'
 						obj.reboot(gravity)
 			clock.tick(10)
