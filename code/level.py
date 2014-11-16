@@ -13,23 +13,24 @@ def Level(nombre):
 	
 	Retry = pygame.image.load('images/retry.png').convert()
 	
-	pos_x, pos_y = p_inicio
+	pos_x, pos_y = p_inicio #Posiciones de inicio
 	player = Player(pos_x, pos_y)
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	
-	for box in box_list.sprites():
+	for box in box_list.sprites(): #Añade propiedades del nivel a las cajas
 		box.level = col_list
 		box.boxes = box_list
 		box.player = player
 	
 	
-	sprite_list.add(player)
+	sprite_list.add(player) 
 	updatable_list.add(player)
 	
+	
 	gravity = 'S'
-	lvl_exit = False
-	lvl_retry = True
+	lvl_exit = False #Variable para terminar de procesar el nivel
+	lvl_retry = True #Variable para reintentar
 	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
 	while not lvl_exit:
 		
@@ -79,7 +80,7 @@ def Level(nombre):
 							print 'Gravedad - ESTE'
 					elif event.key == pygame.K_a:
 						switch = True
-						for box in box_list.sprites():
+						for box in box_list.sprites(): #Revisa si todas las cajas estan quietas.
 							if box.state == 'AIR':
 								switch = False
 						if switch:
@@ -91,9 +92,9 @@ def Level(nombre):
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					
-			times_to_update = milisecs/16
-			print milisecs
-			print times_to_update
+			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
+			print milisecs #DEBUG
+			print times_to_update #DEBUG
 			for times in range(times_to_update):
 				updatable_list.update(gravity)
 				
