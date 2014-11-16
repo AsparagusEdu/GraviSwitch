@@ -77,10 +77,10 @@ def Level(nombre):
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					
-			if not SLOW_MODE:
+			if SLOW_MODE:
 				times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
-				print milisecs #DEBUG
-				print times_to_update #DEBUG
+				print 'Mili -', milisecs #DEBUG
+				print 'Upda -', times_to_update #DEBUG
 				for times in range(times_to_update):
 					updatable_list.update(gravity)
 			else:

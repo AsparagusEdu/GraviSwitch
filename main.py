@@ -15,12 +15,6 @@ main()
 '''
 - PROBAR FRAMESKIP EN EL RASPBERRY!!
 
-- BUG: Cuando el jugador se mueve hacia a una caja de forma horizontal
-mientras esta lo aplasta, atraviesa la pared
-
-- BUG: A veces Player no es cuando salta mientras las cajas van hacia abajo
-- BUG: Uno es aplastado cuando salta entre 2 cajas adyacentes que van cayendo hacia abajo
-
 - Pantalla de titulo
 
 - Crear un switch y un sistema de "corriente"

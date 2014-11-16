@@ -1,6 +1,7 @@
 import pygame
 import Box
 import Spike
+import constants as C
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -122,6 +123,20 @@ class Player(pygame.sprite.Sprite):
 			for hit in hit_list:
 				if type(hit) is Spike.Spike:
 					self.dead = True 
+	def out_screen_death(self):
+		if self.rect.top >= C.SCREEN_HEIGHT:
+			self.dead = True
+		elif self.rect.bottom <= 0:
+			self.dead = True
+		elif self.rect.left >= C.SCREEN_WIDTH:
+			self.dead = True
+		elif self.rect.right <= 0:
+			self.dead = True
+	
+	def death(self):
+		self.crush()
+		self.touch_death()
+		self.out_screen_death()
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -143,8 +158,7 @@ class Player(pygame.sprite.Sprite):
 					self.rect.left = block.rect.right
 				
 	def update(self,grav):
-		self.crush()
-		self.touch_death()
+		self.death()
 		self.rect.x += self.spd_x
 		self.collision_x()
 		
