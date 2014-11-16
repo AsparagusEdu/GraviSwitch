@@ -94,10 +94,6 @@ class Box(pygame.sprite.Sprite):
 				self.spd_x = 0
 				self.state = 'STOP'	
 	
-	def world_shift(self, shift_x, shift_y):
-		self.rect.x += shift_x
-		self.rect.y += shift_y
-	
 	def update(self, grav):
 		self.rect.y += self.spd_y
 		self.collision_y()

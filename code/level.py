@@ -7,7 +7,6 @@ from misc_functions import *
 
 def Level(nombre):
 	
-	
 	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
@@ -26,8 +25,6 @@ def Level(nombre):
 		box.level = col_list
 		box.boxes = box_list
 		box.player = player
-	
-	world = sprite_list
 	
 	sprite_list.add(player) 
 	updatable_list.add(player)
@@ -95,10 +92,6 @@ def Level(nombre):
 			
 			if not player.dead:
 				SCREEN.blit(fondo, (0,0))
-				for worldy in world.sprites():
-					
-					pass
-					#print worldy
 				sprite_list.draw(SCREEN)
 				pygame.display.flip()
 			'''
@@ -114,7 +107,6 @@ def Level(nombre):
 			clock.tick(MAX_FPS)
 			milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 		#Menu al morir D:
-		
 		SCREEN.blit(Retry, (0,0))
 		pygame.display.flip()
 		
@@ -134,5 +126,3 @@ def Level(nombre):
 						obj.reboot(gravity)
 			clock.tick(10)
 		
-#def shift_world(shift_x, shift_y):
-	
