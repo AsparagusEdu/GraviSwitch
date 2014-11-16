@@ -1,5 +1,6 @@
 import pygame
 import Box
+import Spike
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -23,7 +24,6 @@ class Player(pygame.sprite.Sprite):
 		self.rect.x = self.init_x
 		self.rect.y = self.init_y
 		
-	
 	def touch_N(self, colis): #colis == numero de colisiones originales
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
 		if len(hit_list) == colis:
 			return False
 		return True
-	
+		
 	def crush(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		colis = len(hit_list) #Numero de colisiones originalmente.
@@ -93,6 +93,35 @@ class Player(pygame.sprite.Sprite):
 				return True
 				
 		return False
+	def touch_death(self):
+		self.rect.y -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y +=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Spike.Spike:
+					self.dead = True
+		self.rect.y +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y -=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Spike.Spike:
+					self.dead = True 
+		self.rect.x -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x +=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Spike.Spike:
+					self.dead = True 
+		self.rect.x +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x -=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Spike.Spike:
+					self.dead = True 
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -115,6 +144,7 @@ class Player(pygame.sprite.Sprite):
 				
 	def update(self,grav):
 		self.crush()
+		self.touch_death()
 		self.rect.x += self.spd_x
 		self.collision_x()
 		

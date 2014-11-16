@@ -1,6 +1,7 @@
 import pygame
 from Wall import Wall
 from Box import Box
+from Spike import Spike
 from constants import BLOCK_SIZE
 
 def load_level(mapa):
@@ -31,7 +32,13 @@ def load_level(mapa):
 				updatable_list.add(box)
 				box_list.add(box)
 				box.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
-				id_given += 1 
+				id_given += 1
+			if cuadro == 'S':
+				spike = Spike(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
+				sprite_list.add(spike)
+				col_list.add(spike)
+				spike.ID = id_given
+				id_given += 1
 			pos_x += 1
 		pos_y += 1
 	ex = sprite_list, updatable_list, box_list, col_list, p_inicio, p_id

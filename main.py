@@ -23,7 +23,6 @@ mientras esta lo aplasta, atraviesa la pared
 
 - Pantalla de titulo
 
-- Crear pinchos
 - Crear un switch y un sistema de "corriente"
 - Puertas?
 - Crear un bloque que player pueda atravesar, pero no las cajas
