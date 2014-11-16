@@ -56,23 +56,23 @@ class Player(pygame.sprite.Sprite):
 	def crush(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		colis = len(hit_list) #Numero de colisiones originalmente.
-		print colis
+		#print colis
 		if colis >= 3:
 			self.dead = True
 			return True
 		elif colis == 2:
 			if type(hit_list[0]) is Box and type(hit_list[1]) is Box.Box:
-				bloxy = hit_list[0]
+				bloxy = hit_list[1]
 				if bloxy.spd_x > 0:
 					self.rect.left = bloxy.rect.right
 				elif bloxy.spd_x < 0:
 					self.rect.right = bloxy.rect.left
 				elif bloxy.spd_y > 0:
 					self.spd_y = 0
-					self.rect.bottom = bloxy.rect.top + bloxy.spd_y
+					self.rect.bottom = bloxy.rect.top
 				elif bloxy.spd_y < 0:
 					self.spd_y = 0
-					self.rect.top = bloxy.rect.bottom + bloxy.spd_y
+					self.rect.top = bloxy.rect.bottom
 			else:
 				self.dead = True
 				return True
@@ -98,9 +98,9 @@ class Player(pygame.sprite.Sprite):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
 			if block.ID != self.ID:
-				if self.spd_y > 0:
+				if self.spd_y > 0 or block.spd_y < 0:
 					self.rect.bottom = block.rect.top
-				elif self.spd_y < 0:
+				elif self.spd_y < 0 or block.spd_y > 0:
 					self.rect.top = block.rect.bottom
 				# Detener movimiento vertical
 				self.spd_y = 0
