@@ -88,10 +88,11 @@ def Level(nombre):
 				
 			if player.dead == True:
 				lvl_retry = False
-			SCREEN.blit(fondo, (0,0))
-			sprite_list.draw(SCREEN)
 			
-			pygame.display.flip()
+			if not player.dead:
+				SCREEN.blit(fondo, (0,0))
+				sprite_list.draw(SCREEN)
+				pygame.display.flip()
 			'''
 			if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
 				return False
