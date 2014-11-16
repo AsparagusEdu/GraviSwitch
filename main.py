@@ -8,7 +8,8 @@ def main():
 	done = False
 	while not done:
 		TitleScreen()
-		done = Level('levelTest1')
+		#done = Level('levelTest1')
+		done = Level('level2')
 	#Level('level0')
 	#Level('Level2')
 main()

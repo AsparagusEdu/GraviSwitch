@@ -13,7 +13,7 @@ def Level(nombre):
 	music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
 	pygame.mixer.music.play(-1, 0.7)
 	
-	world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	world_objects, lvl_dims, world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	Retry = pygame.image.load('images/retry.png').convert()
 	
@@ -35,19 +35,21 @@ def Level(nombre):
 	lvl_retry = True #Variable para reintentar
 	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
 	
-	world_x = 0
-	world_y = 0
+	world_spd = [0,0] #Velocidades con las que se mueve el mundo
+	
+	world_pos = [0,0] #Posicion de la esquina superior izquierda del mundo	
 	
 	while not lvl_exit:
 		
 		while lvl_retry:
+			#print world_pos
 			clock = pygame.time.Clock() #Reloj
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 				elif event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						lvl_retry = False
+						pygame.quit()
 					elif event.key == pygame.K_r:
 						player.dead = True
 					elif event.key == pygame.K_LEFT and not player.touch_O(0):
@@ -77,40 +79,41 @@ def Level(nombre):
 							gravity = 'O'
 							print 'Gravedad - OESTE'
 					elif event.key == pygame.K_i: #DEBUG
-						world_y = -1
+						world_spd[1] = -2
 					elif event.key == pygame.K_k: #DEBUG
-						world_y = 1
+						world_spd[1] = 2
 					elif event.key == pygame.K_l: #DEBUG
-						world_x = 1
+						world_spd[0] = 2
 					elif event.key == pygame.K_j: #DEBUG
-						world_x = -1
+						world_spd[0] = -2
 				elif event.type == pygame.KEYUP:
 					if event.key == pygame.K_LEFT and player.spd_x < 0:
 						player.stop()
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					elif event.key == pygame.K_i: #DEBUG
-						world_y = 0
+						world_spd[1] = 0
 					elif event.key == pygame.K_k: #DEBUG
-						world_y = 0
+						world_spd[1] = 0
 					elif event.key == pygame.K_l: #DEBUG
-						world_x = 0
+						world_spd[0] = 0
 					elif event.key == pygame.K_j: #DEBUG
-						world_x = 0
+						world_spd[0] = 0
 					
 			if SLOW_MODE:
 				times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
 				print 'Mili -', milisecs #DEBUG
 				print 'Upda -', times_to_update #DEBUG
-				for times in range(times_to_update):
-					updatable_list.update(gravity)
-					for worldy in world.sprites():
-						worldy.shift_world(world_x, world_y)
-						
 			else:
+				times_to_update = 1
+				
+			for times in range(times_to_update):
 				updatable_list.update(gravity)
 				for worldy in world.sprites(): #Mueve al mundo dependiendo del parametro.
-					worldy.world_shift(world_x, world_y)
+					world_pos, world_spd[0] = worldy.world_shift(world_spd, world_pos, lvl_dims)
+					#world_pos[0] = world_temp_pos[0] /world_objects
+					#world_pos[1] = world_temp_pos[1] /world_objects
+					#Todo menos player forma parte de world
 					
 			if player.dead == True:
 				lvl_retry = False
@@ -149,8 +152,8 @@ def Level(nombre):
 					lvl_retry = True
 					for obj in sprite_list.sprites():
 						gravity = 'S'
-						world_x = 0
-						world_y = 0
+						world_spd = [0,0]
+						world_pos = [0,0]
 						obj.reboot(gravity)
 			clock.tick(10)
 		

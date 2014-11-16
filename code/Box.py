@@ -1,5 +1,6 @@
 import pygame
-class Box(pygame.sprite.Sprite):
+import worldshift
+class Box(pygame.sprite.Sprite, worldshift.World_Shift):
 	spd_x = 0
 	spd_y = 0
 	def __init__(self, x, y):
@@ -93,10 +94,6 @@ class Box(pygame.sprite.Sprite):
 				# Detener movimiento vertical
 				self.spd_x = 0
 				self.state = 'STOP'	
-	
-	def world_shift(self, shift_x, shift_y):
-		self.rect.x += shift_x
-		self.rect.y += shift_y
 	
 	def update(self, grav):
 		self.rect.y += self.spd_y

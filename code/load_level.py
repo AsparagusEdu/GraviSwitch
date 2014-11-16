@@ -13,6 +13,7 @@ def load_level(mapa):
 	
 	id_given = 0
 	pos_y = 0
+	lvl_width = 0
 	for linea in mapa:
 		pos_x = 0
 		for cuadro in linea:
@@ -44,6 +45,9 @@ def load_level(mapa):
 				spike.ID = id_given
 				id_given += 1
 			pos_x += 1
+		if pos_x > lvl_width:
+			lvl_width = pos_x
 		pos_y += 1
-	ex = world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id
+	lvl_dims =(lvl_width, pos_y)
+	ex = id_given -1,lvl_dims, world, sprite_list, updatable_list, box_list, col_list, p_inicio, p_id
 	return ex

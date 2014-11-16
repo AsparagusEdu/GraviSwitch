@@ -1,5 +1,6 @@
 import pygame
-class Wall(pygame.sprite.Sprite):
+import worldshift
+class Wall(pygame.sprite.Sprite, worldshift.World_Shift):
 	spd_x = 0
 	spd_y = 0
 	def __init__(self, init_x, init_y):
@@ -13,10 +14,6 @@ class Wall(pygame.sprite.Sprite):
 		
 		self.rect.x = init_x
 		self.rect.y = init_y
-		
-	def world_shift(self, shift_x, shift_y):
-		self.rect.x += shift_x
-		self.rect.y += shift_y
 		
 	def reboot(self, grav):
 		self.rect.x = self.init_x
