@@ -2,6 +2,8 @@ import pygame
 from constants import SCREEN
 def TitleScreen():
 	title = pygame.image.load('images/titlescreen.png').convert()
+	music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+	pygame.mixer.music.play()
 	clock = pygame.time.Clock()
 	over = False
 	while not over:
