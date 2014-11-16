@@ -76,27 +76,11 @@ def Level(nombre):
 						if static_boxes(box_list):
 							gravity = 'O'
 							print 'Gravedad - OESTE'
-					elif event.key == pygame.K_i: #DEBUG
-						world_y = -1
-					elif event.key == pygame.K_k: #DEBUG
-						world_y = 1
-					elif event.key == pygame.K_l: #DEBUG
-						world_x = 1
-					elif event.key == pygame.K_j: #DEBUG
-						world_x = -1
 				elif event.type == pygame.KEYUP:
 					if event.key == pygame.K_LEFT and player.spd_x < 0:
 						player.stop()
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
-					elif event.key == pygame.K_i: #DEBUG
-						world_y = 0
-					elif event.key == pygame.K_k: #DEBUG
-						world_y = 0
-					elif event.key == pygame.K_l: #DEBUG
-						world_x = 0
-					elif event.key == pygame.K_j: #DEBUG
-						world_x = 0
 					
 			if SLOW_MODE:
 				times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
@@ -149,8 +133,6 @@ def Level(nombre):
 					lvl_retry = True
 					for obj in sprite_list.sprites():
 						gravity = 'S'
-						world_x = 0
-						world_y = 0
 						obj.reboot(gravity)
 			clock.tick(10)
 		
