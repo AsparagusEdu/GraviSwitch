@@ -1,6 +1,6 @@
 import pygame
 from load_level import load_level
-from constants import screen, BLOCK_SIZE, FPS
+from constants import screen, BLOCK_SIZE, MAX_FPS
 from player import *
 from read_file import ReadFile
 
@@ -30,7 +30,9 @@ def Level(nombre):
 	gravity = 'S'
 	lvl_exit = False
 	lvl_retry = True
+	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
 	while not lvl_exit:
+		
 		while lvl_retry:
 			clock = pygame.time.Clock() #Reloj
 			for event in pygame.event.get():
@@ -89,7 +91,12 @@ def Level(nombre):
 					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 						player.stop()
 					
-			updatable_list.update(gravity)
+			times_to_update = milisecs/16
+			print milisecs
+			print times_to_update
+			for times in range(times_to_update):
+				updatable_list.update(gravity)
+				
 			if player.dead == True:
 				lvl_retry = False
 			screen.blit(fondo, (0,0))
@@ -106,10 +113,14 @@ def Level(nombre):
 			if player.rect.left >= SCREEN_WIDTH:
 				return False
 			'''
-			clock.tick(FPS)
+			clock.tick(MAX_FPS)
+			milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 		#Menu al morir D:
 		screen.blit(Retry, (0,0))
 		pygame.display.flip()
+		
+		
+		
 		for event in pygame.event.get():
 			clock = pygame.time.Clock() #Reloj
 			if event.type == pygame.QUIT:

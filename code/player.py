@@ -99,8 +99,6 @@ class Player(pygame.sprite.Sprite):
 		
 		if not self.touch_S():
 			self.spd_y += .15
-			#self.calc_grav(grav)
-		
 		
 	def go_left(self):
 		self.spd_x = -2
