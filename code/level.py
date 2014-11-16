@@ -23,10 +23,8 @@ def Level(nombre):
 		box.boxes = box_list
 		box.player = player
 	
-	
 	sprite_list.add(player) 
 	updatable_list.add(player)
-	
 	
 	gravity = 'S'
 	lvl_exit = False #Variable para terminar de procesar el nivel
@@ -38,8 +36,7 @@ def Level(nombre):
 			clock = pygame.time.Clock() #Reloj
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					lvl_retry = False
-					lvl_exit = True
+					pygame.quit()
 				elif event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						lvl_retry = False
@@ -116,9 +113,7 @@ def Level(nombre):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_ESCAPE:
-					return False
-				elif event.key == pygame.K_n:
+				if event.key == pygame.K_n:
 					return False
 				elif event.key == pygame.K_y:
 					lvl_retry = True
