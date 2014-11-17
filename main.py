@@ -9,6 +9,13 @@ def main():
 	while not done:
 		TitleScreen()
 		done = Level('levelTest1')
+	'''	
+	done = False
+	while not done:
+		TitleScreen()
+		done = Level('level0')
+	'''
+	
 	#Level('level0')
 	#Level('Level2')
 main()
@@ -18,10 +25,7 @@ main()
 '''
 - PROBAR FRAMESKIP EN EL RASPBERRY!!
 
-- Pantalla de titulo
-
 - Crear un switch y un sistema de "corriente"
-- Puertas?
 - Crear un bloque que player pueda atravesar, pero no las cajas
 
 - Menus

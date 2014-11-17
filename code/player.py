@@ -2,6 +2,7 @@ import pygame
 import Box
 import Spike
 import constants as C
+import Door
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -15,6 +16,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y = y_init
 		
 		self.dead = False
+		self.win = False
 		self.init_x = self.rect.x
 		self.init_y = self.rect.y
 		
@@ -137,6 +139,12 @@ class Player(pygame.sprite.Sprite):
 		self.crush()
 		self.touch_death()
 		self.out_screen_death()
+	def door(self): #Detecta cuando el jugador llego a una puerta
+		hit_list = pygame.sprite.spritecollide(self, self.doors, False)
+		for hit in hit_list:
+			if type(hit) is Door.Door:
+				if (hit.rect.left + 10 < self.rect.centerx < hit.rect.right - 10) and (hit.rect.bottom == self.rect.bottom):
+					self.win = True
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -159,6 +167,7 @@ class Player(pygame.sprite.Sprite):
 				
 	def update(self,grav):
 		self.death()
+		self.door()
 		self.rect.x += self.spd_x
 		self.collision_x()
 		

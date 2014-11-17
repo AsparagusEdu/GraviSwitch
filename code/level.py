@@ -1,6 +1,6 @@
 import pygame
 from load_level import load_level
-from constants import SCREEN, BLOCK_SIZE, MAX_FPS, SLOW_MODE
+from constants import *
 from player import *
 from read_file import ReadFile
 from misc_functions import *
@@ -9,17 +9,27 @@ def Level(nombre):
 	
 	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
-	music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
-	pygame.mixer.music.play(-1, 0.7)
+	if MUSIC:
+		music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
+		pygame.mixer.music.play(-1, 0.7)
 	
-	sprite_list, updatable_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
-	Retry = pygame.image.load('images/retry.png').convert()
+	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
+	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
+	Retry_rect = Retry_image.get_rect()												 #|
+	Retry_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2) #|
+																					 #|
+	Win_image = pygame.image.load('images/win.png').convert()                        #|
+	Win_rect = Win_image.get_rect()                                                  #|
+	Win_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2)   #|
+	#---------------------------------------------------------------------------------|
 	
 	pos_x, pos_y = p_inicio #Posiciones de inicio
 	player = Player(pos_x, pos_y)
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
+	player.doors = door_list
 	
 	for box in box_list.sprites(): #Annade propiedades del nivel a las cajas
 		box.level = col_list
@@ -89,9 +99,21 @@ def Level(nombre):
 				
 			if player.dead == True:
 				lvl_retry = False
-			
-			if not player.dead:
+			elif player.win == True:
+				while True:
+					SCREEN.blit(Win_image, Win_pos)
+					pygame.display.flip()
+					for event in pygame.event.get():
+						clock = pygame.time.Clock() #Reloj
+						if event.type == pygame.QUIT:
+							pygame.quit()
+						if event.type == pygame.KEYDOWN:
+							return True
+						clock.tick(60)
+				
+			else:
 				SCREEN.blit(fondo, (0,0))
+				door_list.draw(SCREEN)
 				sprite_list.draw(SCREEN)
 				pygame.display.flip()
 			'''
@@ -106,12 +128,12 @@ def Level(nombre):
 			'''
 			clock.tick(MAX_FPS)
 			milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
+			
+			
+			
 		#Menu al morir D:
-		SCREEN.blit(Retry, (0,0))
-		pygame.display.flip()
-		
-		
-		
+		SCREEN.blit(Retry_image, Retry_pos)
+		pygame.display.flip()		
 		for event in pygame.event.get():
 			clock = pygame.time.Clock() #Reloj
 			if event.type == pygame.QUIT:
