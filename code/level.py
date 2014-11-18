@@ -2,12 +2,12 @@ import pygame
 from load_level import load_level
 from constants import *
 from player import *
-from read_file import ReadFile
+from read_file import Read_File
 from misc_functions import *
 
 def Level(nombre):
 	
-	mapa, fondo = ReadFile(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
+	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	if MUSIC:
 		music = pygame.mixer.music.load('sound/music/cheetah2.mp3')

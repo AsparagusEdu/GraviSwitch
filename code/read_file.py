@@ -1,5 +1,5 @@
 
-def ReadFile(nombre):
+def Read_File(nombre):
 	archivo = open("levels/" + nombre)
 	mapa = []
 	for linea in archivo:
