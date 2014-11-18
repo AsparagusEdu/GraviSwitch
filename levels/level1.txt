@@ -1,19 +1,19 @@
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-W                              W
-WWWWWWWWWW   WWWWWWWWWW        W
-W             W  B     W       W
-W          WWW       W  W      W
-W        W   B    W      W     W
-W   B      W        W     W    W
-W      B      W B   W    D W   W
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWW  W
-W            B           W     W
-W      WWWWWWWWWW              W
-W  WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-W                              W
-W W                            W
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWW  W
-W                B             W
-WP               BB            W
+WWW                          WWW
+WWWWWWWWWW   WWWWWWWW        WWW
+WWW           W  B   W       WWW
+WWW      WWW       W  W      WWW
+WWW    W   B    W      W     WWW
+WWWB     W        W     W    WWW
+WWW  B      W B   W    D W   WWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWW  WWW
+WWW            B       W     WWW
+WWW      WWWWWWWWWW          WWW
+WWW  WWWWWWWWWWWWWWWWWWWWWWWWWWW
+WWW             WWWWWWWWWWWWWWWW
+WWW W           WWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWW  WWWWWWWWWWWWWWWW
+WWW      B      WWWWWWWWWWWWWWWW
+WWW   P  BB     WWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 #fondo_test2.png

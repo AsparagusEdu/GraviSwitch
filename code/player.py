@@ -168,17 +168,27 @@ class Player(pygame.sprite.Sprite):
 	def update(self,grav):
 		self.death()
 		self.door()
-		self.rect.x += self.spd_x
+		if not C.SLOW_MODE:
+                        self.rect.x += self.spd_x
+                else:
+                        self.rect.x += self.spd_x * 3
 		self.collision_x()
 		
-		self.rect.y += self.spd_y
+                if not C.SLOW_MODE:
+                        self.rect.y += self.spd_y
+                else:
+                        self.rect.y += self.spd_y * 3              
 		self.collision_y()
 		
 		if not self.touch_S(0):
-			self.spd_y += .15
+                        if not C.SLOW_MODE:
+                                self.spd_y += .15
+                        else:
+                                self.spd_y += .45
 		
 	def go_left(self):
-		self.spd_x = -2
+                self.spd_x = -2
+		
 	def go_right(self):
 		self.spd_x = 2
 	def stop(self):
@@ -189,7 +199,9 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y -=2
 		for i in hit_list:
 			if i.ID != self.ID:
-				#if len(hit_list) > 0 and:
 				
-				self.spd_y = -3
+                                self.spd_y = -3
+                                
+				
+				
 		

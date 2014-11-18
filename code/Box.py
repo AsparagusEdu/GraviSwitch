@@ -1,4 +1,5 @@
 import pygame
+import constants as C
 class Box(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -95,11 +96,21 @@ class Box(pygame.sprite.Sprite):
 				self.state = 'STOP'	
 	
 	def update(self, grav):
-		self.rect.y += self.spd_y
-		self.collision_y()
-		self.rect.x += self.spd_x
-		self.collision_x()
+		
 		if self.state == 'STOP':
+                        
 			self.calc_grav(grav)
+		else:
+                        if not C.SLOW_MODE:
+                                self.rect.y += self.spd_y
+                        else:
+                                self.rect.y += self.spd_y * 3                
+                        self.collision_y()
+                        
+                        if not C.SLOW_MODE:
+                                self.rect.x += self.spd_x
+                        else:
+                                self.rect.x += self.spd_x * 3
+                        self.collision_x()
 		
 		

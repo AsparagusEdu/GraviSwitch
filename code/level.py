@@ -42,7 +42,7 @@ def Level(nombre):
 	gravity = 'S'
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	lvl_retry = True #Variable para reintentar
-	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
+	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
 	while not lvl_exit:
 		clock = pygame.time.Clock() #Reloj
@@ -51,7 +51,7 @@ def Level(nombre):
 				pygame.quit()
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					lvl_retry = False
+					pygame.quit()
 				elif event.key == pygame.K_r:
 					player.dead = True
 				elif event.key == pygame.K_LEFT and not player.touch_O(0):
@@ -85,7 +85,7 @@ def Level(nombre):
 					player.stop()
 				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 					player.stop()
-				
+		'''	
 		if SLOW_MODE:
 			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
 			print 'Mili -', milisecs #DEBUG
@@ -94,10 +94,13 @@ def Level(nombre):
 				box_list.update(gravity)
 				player.update(gravity)
 				#updatable_list.update(gravity)
+		
 		else:
-			box_list.update(gravity)
-			player.update(gravity)
-			#updatable_list.update(gravity)
+		'''
+                #print milisecs
+		box_list.update(gravity)
+		player.update(gravity)
+		#updatable_list.update(gravity)
 			
 		if player.dead == True:
 			lvl_retry = False

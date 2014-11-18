@@ -1,13 +1,19 @@
-W  P WWWWW     W
-W     W W      W
-W     W W      W
-W    WWWWW     W
-W              W
-W              W
-W              W
-WW  W  WW  W  WW
-W            W W
-W           W  W
-W          W   W
-WWWWWWWWWWWWWWWW
-#fondo_test0.png
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WWW                      WWWWWWW
+WWW                      WWWWWWW
+WWW         WWWWWWWWWWW  WW   WW
+WWW        WWWWWWWWWWWW  WDB  WW
+WWW       WWW         W  WWW  WW
+WWW     WWWWW         W  WWW  WW
+WWW WWWWWWWWW         W  WWW  WW
+WWW WWWWWWWWW         W  WWW  WW
+WWW WWWWWWWWW         W       WW
+WWWB                  W       WW
+WWWWWWWWW             WWWWWW  WW
+WWWWWWWWWWWWW         WWWWWWSSWW
+WWWWWWWWWWWWWWWWWW    WWWWWWWWWW
+WWWWWWWWWWWWWWWWWW    WWWWWWWWWW
+WWW              W  B WWWWWWWWWW
+WWW   P             BBWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+#fondo_test2.png
