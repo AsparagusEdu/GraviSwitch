@@ -45,111 +45,111 @@ def Level(nombre):
 	milisecs = 16 #Milisegundos ideales que se demoraria en cada cuadro.
 	
 	while not lvl_exit:
-		
-		while lvl_retry:
-			clock = pygame.time.Clock() #Reloj
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					pygame.quit()
-				elif event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_ESCAPE:
-						lvl_retry = False
-					elif event.key == pygame.K_r:
-						player.dead = True
-					elif event.key == pygame.K_LEFT and not player.touch_O(0):
-						player.go_left()
-						print 'Tecla - Izquierda'
-					elif event.key == pygame.K_RIGHT and not player.touch_E(0):
-						player.go_right()
-						print 'Tecla - Derecha'
-					elif event.key == pygame.K_UP and player.touch_S(0):
-						player.jump()
-						print 'Tecla - Salto'
-					elif event.key == pygame.K_w:
-						switch = True
-						if static_boxes(box_list):
-							gravity = 'N'
-							print 'Gravedad - NORTE' #DEBUG
-					elif event.key == pygame.K_s:
-						if static_boxes(box_list):
-							gravity = 'S'
-							print 'Gravedad - SUR' #DEBUG
-					elif event.key == pygame.K_d:
-						if static_boxes(box_list):
-							gravity = 'E'
-							print 'Gravedad - ESTE'
-					elif event.key == pygame.K_a:
-						if static_boxes(box_list):
-							gravity = 'O'
-							print 'Gravedad - OESTE'
-				elif event.type == pygame.KEYUP:
-					if event.key == pygame.K_LEFT and player.spd_x < 0:
-						player.stop()
-					elif event.key == pygame.K_RIGHT and player.spd_x > 0:
-						player.stop()
-					
-			if SLOW_MODE:
-				times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
-				print 'Mili -', milisecs #DEBUG
-				print 'Upda -', times_to_update #DEBUG
-				for times in range(times_to_update):
-					box_list.update(gravity)
-					player.update(gravity)
-					#updatable_list.update(gravity)
-			else:
+		clock = pygame.time.Clock() #Reloj
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_ESCAPE:
+					lvl_retry = False
+				elif event.key == pygame.K_r:
+					player.dead = True
+				elif event.key == pygame.K_LEFT and not player.touch_O(0):
+					player.go_left()
+					print 'Tecla - Izquierda'
+				elif event.key == pygame.K_RIGHT and not player.touch_E(0):
+					player.go_right()
+					print 'Tecla - Derecha'
+				elif event.key == pygame.K_UP and player.touch_S(0):
+					player.jump()
+					print 'Tecla - Salto'
+				elif event.key == pygame.K_w:
+					switch = True
+					if static_boxes(box_list):
+						gravity = 'N'
+						print 'Gravedad - NORTE' #DEBUG
+				elif event.key == pygame.K_s:
+					if static_boxes(box_list):
+						gravity = 'S'
+						print 'Gravedad - SUR' #DEBUG
+				elif event.key == pygame.K_d:
+					if static_boxes(box_list):
+						gravity = 'E'
+						print 'Gravedad - ESTE'
+				elif event.key == pygame.K_a:
+					if static_boxes(box_list):
+						gravity = 'O'
+						print 'Gravedad - OESTE'
+			elif event.type == pygame.KEYUP:
+				if event.key == pygame.K_LEFT and player.spd_x < 0:
+					player.stop()
+				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
+					player.stop()
+				
+		if SLOW_MODE:
+			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
+			print 'Mili -', milisecs #DEBUG
+			print 'Upda -', times_to_update #DEBUG
+			for times in range(times_to_update):
 				box_list.update(gravity)
 				player.update(gravity)
 				#updatable_list.update(gravity)
-				
-			if player.dead == True:
-				lvl_retry = False
-				print 'DEAD'
-			elif player.win == True:
-				while True:
-					SCREEN.blit(Win_image, Win_pos)
-					pygame.display.flip()
-					for event in pygame.event.get():
-						clock = pygame.time.Clock() #Reloj
-						if event.type == pygame.QUIT:
-							pygame.quit()
-						if event.type == pygame.KEYDOWN:
-							return True
-						clock.tick(60)
-				
-			else:
-				SCREEN.blit(fondo, (0,0))
-				door_list.draw(SCREEN)
-				sprite_list.draw(SCREEN)
+		else:
+			box_list.update(gravity)
+			player.update(gravity)
+			#updatable_list.update(gravity)
+			
+		if player.dead == True:
+			lvl_retry = False
+			print 'DEAD'
+			SCREEN.blit(Retry_image, Retry_pos)
+			pygame.display.flip()
+			while not lvl_retry	:	
+				for event in pygame.event.get():
+					clock = pygame.time.Clock() #Reloj
+					if event.type == pygame.QUIT:
+						pygame.quit()
+					if event.type == pygame.KEYDOWN:
+						if event.key == pygame.K_n:
+							return False
+						elif event.key == pygame.K_y:
+							lvl_retry = True
+							for obj in updatable_list.sprites():
+								gravity = 'S'
+								obj.reboot(gravity)
+					clock.tick(10)
+		elif player.win == True:
+			while True:
+				SCREEN.blit(Win_image, Win_pos)
 				pygame.display.flip()
-			'''
-			if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
-				return False
-			if player.rect.bottom <= 0:
-				return False
-			if player.rect.right <= 0:
-				return False
-			if player.rect.left >= SCREEN_WIDTH:
-				return False
-			'''
-			clock.tick(MAX_FPS)
-			milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
+				for event in pygame.event.get():
+					clock = pygame.time.Clock() #Reloj
+					if event.type == pygame.QUIT:
+						pygame.quit()
+					if event.type == pygame.KEYDOWN:
+						return True
+					clock.tick(60)
 			
-			
-			
-		#Menu al morir D:
-		SCREEN.blit(Retry_image, Retry_pos)
-		pygame.display.flip()		
-		for event in pygame.event.get():
-			clock = pygame.time.Clock() #Reloj
-			if event.type == pygame.QUIT:
-				pygame.quit()
-			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_n:
-					return False
-				elif event.key == pygame.K_y:
-					lvl_retry = True
-					for obj in updatable_list.sprites():
-						gravity = 'S'
-						obj.reboot(gravity)
-			clock.tick(10)
+		else:
+			SCREEN.blit(fondo, (0,0))
+			door_list.draw(SCREEN)
+			sprite_list.draw(SCREEN)
+			pygame.display.flip()
+		'''
+		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
+			return False
+		if player.rect.bottom <= 0:
+			return False
+		if player.rect.right <= 0:
+			return False
+		if player.rect.left >= SCREEN_WIDTH:
+			return False
+		'''
+		clock.tick(MAX_FPS)
+		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
+		
+		
+		
+	#Menu al morir D:
+		
 		
