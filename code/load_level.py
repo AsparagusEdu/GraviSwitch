@@ -4,6 +4,7 @@ from Box import Box
 from Spike import Spike
 from Door import Door
 from constants import BLOCK_SIZE
+from Box_Filter import Box_Filter
 
 def load_level(mapa):
 	sprite_list = pygame.sprite.Group()
@@ -11,6 +12,7 @@ def load_level(mapa):
 	box_list = pygame.sprite.Group()
 	col_list = pygame.sprite.Group()
 	door_list = pygame.sprite.Group()
+	bfilter_list = pygame.sprite.Group()
 	
 	id_given = 0
 	door_id = 0
@@ -24,11 +26,11 @@ def load_level(mapa):
 				col_list.add(wall)
 				wall.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1 
-			if cuadro == 'P':
+			elif cuadro == 'P':
 				p_inicio = (pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				p_id = id_given
 				id_given += 1
-			if cuadro == 'B':
+			elif cuadro == 'B':
 				box = Box(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(box)
 				col_list.add(box)
@@ -36,18 +38,23 @@ def load_level(mapa):
 				box_list.add(box)
 				box.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1
-			if cuadro == 'S':
+			elif cuadro == 'S':
 				spike = Spike(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(spike)
 				col_list.add(spike)
 				spike.ID = id_given
 				id_given += 1
-			if cuadro == 'D':
+			elif cuadro == 'D':
 				door = Door(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				door.exitID = door_id
 				door_list.add(door)
 				door_id += 1
+			elif cuadro == 'F':
+				bfilter = Box_Filter(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
+				bfilter_list.add(bfilter)
+				bfilter.ID = id_given
+				id_given += 1
 			pos_x += 1
 		pos_y += 1
-	ex = sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id
+	ex = bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id
 	return ex

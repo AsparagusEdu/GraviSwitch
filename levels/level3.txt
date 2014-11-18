@@ -1,19 +1,19 @@
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                              W
-W                B             W
-WP               BB           DW
+WSSSSSSSWSSSSSSSSSSSSSSSSSSSSSSW
+WW      S   S       S         SW
+WW                            SW
+WWP                      D    SW
+WWWWB W   W     W    WWWWWWWWWSW
+WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 #fondo_test2.png

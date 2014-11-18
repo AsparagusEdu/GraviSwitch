@@ -26,11 +26,10 @@ main()
 
 #-------TO DO------
 '''
-- PROBAR FRAMESKIP EN EL RASPBERRY!!
-
+- BUG: A veces el jugador se queda atascado al intentar subir un bloque.
+- BUG: Si un jugador cae de una caja a otra, cuenta como si muriera aplastado.
+	
 - Crear un switch y un sistema de "corriente"
-- Crear un bloque que player pueda atravesar, pero no las cajas
 
-- Menus
-- CREAR NIVELES
+
 '''

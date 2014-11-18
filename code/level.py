@@ -13,7 +13,7 @@ def Level(nombre):
 		music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
 		pygame.mixer.music.play(-1, 0.7)
 	
-	sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
@@ -32,7 +32,9 @@ def Level(nombre):
 	player.doors = door_list
 	
 	for box in box_list.sprites(): #Annade propiedades del nivel a las cajas
-		box.level = col_list
+		box.level = bfilter_list
+		for coli in col_list.sprites():
+			box.level.add(coli)
 		box.boxes = box_list
 		box.player = player
 	
@@ -51,7 +53,7 @@ def Level(nombre):
 				pygame.quit()
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					pygame.quit()
+					return False
 				elif event.key == pygame.K_r:
 					player.dead = True
 				elif event.key == pygame.K_LEFT and not player.touch_O(0):
@@ -137,6 +139,7 @@ def Level(nombre):
 			SCREEN.blit(fondo, (0,0))
 			door_list.draw(SCREEN)
 			sprite_list.draw(SCREEN)
+			bfilter_list.draw(SCREEN)
 			pygame.display.flip()
 		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
