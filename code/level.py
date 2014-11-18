@@ -93,12 +93,17 @@ def Level(nombre):
 				print 'Mili -', milisecs #DEBUG
 				print 'Upda -', times_to_update #DEBUG
 				for times in range(times_to_update):
-					updatable_list.update(gravity)
+					box_list.update(gravity)
+					player.update(gravity)
+					#updatable_list.update(gravity)
 			else:
-				updatable_list.update(gravity)
+				box_list.update(gravity)
+				player.update(gravity)
+				#updatable_list.update(gravity)
 				
 			if player.dead == True:
 				lvl_retry = False
+				print 'DEAD'
 			elif player.win == True:
 				while True:
 					SCREEN.blit(Win_image, Win_pos)

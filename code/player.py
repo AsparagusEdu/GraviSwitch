@@ -64,7 +64,7 @@ class Player(pygame.sprite.Sprite):
 			self.dead = True
 			return True
 		elif colis == 2:
-			if type(hit_list[0]) is Box and type(hit_list[1]) is Box.Box:
+			if type(hit_list[0]) is Box.Box and type(hit_list[1]) is Box.Box:
 				bloxy = hit_list[1]
 				if bloxy.spd_x > 0:
 					self.rect.left = bloxy.rect.right
