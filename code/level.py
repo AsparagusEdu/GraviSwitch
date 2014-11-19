@@ -10,8 +10,8 @@ def Level(nombre):
 	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/cheetah2.mp3')
-		pygame.mixer.music.play(-1, 0.7)
+		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+		pygame.mixer.music.play(-1)
 	
 	bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	

@@ -16,12 +16,15 @@ class Menu():
 		self.cursor_image = pygame.image.load('images/stageselect_cursor.png').convert_alpha()
 		self.cursor_rect = self.cursor_image.get_rect()
 		
+		self.state = 'level1'
 		while True:
+			if MUSIC:
+				music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+				pygame.mixer.music.play(-1)
 			SCREEN.blit(TScreen, (0,0))
 			SCREEN.blit(self.menu_image, self.menu_pos)
 			pygame.display.flip()
 			
-			self.state = 'level1'
 			selected = False
 			while not selected:
 				change = False
