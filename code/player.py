@@ -91,9 +91,12 @@ class Player(pygame.sprite.Sprite):
 			elif bloxy.spd_y < 0 and not self.touch_N(colis):
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
-			elif bloxy.spd_y < 0 and self.spd_y > 0:
+			elif bloxy.spd_y < 0 and self.spd_y > 0: #BUGFIX para que el jugador pueda caer de una caja en movimiento a otra
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
+			elif bloxy.spd_y > 0 and self.spd_y < 0:
+				self.spd_y = 0
+				self.rect.top = bloxy.rect.bottom
 			else:
 				self.dead = True
 				return True
