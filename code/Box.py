@@ -98,19 +98,18 @@ class Box(pygame.sprite.Sprite):
 	def update(self, grav):
 		
 		if self.state == 'STOP':
-                        
 			self.calc_grav(grav)
 		else:
-                        if not C.SLOW_MODE:
-                                self.rect.y += self.spd_y
-                        else:
-                                self.rect.y += self.spd_y * 3                
-                        self.collision_y()
-                        
-                        if not C.SLOW_MODE:
-                                self.rect.x += self.spd_x
-                        else:
-                                self.rect.x += self.spd_x * 3
-                        self.collision_x()
+			if not C.SLOW_MODE:
+				self.rect.y += self.spd_y
+			else:
+				self.rect.y += self.spd_y * 3                
+			self.collision_y()
+			
+			if not C.SLOW_MODE:
+				self.rect.x += self.spd_x
+			else:
+				self.rect.x += self.spd_x * 3
+			self.collision_x()
 		
 		

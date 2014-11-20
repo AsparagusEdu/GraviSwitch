@@ -12,13 +12,15 @@ main()
 
 #-------TO DO------
 '''
-- BUG: Si un jugador cae de una caja a otra mientras ambas van subiendo, cuenta como si muriera aplastado.
+
 - BUG: Si el jugador esta saltando y choca con una caja que va cayendo hacia abajo, es aplastado
 Relacionados?
+- BUG: El jugador no puede saltar de cajas que van cayendo hacia arriba.
 
 - Optimizar para el Raspberry contando la cantidad de objetos.
 
-- Crear un switch y un sistema de "corriente"
 - Crear Checkpoints
+- Crear un switch y un sistema de "corriente"
+- Permitir al jugador oprimir abajo para que monte una caja de forma horizontal.
 
 '''

@@ -91,6 +91,9 @@ class Player(pygame.sprite.Sprite):
 			elif bloxy.spd_y < 0 and not self.touch_N(colis):
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
+			elif bloxy.spd_y < 0 and self.spd_y > 0:
+				self.spd_y = 0
+				self.rect.bottom = bloxy.rect.top
 			else:
 				self.dead = True
 				return True
@@ -169,25 +172,26 @@ class Player(pygame.sprite.Sprite):
 		self.death()
 		self.door()
 		if not C.SLOW_MODE:
-                        self.rect.x += self.spd_x
-                else:
-                        self.rect.x += self.spd_x * 3
+			self.rect.x += self.spd_x
+		else:
+			self.rect.x += self.spd_x * 3
 		self.collision_x()
 		
-                if not C.SLOW_MODE:
-                        self.rect.y += self.spd_y
-                else:
-                        self.rect.y += self.spd_y * 3              
+		
+		if not C.SLOW_MODE:
+			self.rect.y += self.spd_y
+		else:
+			self.rect.y += self.spd_y * 3              
 		self.collision_y()
 		
 		if not self.touch_S(0):
-                        if not C.SLOW_MODE:
-                                self.spd_y += .15
-                        else:
-                                self.spd_y += .45
+			if not C.SLOW_MODE:
+				self.spd_y += .15
+			else:
+				self.spd_y += .45
 		
 	def go_left(self):
-                self.spd_x = -2
+		self.spd_x = -2
 		
 	def go_right(self):
 		self.spd_x = 2
@@ -199,8 +203,7 @@ class Player(pygame.sprite.Sprite):
 		self.rect.y -=2
 		for i in hit_list:
 			if i.ID != self.ID:
-				
-                                self.spd_y = -3
+				self.spd_y = -3
                                 
 				
 				
