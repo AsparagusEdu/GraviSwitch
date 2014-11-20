@@ -56,10 +56,10 @@ def Level(nombre):
 					return False
 				elif event.key == pygame.K_r:
 					player.dead = True
-				elif event.key == pygame.K_LEFT and not player.touch_O(0):
+				elif event.key == pygame.K_LEFT:
 					player.go_left()
 					print 'Tecla - Izquierda'
-				elif event.key == pygame.K_RIGHT and not player.touch_E(0):
+				elif event.key == pygame.K_RIGHT:
 					player.go_right()
 					print 'Tecla - Derecha'
 				elif event.key == pygame.K_UP and player.touch_S(0):
