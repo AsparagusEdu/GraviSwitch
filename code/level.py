@@ -3,17 +3,17 @@ from load_level import load_level
 from constants import *
 from player import *
 from read_file import Read_File
-from misc_functions import *
+from misc_functions import static_boxes
 
 def Level(nombre):
 	
 	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+		music = pygame.mixer.music.load('sound/music/tropicalresort.mp3')
 		pygame.mixer.music.play(-1)
 	
-	bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
@@ -30,6 +30,7 @@ def Level(nombre):
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	player.doors = door_list
+	player.checkpoints = checkpoint_list
 	
 	for box in box_list.sprites(): #Annade propiedades del nivel a las cajas
 		box.level = bfilter_list
@@ -46,8 +47,9 @@ def Level(nombre):
 	lvl_retry = True #Variable para reintentar
 	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
+	clock = pygame.time.Clock() #Reloj
 	while not lvl_exit:
-		clock = pygame.time.Clock() #Reloj
+		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				pygame.quit()
@@ -100,8 +102,8 @@ def Level(nombre):
 		else:
 		'''
                 #print milisecs
-		box_list.update(gravity)
-		player.update(gravity)
+		box_list.update(gravity, clock.get_fps()/60.0)
+		player.update(gravity, clock.get_fps()/60.0)
 		#updatable_list.update(gravity)
 			
 		if player.dead == True:
@@ -137,6 +139,7 @@ def Level(nombre):
 			
 		else:
 			SCREEN.blit(fondo, (0,0))
+			checkpoint_list.draw(SCREEN)
 			door_list.draw(SCREEN)
 			sprite_list.draw(SCREEN)
 			bfilter_list.draw(SCREEN)
@@ -152,6 +155,7 @@ def Level(nombre):
 			return False
 		'''
 		clock.tick(MAX_FPS)
+		
 		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 		
 		

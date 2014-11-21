@@ -3,6 +3,8 @@ import Box
 import Spike
 import constants as C
 import Door
+import Checkpoint
+
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -152,6 +154,14 @@ class Player(pygame.sprite.Sprite):
 				if (hit.rect.left + 10 < self.rect.centerx < hit.rect.right - 10) and (hit.rect.bottom == self.rect.bottom):
 					self.win = True
 	
+	def checkpoint(self):
+		hit_list = pygame.sprite.spritecollide(self, self.checkpoints, False)
+		for hit in hit_list:
+			if type(hit) is Checkpoint.Checkpoint and hit.image != hit.ani1[3]:
+				hit.ani1_play()
+				self.init_x = hit.rect.x
+				self.init_y = hit.rect.y
+	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
@@ -171,27 +181,26 @@ class Player(pygame.sprite.Sprite):
 				elif self.spd_x < 0:
 					self.rect.left = block.rect.right
 				
-	def update(self,grav):
+	def update(self,grav, times):
 		self.death()
 		self.door()
+		self.checkpoint()
 		if not C.SLOW_MODE:
 			self.rect.x += self.spd_x
 		else:
-			self.rect.x += self.spd_x * 3
+			self.rect.x += self.spd_x * times
 		self.collision_x()
 		
 		
 		if not C.SLOW_MODE:
 			self.rect.y += self.spd_y
 		else:
-			self.rect.y += self.spd_y * 3              
+			self.rect.y += self.spd_y * times              
 		self.collision_y()
 		
 		if not self.touch_S(0):
-			if not C.SLOW_MODE:
-				self.spd_y += .15
-			else:
-				self.spd_y += .45
+			self.spd_y += .15
+			
 		
 	def go_left(self):
 		self.spd_x = -2

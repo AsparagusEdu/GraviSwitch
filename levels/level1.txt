@@ -1,5 +1,5 @@
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WWW                 F        WWW
+WWW          C      F        WWW
 WWWWWWWWWWFFFWWWWWWWW        WWW
 WWW           W  B   W       WWW
 WWW      WWW       W  W      WWW
@@ -7,7 +7,7 @@ WWW    W   B    W      W     WWW
 WWWB     W        W     W    WWW
 WWW  B      W B   W    D W   WWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWW  WWW
-WWW            B       W     WWW
+WWW            B C     W     WWW
 WWW      WWWWWWWWWW          WWW
 WWW  WWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWW             WWWWWWWWWWWWWWWW

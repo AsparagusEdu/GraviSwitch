@@ -10,11 +10,15 @@ def main():
 main()
 #-------TO DO------
 '''
+- SOLUCIONAR FRAMERATE RASPBERRY!!
+
+- Hacer la animacion de forma eficiente.
+- Calcular la cantidad de veces que se debe actualizar una animacion.
+
 - BUG: El jugador no puede saltar de cajas que van cayendo hacia arriba.
 
 - Optimizar para el Raspberry contando la cantidad de objetos.
 
-- Crear Checkpoints
 - Crear un switch y un sistema de "corriente"
 - Permitir al jugador oprimir abajo para que monte una caja de forma horizontal.
 

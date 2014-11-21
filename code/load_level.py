@@ -1,10 +1,11 @@
 import pygame
+from constants import BLOCK_SIZE
 from Wall import Wall
 from Box import Box
 from Spike import Spike
 from Door import Door
-from constants import BLOCK_SIZE
 from Box_Filter import Box_Filter
+from Checkpoint import Checkpoint
 
 def load_level(mapa):
 	sprite_list = pygame.sprite.Group()
@@ -13,6 +14,7 @@ def load_level(mapa):
 	col_list = pygame.sprite.Group()
 	door_list = pygame.sprite.Group()
 	bfilter_list = pygame.sprite.Group()
+	checkpoint_list = pygame.sprite.Group()
 	
 	id_given = 0
 	door_id = 0
@@ -54,7 +56,13 @@ def load_level(mapa):
 				bfilter_list.add(bfilter)
 				bfilter.ID = id_given
 				id_given += 1
+			elif cuadro == 'C':
+				checkpoint = Checkpoint(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
+				checkpoint_list.add(checkpoint)
+				checkpoint.ID = id_given
+				id_given += 1
+				
 			pos_x += 1
 		pos_y += 1
-	ex = bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id
+	ex = checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id
 	return ex
