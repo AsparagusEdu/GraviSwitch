@@ -1,6 +1,7 @@
 import pygame
-from load_level import load_level
 from constants import *
+from load_level import load_level
+import sound
 from player import *
 from read_file import Read_File
 from misc_functions import static_boxes
@@ -10,8 +11,10 @@ def Level(nombre):
 	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
 	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/tropicalresort.mp3')
+		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
 		pygame.mixer.music.play(-1)
+	#-----EFECTOS DE SONIDO----------
+	
 	
 	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
@@ -101,9 +104,11 @@ def Level(nombre):
 		
 		else:
 		'''
-                #print milisecs
-		box_list.update(gravity, clock.get_fps()/60.0)
-		player.update(gravity, clock.get_fps()/60.0)
+		#print milisecs
+		FPS = clock.get_fps()
+		#print FPS
+		box_list.update(gravity, FPS/60)
+		player.update(gravity, FPS/60)
 		#updatable_list.update(gravity)
 			
 		if player.dead == True:

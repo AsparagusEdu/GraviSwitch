@@ -2,7 +2,7 @@ import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MUSIC
 from level import Level
 from titlescreen import TitleScreen
-
+import sound
 
 class Menu():
 	def __init__(self):
@@ -36,11 +36,12 @@ class Menu():
 					elif self.state == 'level3':
 						selected, change = self.level_3()
 					elif self.state == 'level4':
-						selected, change = self.level_4()	
+						selected, change = self.level_4()
 					elif self.state == 'level5':
 						selected, change = self.level_5()
 					elif self.state == 'level6':
-						selected, change = self.level_6()	
+						selected, change = self.level_6()
+						
 					if change != True:
 						self.state = change
 						change = False
@@ -61,11 +62,13 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_DOWN:
+						sound.cursor.play()
 						return (False, 'level4')
 					elif event.key == pygame.K_RIGHT:
+						sound.cursor.play()
 						return (False, 'level2')
 			clock.tick(10)
 				
@@ -83,13 +86,16 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_DOWN:
+						sound.cursor.play()
 						return (False, 'level5')
 					elif event.key == pygame.K_RIGHT:
+						sound.cursor.play()
 						return (False, 'level3')
 					elif event.key == pygame.K_LEFT:
+						sound.cursor.play()
 						return (False, 'level1')
 			clock.tick(10)			
 	
@@ -107,11 +113,13 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_DOWN:
+						sound.cursor.play()	
 						return (False, 'level6')
 					elif event.key == pygame.K_LEFT:
+						sound.cursor.play()
 						return (False, 'level2')
 			clock.tick(10)
 
@@ -129,11 +137,13 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_UP:
+						sound.cursor.play()
 						return (False, 'level1')
 					elif event.key == pygame.K_RIGHT:
+						sound.cursor.play()
 						return (False, 'level5')
 			clock.tick(10)
 				
@@ -151,13 +161,16 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_UP:
+						sound.cursor.play()
 						return (False, 'level2')
 					elif event.key == pygame.K_RIGHT:
+						sound.cursor.play()
 						return (False, 'level6')
 					elif event.key == pygame.K_LEFT:
+						sound.cursor.play()
 						return (False, 'level4')
 			clock.tick(10)			
 	
@@ -175,11 +188,13 @@ class Menu():
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
 						pygame.quit()
-					if event.key == pygame.K_RETURN:
+					elif event.key == pygame.K_RETURN:
 						return (True, True)
 					elif event.key == pygame.K_UP:
+						sound.cursor.play()
 						return (False, 'level3')
 					elif event.key == pygame.K_LEFT:
+						sound.cursor.play()
 						return (False, 'level5')
 			clock.tick(10)
 
