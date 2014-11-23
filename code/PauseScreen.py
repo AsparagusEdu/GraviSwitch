@@ -20,6 +20,10 @@ def Pause_Screen():
 	
 	while pause:
 		SCREEN.blit(menu_image, menu_pos)
+		if cursor_state == -1: #Precaucion para que no salga fuera de rango
+			cursor_state = 2
+		elif cursor_state == 3:
+			cursor_state = 0
 		SCREEN.blit(cursor_image, menu_list[cursor_state])
 		pygame.display.flip()
 		
@@ -29,6 +33,10 @@ def Pause_Screen():
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					pass
+				elif event.key == pygame.K_DOWN:
+					cursor_state +=1
+				elif event.key == pygame.K_UP:
+					cursor_state -=1
 		
 		clock.tick(MAX_FPS)
 		FPS = clock.get_fps()

@@ -51,7 +51,7 @@ class Demo_Menu():
 			if MUSIC:
 				pygame.mixer.music.fadeout(1000)
 			if not EXIT_GAME:
-				Finished, EXIT_GAME = Demo_Level(self.state) #Level(self.state)
+				Finished, EXIT_GAME = Level(self.state) #Demo_Level(self.state)
 				pygame.mixer.music.fadeout(250)
 
 	def level_1(self):
