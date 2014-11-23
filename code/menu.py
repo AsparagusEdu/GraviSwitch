@@ -4,7 +4,7 @@ from level import Level
 from titlescreen import TitleScreen
 import sound
 
-class Menu():
+class Demo_Menu():
 	def __init__(self):
 		
 		TScreen = pygame.image.load('images/titlescreen.png').convert()

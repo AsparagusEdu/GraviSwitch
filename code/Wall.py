@@ -7,7 +7,7 @@ class Wall(pygame.sprite.Sprite):
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
 
-		self.image = pygame.image.load('images/box.png').convert()
+		self.image = pygame.image.load('images/tiles/box.png').convert()
 		self.rect = self.image.get_rect()		
 		self.rect.y = y
 		self.rect.x = x
@@ -53,7 +53,7 @@ class Wall(pygame.sprite.Sprite):
 		self.change_terrain(pared, top, bottom, left, right)
 		
 	def change_terrain(self, pared, top, bottom, left, right):
-		sheet = pygame.image.load('images/' + pared).convert()
+		sheet = pygame.image.load('images/tiles/' + pared).convert()
 		
 		if top:
 			if bottom:

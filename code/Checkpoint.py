@@ -12,7 +12,7 @@ class Checkpoint(pygame.sprite.Sprite):
 		self.ani1 = []
 		self.ani1_frame = 0 #60 frames total (1 sec of animation)
 		ani1_cod = [(0,0),(32,0),(64,0),(96,0)]
-		ani1_sheet = pygame.image.load('images/checkpoint.png').convert()
+		ani1_sheet = pygame.image.load('images/tiles/checkpoint.png').convert()
 		
 		for i in ani1_cod:
 			cuadro = get_image(ani1_sheet, i[0], i[1], 32,32).convert()

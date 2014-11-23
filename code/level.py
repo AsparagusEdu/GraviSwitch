@@ -15,7 +15,7 @@ def Level(nombre):
 	p_id = lvl_info[0]
 	p_inicio = lvl_info[1]
 	fondo = lvl_info[2]
-	fondo = pygame.image.load('images/' + fondo).convert()
+	fondo = pygame.image.load('images/backgrounds/' + fondo).convert()
 	musica = lvl_info[3]
 	pared = lvl_info[4]
 	

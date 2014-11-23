@@ -6,7 +6,7 @@ class Box(pygame.sprite.Sprite):
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
 
-		self.image = pygame.image.load('images/box.png').convert()
+		self.image = pygame.image.load('images/tiles/box.png').convert()
 		self.rect = self.image.get_rect()		
 		self.rect.x = x
 		self.rect.y = y

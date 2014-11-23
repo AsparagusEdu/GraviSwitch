@@ -1,12 +1,12 @@
 import pygame, os, sys, code.constants as C
 from code.level import Level
 from code.titlescreen import TitleScreen
-from code.menu import Menu
+from code.menu import Demo_Menu
 
 def main():
 	pygame.init()
 	pygame.display.set_caption(C.GAME_NAME)
-	Menu()
+	Demo_Menu()
 main()
 #-------TO DO------
 '''
@@ -36,13 +36,23 @@ Programming
 Programming Director
 - Eduardo Quezada
 
+Level Design
+- Carlos Barahona
+- Matias Ruiz
+- Eduardo Quezada
+
 Character Design
 - Matias Ruiz
 -  "Zadaka"
+
+External Resourcing
+- Matias Ruiz
 
 Testing
 - Francisco Amaro
 - Yerko 
 - "DiFroggy"
-- 
+- "Zadaka"
+- Moscoso
+- Leonora Quezada
 '''
