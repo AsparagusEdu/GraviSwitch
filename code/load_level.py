@@ -10,6 +10,7 @@ from Checkpoint import Checkpoint
 def load_level(mapa):
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
+	wall_list = pygame.sprite.Group()
 	box_list = pygame.sprite.Group()
 	col_list = pygame.sprite.Group()
 	door_list = pygame.sprite.Group()
@@ -26,6 +27,7 @@ def load_level(mapa):
 				wall = Wall(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(wall)
 				col_list.add(wall)
+				wall_list.add(wall)
 				wall.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
 				id_given += 1 
 			elif cuadro == 'P':
@@ -64,5 +66,5 @@ def load_level(mapa):
 				
 			pos_x += 1
 		pos_y += 1
-	ex = checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id
+	ex = checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, wall_list, box_list, col_list, p_inicio, p_id
 	return ex

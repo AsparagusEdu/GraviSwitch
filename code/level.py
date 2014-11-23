@@ -16,7 +16,7 @@ def Level(nombre):
 	#-----EFECTOS DE SONIDO----------
 	
 	
-	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, wall_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
@@ -41,6 +41,10 @@ def Level(nombre):
 			box.level.add(coli)
 		box.boxes = box_list
 		box.player = player
+		
+	for wall in wall_list.sprites():
+		wall.level = wall_list
+		wall.check_terrain()
 	
 	sprite_list.add(player) 
 	updatable_list.add(player)
