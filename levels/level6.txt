@@ -17,3 +17,4 @@
         W     W D W            
         WWWWWWWWWWW             
 :F fondo_test2.png
+:W wall2.png

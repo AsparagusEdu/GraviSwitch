@@ -10,22 +10,23 @@ def Level(nombre):
 	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
 	pygame.display.flip()
 	
-	lvl_info = load_level(nombre + '.txt')
+	lvl_info, lvl_lists = load_level(nombre + '.txt')
 	
-	fondo = lvl_info[0]
+	p_id = lvl_info[0]
+	p_inicio = lvl_info[1]
+	fondo = lvl_info[2]
 	fondo = pygame.image.load('images/' + fondo).convert()
-	musica = lvl_info[1]
+	musica = lvl_info[3]
+	pared = lvl_info[4]
 	
-	p_id = lvl_info[2]
-	p_inicio = lvl_info[3]
-	col_list = lvl_info[4]
-	box_list = lvl_info[5]
-	wall_list = lvl_info[6]
-	door_list = lvl_info[7]
-	updatable_list = lvl_info[8]
-	sprite_list = lvl_info[9]
-	bfilter_list = lvl_info[10]
-	checkpoint_list = lvl_info[11]
+	col_list = lvl_lists[0]
+	box_list = lvl_lists[1]
+	wall_list = lvl_lists[2]
+	door_list = lvl_lists[3]
+	updatable_list = lvl_lists[4]
+	sprite_list = lvl_lists[5]
+	bfilter_list = lvl_lists[6]
+	checkpoint_list = lvl_lists[7]
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
@@ -54,7 +55,7 @@ def Level(nombre):
 	
 	for wall in wall_list.sprites():
 		wall.level = wall_list
-		wall.check_terrain()
+		wall.check_terrain(pared)
 	
 	
 	sprite_list.add(player) 

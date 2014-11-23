@@ -16,5 +16,4 @@ WS             WWW            SW
 WS                            SW
 WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-:F fondo_test2.png
 :M cheetah.mp3

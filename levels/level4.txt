@@ -16,4 +16,5 @@ WS    P   W      WWWW         SW
 WS  WWWWW     W               SW
 WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-:F fondo_test2.png
+:F fondo_test1.png
+:W wall2.png

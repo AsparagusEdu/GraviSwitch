@@ -18,3 +18,4 @@ WWWC  P  BB     WWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :F fondo_test2.png
 :M tropicalresort.mp3
+:W wall2.png

@@ -13,9 +13,8 @@ main()
 - SOLUCIONAR FRAMERATE RASPBERRY!!
 
 - Mostrar en pantalla los FPS.
+- Sistema de guardado
 - Arreglar animacion y colision del checkpoint.
-
-- Hacer la animacion de forma eficiente.
 
 - BUG: El jugador no puede saltar de cajas que van cayendo hacia arriba.
 

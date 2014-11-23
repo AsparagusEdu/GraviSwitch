@@ -12,7 +12,7 @@ class Wall(pygame.sprite.Sprite):
 		self.rect.y = y
 		self.rect.x = x
 		
-	def check_terrain(self): #Cambia la imagen de terreno dependiendo de que otras paredes hayan.
+	def check_terrain(self, pared): #Cambia la imagen de terreno dependiendo de que otras paredes hayan.
 		hit_list1 = pygame.sprite.spritecollide(self, self.level, False)
 		
 		self.rect.y -=2
@@ -50,10 +50,10 @@ class Wall(pygame.sprite.Sprite):
 			right = False
 		self.rect.x -=2
 		
-		self.change_terrain(top, bottom, left, right)
+		self.change_terrain(pared, top, bottom, left, right)
 		
-	def change_terrain(self, top, bottom, left, right):
-		sheet = pygame.image.load('images/wall_sheet.png').convert()
+	def change_terrain(self, pared, top, bottom, left, right):
+		sheet = pygame.image.load('images/' + pared).convert()
 		
 		if top:
 			if bottom:
