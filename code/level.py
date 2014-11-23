@@ -39,10 +39,12 @@ def Level(nombre):
 			box.level.add(coli)
 		box.boxes = box_list
 		box.player = player
-		
+	
+	
 	for wall in wall_list.sprites():
 		wall.level = wall_list
 		wall.check_terrain()
+	
 	
 	sprite_list.add(player) 
 	updatable_list.add(player)

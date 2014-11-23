@@ -102,6 +102,12 @@ class Player(pygame.sprite.Sprite):
 			elif bloxy.spd_y > 0 and self.spd_y < 0:
 				self.spd_y = 0
 				self.rect.top = bloxy.rect.bottom
+			elif bloxy.spd_y < 0 and self.spd_y < 0:
+				self.spd_y = 0
+				if bloxy.rect.y > self.rect.y:
+					self.rect.bottom = bloxy.rect.top
+				else:
+					self.rect.top = bloxy.rect.bottom
 			else:
 				self.dead = True
 				return True

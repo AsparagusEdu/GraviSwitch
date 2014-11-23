@@ -60,78 +60,50 @@ class Wall(pygame.sprite.Sprite):
 				if left:
 					if right:
 						cuadro = get_image(sheet, 0,0, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 32, 0, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 				else:
 					if right:
 						cuadro = get_image(sheet, 64, 0, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 96, 0, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 						
 			else:
 				if left:
 					if right:
 						cuadro = get_image(sheet, 0, 32, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 32, 32, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 				else:
 					if right:
 						cuadro = get_image(sheet, 64, 32, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 96, 32, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 		else:
 			if bottom:
 				if left:
 					if right:
 						cuadro = get_image(sheet, 0, 64, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 32, 64, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 				else:
 					if right:
 						cuadro = get_image(sheet, 64, 64, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 96, 64, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 			else:
 				if left:
 					if right:
 						cuadro = get_image(sheet, 0, 96, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 32, 96, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 				else:
 					if right:
 						cuadro = get_image(sheet, 64, 96, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
 					else:
 						cuadro = get_image(sheet, 96, 96, 32,32).convert()
-						cuadro.set_colorkey(CHROMA_KEY)
-						self.image = cuadro
+		
+		#cuadro.set_colorkey(CHROMA_KEY)
+		self.image = cuadro
+		
 
