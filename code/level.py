@@ -14,17 +14,18 @@ def Level(nombre):
 	
 	fondo = lvl_info[0]
 	fondo = pygame.image.load('images/' + fondo).convert()
+	musica = lvl_info[1]
 	
-	p_id = lvl_info[1]
-	p_inicio = lvl_info[2]
-	col_list = lvl_info[3]
-	box_list = lvl_info[4]
-	wall_list = lvl_info[5]
-	door_list = lvl_info[6]
-	updatable_list = lvl_info[7]
-	sprite_list = lvl_info[8]
-	bfilter_list = lvl_info[9]
-	checkpoint_list = lvl_info[10]
+	p_id = lvl_info[2]
+	p_inicio = lvl_info[3]
+	col_list = lvl_info[4]
+	box_list = lvl_info[5]
+	wall_list = lvl_info[6]
+	door_list = lvl_info[7]
+	updatable_list = lvl_info[8]
+	sprite_list = lvl_info[9]
+	bfilter_list = lvl_info[10]
+	checkpoint_list = lvl_info[11]
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
@@ -65,7 +66,7 @@ def Level(nombre):
 	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
 	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+		music = pygame.mixer.music.load('sound/music/' + musica)
 		pygame.mixer.music.play(-1)
 	
 	clock = pygame.time.Clock() #Reloj
@@ -138,10 +139,10 @@ def Level(nombre):
 				for event in pygame.event.get():
 					clock = pygame.time.Clock() #Reloj
 					if event.type == pygame.QUIT:
-						pygame.quit()
+						return False, True
 					if event.type == pygame.KEYDOWN:
 						if event.key == pygame.K_n:
-							return False
+							return False, False
 						elif event.key == pygame.K_y:
 							lvl_retry = True
 							for obj in updatable_list.sprites():
@@ -155,9 +156,9 @@ def Level(nombre):
 				for event in pygame.event.get():
 					clock = pygame.time.Clock() #Reloj
 					if event.type == pygame.QUIT:
-						pygame.quit()
+						return True, True
 					if event.type == pygame.KEYDOWN:
-						return True
+						return True, False
 					clock.tick(60)
 			
 		else:

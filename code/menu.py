@@ -52,6 +52,7 @@ class Menu():
 				pygame.mixer.music.fadeout(1000)
 			if not EXIT_GAME:
 				Finished, EXIT_GAME = Level(self.state)
+				pygame.mixer.music.fadeout(250)
 
 	def level_1(self):
 		clock = pygame.time.Clock()

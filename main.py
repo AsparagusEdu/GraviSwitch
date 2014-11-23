@@ -12,6 +12,7 @@ main()
 '''
 - SOLUCIONAR FRAMERATE RASPBERRY!!
 
+- Mostrar en pantalla los FPS.
 - Arreglar animacion y colision del checkpoint.
 
 - Hacer la animacion de forma eficiente.
