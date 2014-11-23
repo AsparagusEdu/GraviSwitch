@@ -7,7 +7,26 @@ from Door import Door
 from Box_Filter import Box_Filter
 from Checkpoint import Checkpoint
 
-def load_level(mapa):
+def Read_File(nombre):
+	archivo = open("levels/" + nombre)
+	mapa = []
+	for linea in archivo:
+		linea = linea.strip("\n")
+		if linea[0] != '#':
+			linea.split()
+			mapa.append(linea)
+			print linea
+		else:
+			fondo = linea.strip('#')
+			print fondo
+
+	archivo.close()
+	return mapa, fondo
+	
+
+def load_level(nombre):
+	mapa, fondo = Read_File(nombre)
+	
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
 	wall_list = pygame.sprite.Group()
@@ -66,5 +85,6 @@ def load_level(mapa):
 				
 			pos_x += 1
 		pos_y += 1
-	ex = checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, wall_list, box_list, col_list, p_inicio, p_id
+	ex =[fondo, p_id, p_inicio, col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list]
 	return ex
+

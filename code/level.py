@@ -11,10 +11,21 @@ def Level(nombre):
 	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
 	pygame.display.flip()
 	
-	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
+	lvl_info = load_level(nombre + '.txt')
+	
+	fondo = lvl_info[0]
 	fondo = pygame.image.load('images/' + fondo).convert()
-			
-	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, wall_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
+	
+	p_id = lvl_info[1]
+	p_inicio = lvl_info[2]
+	col_list = lvl_info[3]
+	box_list = lvl_info[4]
+	wall_list = lvl_info[5]
+	door_list = lvl_info[6]
+	updatable_list = lvl_info[7]
+	sprite_list = lvl_info[8]
+	bfilter_list = lvl_info[9]
+	checkpoint_list = lvl_info[10]
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
