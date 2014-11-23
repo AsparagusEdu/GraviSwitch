@@ -8,14 +8,12 @@ from misc_functions import static_boxes
 
 def Level(nombre):
 	
+	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
+	pygame.display.flip()
+	
 	mapa, fondo = Read_File(nombre + '.txt') #mapa es matriz y fondo es el nombre del archivo + extension del fondo
 	fondo = pygame.image.load('images/' + fondo).convert()
-	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
-		pygame.mixer.music.play(-1)
-	#-----EFECTOS DE SONIDO----------
-	
-	
+			
 	checkpoint_list, bfilter_list, sprite_list, updatable_list, door_list, wall_list, box_list, col_list, p_inicio, p_id = load_level(mapa)
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
@@ -53,6 +51,10 @@ def Level(nombre):
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	lvl_retry = True #Variable para reintentar
 	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
+	
+	if MUSIC:
+		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+		pygame.mixer.music.play(-1)
 	
 	clock = pygame.time.Clock() #Reloj
 	while not lvl_exit:
@@ -110,7 +112,7 @@ def Level(nombre):
 		'''
 		#print milisecs
 		FPS = clock.get_fps()
-		#print FPS
+		print FPS
 		box_list.update(gravity, FPS/60)
 		player.update(gravity, FPS/60)
 		#updatable_list.update(gravity)
