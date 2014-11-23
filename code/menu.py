@@ -46,6 +46,8 @@ class Menu():
 						self.state = change
 						change = False
 			
+			if MUSIC:
+				pygame.mixer.music.fadeout(1000)
 			Level(self.state)
 
 	def level_1(self):

@@ -152,10 +152,10 @@ def Level(nombre):
 			
 		else:
 			SCREEN.blit(fondo, (0,0))
-			checkpoint_list.draw(SCREEN)
 			door_list.draw(SCREEN)
 			sprite_list.draw(SCREEN)
 			bfilter_list.draw(SCREEN)
+			checkpoint_list.draw(SCREEN)
 			pygame.display.flip()
 		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
