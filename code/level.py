@@ -11,7 +11,7 @@ def Level(nombre):
 	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
 	pygame.display.flip()
 	
-	lvl_info, lvl_lists = load_level(nombre + '.txt')
+	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt')
 	
 	p_id = lvl_info[0]
 	p_inicio = lvl_info[1]
@@ -82,6 +82,7 @@ def Level(nombre):
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					pause = Pause_Screen(NOFPS_SCREEN)
+					player.spd_x = 0
 					if pause == 'Continuar':
 						pass
 					elif pause == 'Reiniciar':
@@ -186,8 +187,9 @@ def Level(nombre):
 			bfilter_list.draw(SCREEN)
 			checkpoint_list.draw(SCREEN)
 			
-			NOFPS_SCREEN.blit(SCREEN, (0,0))
-			show_fps(FPS)
+			if SHOW_FPS:
+				NOFPS_SCREEN.blit(SCREEN, (0,0))
+				show_fps(FPS)
 			pygame.display.flip()
 		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla

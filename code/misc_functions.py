@@ -17,5 +17,5 @@ def get_image(sheet, x, y, width, height):
 
 def show_fps(FPS):
 	fonty = pygame.font.SysFont('Pokemon FireLeaf', 20)
-	image = fonty.render(str(FPS), False, (0,0,0))
+	image = fonty.render('FPS:' + str(int(FPS)), False, (0,0,0))
 	SCREEN.blit(image, (0,0))

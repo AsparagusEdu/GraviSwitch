@@ -12,5 +12,7 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 CHROMA_KEY = (255,60,250)
 
 MAX_FPS = 60
+SHOW_FPS = False
 SLOW_MODE = False
+
 MUSIC = False
