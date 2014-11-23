@@ -11,13 +11,15 @@ def Read_File(nombre):
 	archivo = open("levels/" + nombre)
 	mapa = []
 	for linea in archivo:
+		if len(linea) == 0:
+			continue
 		linea = linea.strip("\n")
-		if linea[0] != '#':
+		if linea[0] != ':':
 			linea.split()
 			mapa.append(linea)
 			print linea
-		else:
-			fondo = linea.strip('#')
+		elif linea[1] == 'F':
+			fondo = linea.strip(':F ')
 			print fondo
 
 	archivo.close()
