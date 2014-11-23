@@ -3,7 +3,7 @@ from constants import *
 from load_level import load_level
 import sound
 from player import *
-from misc_functions import static_boxes
+from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 
 def Level(nombre):
@@ -37,6 +37,8 @@ def Level(nombre):
 	Win_image = pygame.image.load('images/win.png').convert()                        #|
 	Win_rect = Win_image.get_rect()                                                  #|
 	Win_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2)   #|
+	
+	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert()
 	#---------------------------------------------------------------------------------|
 	
 	pos_x, pos_y = p_inicio #Posiciones de inicio
@@ -79,7 +81,7 @@ def Level(nombre):
 				return False, True #Nivel terminado, Salir del juego
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					pause = Pause_Screen()
+					pause = Pause_Screen(NOFPS_SCREEN)
 					if pause == 'Continuar':
 						pass
 					elif pause == 'Reiniciar':
@@ -141,7 +143,7 @@ def Level(nombre):
 		'''
 		#print milisecs
 		FPS = clock.get_fps()
-		print FPS
+		
 		box_list.update(gravity, FPS/60)
 		player.update(gravity, FPS/60)
 		#updatable_list.update(gravity)
@@ -183,6 +185,9 @@ def Level(nombre):
 			sprite_list.draw(SCREEN)
 			bfilter_list.draw(SCREEN)
 			checkpoint_list.draw(SCREEN)
+			
+			NOFPS_SCREEN.blit(SCREEN, (0,0))
+			show_fps(FPS)
 			pygame.display.flip()
 		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla

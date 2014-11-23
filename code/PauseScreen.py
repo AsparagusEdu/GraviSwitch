@@ -1,8 +1,10 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY
+import sound
+from misc_functions import show_fps
 
-def Pause_Screen():
-	
+def Pause_Screen(prev_screen):
+		
 	menu_image = pygame.image.load('images/pause_menu.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
@@ -19,7 +21,10 @@ def Pause_Screen():
 	pause = True
 	
 	while pause:
+		SCREEN.blit(prev_screen, (0,0))
 		SCREEN.blit(menu_image, menu_pos)
+		FPS = clock.get_fps()
+		show_fps(FPS)
 		if cursor_state == -1: #Precaucion para que no salga fuera de rango
 			cursor_state = 3
 		elif cursor_state == 4:
@@ -43,9 +48,10 @@ def Pause_Screen():
 						return 'Salir'
 				elif event.key == pygame.K_DOWN:
 					cursor_state +=1
+					sound.cursor.play()
 				elif event.key == pygame.K_UP:
 					cursor_state -=1
+					sound.cursor.play()
 		
 		clock.tick(MAX_FPS)
-		FPS = clock.get_fps()
-		print FPS
+		

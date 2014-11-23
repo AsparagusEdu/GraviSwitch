@@ -13,4 +13,4 @@ CHROMA_KEY = (255,60,250)
 
 MAX_FPS = 60
 SLOW_MODE = False
-MUSIC = True
+MUSIC = False
