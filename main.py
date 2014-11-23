@@ -5,6 +5,9 @@ from code.menu import Demo_Menu
 
 def main():
 	pygame.init()
+	icon = pygame.image.load('images/icon.png').convert()
+	icon.set_colorkey(C.CHROMA_KEY)
+	pygame.display.set_icon(icon)
 	pygame.display.set_caption(C.GAME_NAME)
 	Demo_Menu()
 main()
