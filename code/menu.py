@@ -6,7 +6,7 @@ import sound
 
 class Menu():
 	def __init__(self):
-		TitleScreen()
+		
 		TScreen = pygame.image.load('images/titlescreen.png').convert()
 		
 		self.menu_image = pygame.image.load('images/stageselect.png').convert()
@@ -17,7 +17,9 @@ class Menu():
 		self.cursor_rect = self.cursor_image.get_rect()
 		
 		self.state = 'level1'
-		while True:
+		
+		EXIT_GAME = TitleScreen()
+		while not EXIT_GAME:
 			if MUSIC:
 				music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
 				pygame.mixer.music.play(-1)
@@ -30,17 +32,17 @@ class Menu():
 				change = False
 				while not change:
 					if self.state == 'level1':
-						selected, change = self.level_1()
+						selected, change, EXIT_GAME = self.level_1()
 					elif self.state == 'level2':
-						selected, change = self.level_2()
+						selected, change, EXIT_GAME = self.level_2()
 					elif self.state == 'level3':
-						selected, change = self.level_3()
+						selected, change, EXIT_GAME = self.level_3()
 					elif self.state == 'level4':
-						selected, change = self.level_4()
+						selected, change, EXIT_GAME = self.level_4()
 					elif self.state == 'level5':
-						selected, change = self.level_5()
+						selected, change, EXIT_GAME = self.level_5()
 					elif self.state == 'level6':
-						selected, change = self.level_6()
+						selected, change, EXIT_GAME = self.level_6()
 						
 					if change != True:
 						self.state = change
@@ -48,7 +50,8 @@ class Menu():
 			
 			if MUSIC:
 				pygame.mixer.music.fadeout(1000)
-			Level(self.state)
+			if not EXIT_GAME:
+				Finished, EXIT_GAME = Level(self.state)
 
 	def level_1(self):
 		clock = pygame.time.Clock()
@@ -60,18 +63,18 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_DOWN:
 						sound.cursor.play()
-						return (False, 'level4')
+						return (False, 'level4', False)
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
-						return (False, 'level2')
+						return (False, 'level2', False)
 			clock.tick(10)
 				
 	def level_2(self):
@@ -84,21 +87,21 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_DOWN:
 						sound.cursor.play()
-						return (False, 'level5')
+						return (False, 'level5', False)
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
-						return (False, 'level3')
+						return (False, 'level3', False)
 					elif event.key == pygame.K_LEFT:
 						sound.cursor.play()
-						return (False, 'level1')
+						return (False, 'level1', False)
 			clock.tick(10)			
 	
 	def level_3(self):
@@ -111,18 +114,18 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_DOWN:
 						sound.cursor.play()	
-						return (False, 'level6')
+						return (False, 'level6', False)
 					elif event.key == pygame.K_LEFT:
 						sound.cursor.play()
-						return (False, 'level2')
+						return (False, 'level2', False)
 			clock.tick(10)
 
 	def level_4(self):
@@ -135,18 +138,18 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_UP:
 						sound.cursor.play()
-						return (False, 'level1')
+						return (False, 'level1', False)
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
-						return (False, 'level5')
+						return (False, 'level5', False)
 			clock.tick(10)
 				
 	def level_5(self):
@@ -159,21 +162,21 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_UP:
 						sound.cursor.play()
-						return (False, 'level2')
+						return (False, 'level2', False)
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
-						return (False, 'level6')
+						return (False, 'level6', False)
 					elif event.key == pygame.K_LEFT:
 						sound.cursor.play()
-						return (False, 'level4')
+						return (False, 'level4', False)
 			clock.tick(10)			
 	
 	def level_6(self):
@@ -186,17 +189,17 @@ class Menu():
 		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					pygame.quit()
+					return (True, True, True)
 				if event.type == pygame.KEYDOWN:
 					if event.key == pygame.K_ESCAPE:
-						pygame.quit()
+						return (True, True, True)
 					elif event.key == pygame.K_RETURN:
-						return (True, True)
+						return (True, True, False)
 					elif event.key == pygame.K_UP:
 						sound.cursor.play()
-						return (False, 'level3')
+						return (False, 'level3', False)
 					elif event.key == pygame.K_LEFT:
 						sound.cursor.play()
-						return (False, 'level5')
+						return (False, 'level5', False)
 			clock.tick(10)
 

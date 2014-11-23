@@ -12,12 +12,12 @@ def TitleScreen():
 	while not over:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				pygame.quit()
+				return True
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					pygame.quit()
+					return True
 				elif event.key == pygame.K_RETURN:
-					return
+					return False
 				
 		SCREEN.blit(title, (0,0))
 		pygame.display.flip()

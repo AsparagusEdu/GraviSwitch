@@ -3,7 +3,6 @@ from constants import *
 from load_level import load_level
 import sound
 from player import *
-from read_file import Read_File
 from misc_functions import static_boxes
 
 def Level(nombre):
@@ -74,10 +73,10 @@ def Level(nombre):
 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				pygame.quit()
+				return False, True
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					return False
+					return False, False
 				elif event.key == pygame.K_r:
 					player.dead = True
 				elif event.key == pygame.K_LEFT:
