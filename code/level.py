@@ -3,7 +3,7 @@ from constants import *
 from load_level import load_level
 import sound
 from player import *
-from misc_functions import static_boxes, show_fps
+from misc_functions import static_boxes, show_fps, dead_player
 from PauseScreen import Pause_Screen
 
 def Level(nombre):
@@ -130,18 +130,6 @@ def Level(nombre):
 					player.stop()
 				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 					player.stop()
-		'''	
-		if SLOW_MODE:
-			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
-			print 'Mili -', milisecs #DEBUG
-			print 'Upda -', times_to_update #DEBUG
-			for times in range(times_to_update):
-				box_list.update(gravity)
-				player.update(gravity)
-				#updatable_list.update(gravity)
-		
-		else:
-		'''
 		#print milisecs
 		FPS = clock.get_fps()
 		
@@ -154,9 +142,9 @@ def Level(nombre):
 			print 'DEAD'
 			SCREEN.blit(Retry_image, Retry_pos)
 			pygame.display.flip()
+			clock = pygame.time.Clock() #Reloj
 			while not lvl_retry	:	
 				for event in pygame.event.get():
-					clock = pygame.time.Clock() #Reloj
 					if event.type == pygame.QUIT:
 						return False, True
 					if event.type == pygame.KEYDOWN:
@@ -313,19 +301,7 @@ def Demo_Level(nombre):
 					player.stop()
 				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
 					player.stop()
-		'''	
-		if SLOW_MODE:
-			times_to_update = milisecs/16 #Veces en la que el juego actualiza sus objetos.
-			print 'Mili -', milisecs #DEBUG
-			print 'Upda -', times_to_update #DEBUG
-			for times in range(times_to_update):
-				box_list.update(gravity)
-				player.update(gravity)
-				#updatable_list.update(gravity)
 		
-		else:
-		'''
-		#print milisecs
 		FPS = clock.get_fps()
 		print FPS
 		box_list.update(gravity, FPS/60)
