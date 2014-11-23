@@ -30,13 +30,10 @@ def Level(nombre):
 	checkpoint_list = lvl_lists[7]
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
-	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
-	Retry_rect = Retry_image.get_rect()												 #|
-	Retry_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2) #|
 																					 #|
 	Win_image = pygame.image.load('images/win.png').convert()                        #|
 	Win_rect = Win_image.get_rect()                                                  #|
-	Win_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2)   #|
+	Win_pos = (SCREEN_WIDTH/2 - Win_rect.w/2 , SCREEN_HEIGHT/2 - Win_rect.h/2)   #|
 	
 	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert()
 	#---------------------------------------------------------------------------------|
@@ -140,22 +137,16 @@ def Level(nombre):
 		if player.dead == True:
 			lvl_retry = False
 			print 'DEAD'
-			SCREEN.blit(Retry_image, Retry_pos)
-			pygame.display.flip()
-			clock = pygame.time.Clock() #Reloj
-			while not lvl_retry	:	
-				for event in pygame.event.get():
-					if event.type == pygame.QUIT:
-						return False, True
-					if event.type == pygame.KEYDOWN:
-						if event.key == pygame.K_n:
-							return False, False
-						elif event.key == pygame.K_y:
-							lvl_retry = True
-							for obj in updatable_list.sprites():
-								gravity = 'S'
-								obj.reboot(gravity)
-					clock.tick(10)
+			revive, G_OVER = dead_player()
+			if revive:
+				for obj in updatable_list.sprites():
+					gravity = 'S'
+					obj.reboot(gravity)
+			elif not G_OVER:
+				return False, False
+			else:
+				return False, True
+			
 		elif player.win == True:
 			while True:
 				SCREEN.blit(Win_image, Win_pos)
@@ -193,7 +184,8 @@ def Level(nombre):
 		
 		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 	
-
+	
+		''' #DEMO
 def Demo_Level(nombre):
 	
 	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
@@ -347,6 +339,7 @@ def Demo_Level(nombre):
 			checkpoint_list.draw(SCREEN)
 			pygame.display.flip()
 		'''
+		'''
 		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
 			return False
 		if player.rect.bottom <= 0:
@@ -356,10 +349,11 @@ def Demo_Level(nombre):
 		if player.rect.left >= SCREEN_WIDTH:
 			return False
 		'''
+		'''
 		clock.tick(MAX_FPS)
 		
 		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
-		
+		'''	
 		
 		
 	#Menu al morir D:

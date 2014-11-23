@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN
+from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH
 
 def static_boxes(box_list):#Recibe lista de objetos "Box" como parametro
 	for box in box_list.sprites():
@@ -21,4 +21,21 @@ def show_fps(FPS):
 	SCREEN.blit(image, (0,0))
 
 def dead_player():
-	pass
+	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
+	Retry_rect = Retry_image.get_rect()												 #|
+	Retry_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2) #|
+	
+	SCREEN.blit(Retry_image, Retry_pos)
+	pygame.display.flip()
+	while True	:	
+		for event in pygame.event.get():
+			clock = pygame.time.Clock() #Reloj
+			if event.type == pygame.QUIT:
+				return False, True #Reintentar, Salir del Juego
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_n:
+					return False, False
+				elif event.key == pygame.K_y:
+					return True, False
+			clock.tick(10)
+	
