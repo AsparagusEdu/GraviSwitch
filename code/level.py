@@ -79,7 +79,21 @@ def Level(nombre):
 				return False, True #Nivel terminado, Salir del juego
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					return Pause_Screen()
+					pause = Pause_Screen()
+					if pause == 'Continuar':
+						pass
+					elif pause == 'Reiniciar':
+						for obj in updatable_list.sprites():
+							gravity = 'S'
+							obj.reboot(gravity)
+						for che in checkpoint_list.sprites():
+							che.reboot()
+						player.rect.x, player.rect.y = pos_x, pos_y
+						player.init_x, player.init_y = pos_x, pos_y
+					elif pause == 'Menu':
+						return False, False
+					elif pause == 'Salir':
+						return False, True
 				elif event.key == pygame.K_r:
 					player.dead = True
 				elif event.key == pygame.K_LEFT:

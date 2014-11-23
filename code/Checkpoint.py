@@ -24,6 +24,9 @@ class Checkpoint(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect()		
 		self.rect.y = y
 		self.rect.x = x
+		
+	def reboot(self):
+		self.image = self.ani1[0]
 
 	def ani1_play(self):
 		if self.image == self.ani1[0] and self.ani1_frame >= 15:
