@@ -1,0 +1,20 @@
+        WWWWWWWWWWWW
+        W  W F     W            
+        WP W F C   W            
+        WW W WWWWFWW            
+        W  W  WW B W           
+        W  W  WW W W           
+        W WW  WWB BW           
+        W  WW WWWFWW           
+        W  W  WW   W           
+        WWBW  WW WBW           
+        W  W  WWB BW           
+        W WW WWWFWWW           
+        W  W  WW  W            
+        W  W  WW  W            
+        WW W  W   W            
+        W  WW W   W            
+        W     W D W            
+        WWWWWWWWWWW             
+:F fondo_test2.png
+:W wall1.png

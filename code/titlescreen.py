@@ -1,7 +1,7 @@
 import pygame
 from constants import SCREEN, MUSIC
-def TitleScreen():
-	title = pygame.image.load('images/titlescreen.png').convert()
+def Demo_TitleScreen():
+	title = pygame.image.load('images/demo/titlescreen.png').convert()
 	'''
 	if MUSIC:
 		music = pygame.mixer.music.load('sound/music/cheetah.mp3')

@@ -1,6 +1,4 @@
 import pygame, os, sys, code.constants as C
-from code.level import Level
-from code.titlescreen import TitleScreen
 from code.menu import Demo_Menu
 
 def main():
@@ -9,6 +7,7 @@ def main():
 	icon.set_colorkey(C.CHROMA_KEY)
 	pygame.display.set_icon(icon)
 	pygame.display.set_caption(C.GAME_NAME)
+	
 	Demo_Menu()
 main()
 #-------TO DO------

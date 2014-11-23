@@ -1,0 +1,20 @@
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WSSSSSSSWSSSSSSSSSSSSSSSSSSSSSSW
+WW      S   W       S         SW
+WW                            SW
+WWP                      D    SW
+WWWWB W   W     W    WWWWWWWWWSW
+WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WS                            SW
+WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+:F fondo_test2.png
+:M cheetah.mp3
