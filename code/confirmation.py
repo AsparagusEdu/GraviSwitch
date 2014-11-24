@@ -2,20 +2,19 @@ import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
 from misc_functions import show_fps
-from confirmation import Confirmation
 
-def Pause_Screen(prev_screen):
+def Confirmation(prev_screen):
 		
-	menu_image = pygame.image.load('images/pause_menu.png').convert()
+	menu_image = pygame.image.load('images/confirmation.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
-	menu_list = [(425,221),(425,269),(425,317), (425,365)] #48
+	menu_list = [(399,284),(518,284)]
 	
-	cursor_image = pygame.image.load('images/pause_menu_cursor.png').convert()
+	cursor_image = pygame.image.load('images/confirmation_cursor.png').convert()
 	cursor_image.set_colorkey(CHROMA_KEY)
 	cursor_rect = cursor_image.get_rect()
 	
-	cursor_state = 0
+	cursor_state = 1
 
 	clock = pygame.time.Clock()
 	
@@ -30,8 +29,8 @@ def Pause_Screen(prev_screen):
 			show_fps(FPS)
 			
 		if cursor_state == -1: #Precaucion para que no salga fuera de rango
-			cursor_state = 3
-		elif cursor_state == 4:
+			cursor_state = 1
+		elif cursor_state == 2:
 			cursor_state = 0
 		SCREEN.blit(cursor_image, menu_list[cursor_state])
 		pygame.display.flip()
@@ -42,20 +41,13 @@ def Pause_Screen(prev_screen):
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
 					if cursor_state == 0:
-						return 'Continuar'
+						return True
 					elif cursor_state == 1:
-						if Confirmation(prev_screen):
-							return 'Reiniciar'
-					elif cursor_state == 2:
-						if Confirmation(prev_screen):
-							return 'Menu'
-					elif cursor_state == 3:
-						if Confirmation(prev_screen):
-							return 'Salir'
-				elif event.key == pygame.K_DOWN:
+						return False
+				elif event.key == pygame.K_RIGHT:
 					cursor_state +=1
 					sound.cursor.play()
-				elif event.key == pygame.K_UP:
+				elif event.key == pygame.K_LEFT:
 					cursor_state -=1
 					sound.cursor.play()
 		

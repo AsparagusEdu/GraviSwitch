@@ -11,19 +11,17 @@ def get_image(sheet, x, y, width, height):
 		image = pygame.Surface([width, height])
 		image.blit(sheet, (0, 0), (x, y, width, height))
 		return image
-
-#def confirmation(): "Are you sure?"
 	
 
 def show_fps(FPS):
-	fonty = pygame.font.SysFont('Pokemon FireLeaf', 20)
+	fonty = pygame.font.SysFont('Arial', 20) #Pokemon FireLeaf
 	image = fonty.render('FPS:' + str(int(FPS)), False, (0,0,0))
 	SCREEN.blit(image, (0,0))
 
 def dead_player():
-	Retry_image = pygame.image.load('images/retry.png').convert()					 #|
-	Retry_rect = Retry_image.get_rect()												 #|
-	Retry_pos = (SCREEN_WIDTH/2 - Retry_rect.w/2 , SCREEN_HEIGHT/2 - Retry_rect.h/2) #|
+	menu_image = pygame.image.load('images/retry.png').convert()					 #|
+	menu_rect = menu_image.get_rect()												 #|
+	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2) #|
 	
 	SCREEN.blit(Retry_image, Retry_pos)
 	pygame.display.flip()
