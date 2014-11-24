@@ -5,6 +5,7 @@ import sound
 from player import *
 from misc_functions import static_boxes, show_fps, dead_player
 from PauseScreen import Pause_Screen
+from dead_player import DeadPlayer
 
 def Level(nombre):
 	
@@ -63,7 +64,6 @@ def Level(nombre):
 	
 	gravity = 'S'
 	lvl_exit = False #Variable para terminar de procesar el nivel
-	lvl_retry = True #Variable para reintentar
 	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
 	if MUSIC:
@@ -94,8 +94,6 @@ def Level(nombre):
 						return False, False
 					elif pause == 'Salir':
 						return False, True
-				elif event.key == pygame.K_r:
-					player.dead = True
 				elif event.key == pygame.K_LEFT:
 					player.go_left()
 					print 'Tecla - Izquierda'
@@ -135,9 +133,8 @@ def Level(nombre):
 		#updatable_list.update(gravity)
 			
 		if player.dead == True:
-			lvl_retry = False
 			print 'DEAD'
-			revive, G_OVER = dead_player()
+			revive, G_OVER = DeadPlayer(NOFPS_SCREEN) #dead_player()
 			if revive:
 				for obj in updatable_list.sprites():
 					gravity = 'S'

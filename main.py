@@ -12,12 +12,14 @@ def main():
 main()
 #-------TO DO------
 '''
+- Terminar con el menu.
 - SOLUCIONAR FRAMERATE RASPBERRY!!
 
 - Sistema de guardado
-- Arreglar animacion y colision del checkpoint.
+- Arreglar animacion del checkpoint.
 
-- BUG: El jugador no puede saltar de cajas que van cayendo hacia arriba.
+- BUG?: El jugador no puede saltar de cajas que van cayendo hacia arriba.
+  Y si utilizamos esto como explicacion para permitir que las cajas puedan lanzar al jugador hacia arriba?
 
 - Crear un switch y un sistema de "corriente"
 - Permitir al jugador oprimir abajo para que monte una caja de forma horizontal.
@@ -44,16 +46,16 @@ Level Design
 
 Character Design
 - Matias Ruiz
--  "Zadaka"
+- "Zadaka"
 
 External Resourcing
 - Matias Ruiz
 
 Testing
-- Francisco Amaro
-- Yerko 
-- "DiFroggy"
 - "Zadaka"
-- Moscoso
+- "DiFroggy"
+- Felipe Moscoso
+- Yerko
+- Francisco Amaro
 - Leonora Quezada
 '''

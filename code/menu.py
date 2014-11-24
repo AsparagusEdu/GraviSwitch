@@ -76,8 +76,7 @@ class Demo_Menu():
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
 						return (False, 'level2', False)
-			clock.tick(10)
-				
+			clock.tick(10)		
 	def level_2(self):
 		clock = pygame.time.Clock()
 		
@@ -104,7 +103,6 @@ class Demo_Menu():
 						sound.cursor.play()
 						return (False, 'level1', False)
 			clock.tick(10)			
-	
 	def level_3(self):
 		clock = pygame.time.Clock()
 		
@@ -128,7 +126,6 @@ class Demo_Menu():
 						sound.cursor.play()
 						return (False, 'level2', False)
 			clock.tick(10)
-
 	def level_4(self):
 		clock = pygame.time.Clock()
 		
@@ -151,8 +148,7 @@ class Demo_Menu():
 					elif event.key == pygame.K_RIGHT:
 						sound.cursor.play()
 						return (False, 'level5', False)
-			clock.tick(10)
-				
+			clock.tick(10)			
 	def level_5(self):
 		clock = pygame.time.Clock()
 		
@@ -179,7 +175,6 @@ class Demo_Menu():
 						sound.cursor.play()
 						return (False, 'level4', False)
 			clock.tick(10)			
-	
 	def level_6(self):
 		clock = pygame.time.Clock()
 		

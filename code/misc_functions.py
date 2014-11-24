@@ -23,7 +23,7 @@ def dead_player():
 	menu_rect = menu_image.get_rect()												 #|
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2) #|
 	
-	SCREEN.blit(Retry_image, Retry_pos)
+	SCREEN.blit(menu_image, menu_pos)
 	pygame.display.flip()
 	while True	:	
 		for event in pygame.event.get():
