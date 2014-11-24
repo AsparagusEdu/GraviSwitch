@@ -26,7 +26,7 @@ main()
 
 '''
 
-#Creditz
+#------Creditz-----
 '''
 Game Director
 - Eduardo Quezada
