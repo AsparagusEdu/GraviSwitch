@@ -1,5 +1,6 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH
+from Box import *
 
 def static_boxes(box_list):#Recibe lista de objetos "Box" como parametro
 	for box in box_list.sprites():
@@ -36,4 +37,14 @@ def dead_player():
 				elif event.key == pygame.K_y:
 					return True, False
 			clock.tick(10)
+	
+def check_if_box(block):
+	if type(block) is Box:
+		return True
+	elif type(block) is JumpBox:
+		return True
+	return False
+	
+	
+	
 	

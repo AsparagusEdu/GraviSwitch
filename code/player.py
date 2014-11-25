@@ -7,6 +7,8 @@ import constants as C
 import Door
 import Checkpoint
 
+from misc_functions import check_if_box
+
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
@@ -72,7 +74,9 @@ class Player(pygame.sprite.Sprite):
 			self.dead = True
 			return True
 		elif colis == 2:
-			if (type(hit_list[0]) is Box.Box or type(hit_list[0]) is Box.JumpBox) and (type(hit_list[1]) is Box.Box and type(hit_list[1]) is Box.JumpBox):
+			#if (type(hit_list[0]) is Box.Box or type(hit_list[0]) is Box.JumpBox) and (type(hit_list[1]) is Box.Box and type(hit_list[1]) is Box.JumpBox):
+			
+			if check_if_box(hit_list[0]) and check_if_box(hit_list[1]):
 				bloxy = hit_list[1]
 				if bloxy.spd_x > 0:
 					self.rect.left = bloxy.rect.right
@@ -94,6 +98,10 @@ class Player(pygame.sprite.Sprite):
 				self.rect.left = bloxy.rect.right
 			elif bloxy.spd_x < 0 and not self.touch_O(colis):
 				self.rect.right = bloxy.rect.left
+			
+			#elif bloxy.spd_x < 0 and self.spd_x < 0 and self.rect.x < bloxy.rect.x:
+				#self.rect.right = bloxy.rect.left
+			
 			elif bloxy.spd_y > 0 and not self.touch_S(colis):
 				self.spd_y = 0
 				self.rect.top = bloxy.rect.bottom
@@ -112,6 +120,7 @@ class Player(pygame.sprite.Sprite):
 					self.rect.bottom = bloxy.rect.top
 				else:
 					self.rect.top = bloxy.rect.bottom
+			
 			else:
 				self.dead = True
 				return True
@@ -183,7 +192,7 @@ class Player(pygame.sprite.Sprite):
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
 					self.bounce = True
-					self.spd_x = 3
+					self.spd_x = 4
 		self.rect.x +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x -=1
@@ -191,7 +200,7 @@ class Player(pygame.sprite.Sprite):
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
 					self.bounce = True
-					self.spd_x = -3
+					self.spd_x = -4
 	def door(self): #Detecta cuando el jugador llego a una puerta
 		hit_list = pygame.sprite.spritecollide(self, self.doors, False)
 		for hit in hit_list:
@@ -249,9 +258,9 @@ class Player(pygame.sprite.Sprite):
 			self.spd_y += .15
 		if self.bounce:
 			if self.spd_x > 0.3:
-				self.spd_x -= .05
+				self.spd_x -= .09
 			elif self.spd_x < -0.3:
-				self.spd_x += .05
+				self.spd_x += .09
 			else:
 				self.spd_x = 0
 				
