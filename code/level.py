@@ -56,7 +56,7 @@ def Level(nombre):
 	
 	for wall in wall_list.sprites():
 		wall.level = wall_list
-		wall.check_terrain(pared)
+		wall.change_terrain(pared)
 	
 	
 	sprite_list.add(player) 

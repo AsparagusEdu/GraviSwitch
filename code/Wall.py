@@ -12,7 +12,7 @@ class Wall(pygame.sprite.Sprite):
 		self.rect.y = y
 		self.rect.x = x
 		
-	def check_terrain(self, pared): #Cambia la imagen de terreno dependiendo de que otras paredes hayan.
+	def check_terrain_1(self): #Cambia la imagen de terreno dependiendo de que otras paredes hayan.
 		hit_list1 = pygame.sprite.spritecollide(self, self.level, False)
 		
 		self.rect.y -=2
@@ -50,10 +50,69 @@ class Wall(pygame.sprite.Sprite):
 			right = False
 		self.rect.x -=2
 		
-		self.change_terrain(pared, top, bottom, left, right)
+		return top, bottom, left, right
 		
-	def change_terrain(self, pared, top, bottom, left, right):
+	def check_terrain_2(self, top, bottom, left, right):
+		if top and left:
+			self.rect.x -=2
+			self.rect.y -=2
+			hit_list = pygame.sprite.spritecollide(self, self.level, False)
+			self.rect.x +=2
+			self.rect.y +=2
+			if len(hit_list) == 3:
+				topleft = True
+			else:
+				topleft = False
+		else:
+			topleft = False
+			
+		if top and right:
+			self.rect.x +=2
+			self.rect.y -=2
+			hit_list = pygame.sprite.spritecollide(self, self.level, False)
+			self.rect.x -=2
+			self.rect.y +=2
+			if len(hit_list) == 3:
+				topright = True
+			else:
+				topright = False
+		else:
+			topright = False
+			
+		if bottom and left:
+			self.rect.x -=2
+			self.rect.y +=2
+			hit_list = pygame.sprite.spritecollide(self, self.level, False)
+			self.rect.x +=2
+			self.rect.y -=2
+			if len(hit_list) == 3:
+				bottomleft = True
+			else:
+				bottomleft = False
+		else:
+			bottomleft = False
+			
+		if bottom and right:
+			self.rect.x +=2
+			self.rect.y +=2
+			hit_list = pygame.sprite.spritecollide(self, self.level, False)
+			self.rect.x -=2
+			self.rect.y -=2
+			if len(hit_list) == 3:
+				bottomright = True
+			else:
+				bottomright = False
+		else:
+			bottomright = False
+			
+		return topleft, topright, bottomleft, bottomright
+	
+	def change_terrain(self, pared):
 		sheet = pygame.image.load('images/tiles/' + pared).convert()
+		top, bottom, left, right = self.check_terrain_1()
+		topleft, topright, bottomleft, bottomright = self.check_terrain_2(top, bottom, left, right)
+		
+		cuadro = pygame.image.load('images/tiles/box.png').convert()
 		
 		if top:
 			if bottom:

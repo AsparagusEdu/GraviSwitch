@@ -15,4 +15,4 @@ MAX_FPS = 60
 SHOW_FPS = True
 SLOW_MODE = False
 
-MUSIC = True
+MUSIC = False
