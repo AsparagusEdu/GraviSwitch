@@ -1,7 +1,7 @@
 import pygame
 from constants import BLOCK_SIZE
 from Wall import Wall
-from Box import Box
+from Box import Box, JumpBox
 from Spike import Spike
 from Door import Door
 from Box_Filter import Box_Filter
@@ -72,6 +72,14 @@ def load_level(nombre):
 				id_given += 1
 			elif cuadro == 'B':
 				box = Box(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
+				sprite_list.add(box)
+				col_list.add(box)
+				updatable_list.add(box)
+				box_list.add(box)
+				box.ID = id_given #Cada bloque va a tener su propio ID, para comparar colisiones.
+				id_given += 1
+			elif cuadro == 'J':
+				box = JumpBox(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE)
 				sprite_list.add(box)
 				col_list.add(box)
 				updatable_list.add(box)

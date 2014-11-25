@@ -17,5 +17,5 @@ WS                            SW
 WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :F fondo_marble.png
-:M cheetah2.mp3
+:M marble.mp3
 :W wallmarble.png

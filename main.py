@@ -53,9 +53,10 @@ External Resourcing
 
 Testing
 - "Zadaka"
-- "DiFroggy"
+- Felipe "DiFroggy" Vasquez
 - Felipe Moscoso
 - Yerko
 - Francisco Amaro
-- Leonora Quezada
+- Daniel Nahum
+
 '''

@@ -112,4 +112,15 @@ class Box(pygame.sprite.Sprite):
 				self.rect.x += self.spd_x * times
 			self.collision_x()
 		
+class JumpBox(Box):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+
+		self.image = pygame.image.load('images/tiles/jumpbox.png').convert()
+		self.rect = self.image.get_rect()		
+		self.rect.x = x
+		self.rect.y = y
+		self.state = 'STOP'
 		
+		self.init_x = x
+		self.init_y = y

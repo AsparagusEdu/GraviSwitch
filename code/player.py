@@ -24,6 +24,10 @@ class Player(pygame.sprite.Sprite):
 		self.init_x = self.rect.x
 		self.init_y = self.rect.y
 		
+		self.bounce = False
+		self.p_input_l = False
+		self.p_input_r = False
+		
 	def reboot(self, grav):
 		self.dead = False
 		self.spd_y = 0
@@ -68,7 +72,7 @@ class Player(pygame.sprite.Sprite):
 			self.dead = True
 			return True
 		elif colis == 2:
-			if type(hit_list[0]) is Box.Box and type(hit_list[1]) is Box.Box:
+			if (type(hit_list[0]) is Box.Box or type(hit_list[0]) is Box.JumpBox) and (type(hit_list[1]) is Box.Box and type(hit_list[1]) is Box.JumpBox):
 				bloxy = hit_list[1]
 				if bloxy.spd_x > 0:
 					self.rect.left = bloxy.rect.right
@@ -156,13 +160,44 @@ class Player(pygame.sprite.Sprite):
 		if self.crush() or self.touch_death() or self.out_screen_death():
 			self.dead = True
 			sound.dead.play()
+	
+	def jumpbox(self): #Detecta cuando el jugador llego a una puerta
+		self.rect.y -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y +=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Box.JumpBox:
+					self.spd_y = 6
+		self.rect.y +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y -=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Box.JumpBox:
+					self.spd_y = -6
+		self.rect.x -=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x +=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Box.JumpBox:
+					self.bounce = True
+					self.spd_x = 3
+		self.rect.x +=1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.x -=1
+		if len(hit_list) > 0:
+			for hit in hit_list:
+				if type(hit) is Box.JumpBox:
+					self.bounce = True
+					self.spd_x = -3
 	def door(self): #Detecta cuando el jugador llego a una puerta
 		hit_list = pygame.sprite.spritecollide(self, self.doors, False)
 		for hit in hit_list:
 			if type(hit) is Door.Door:
 				if (hit.rect.left + 10 < self.rect.centerx < hit.rect.right - 10) and (hit.rect.bottom == self.rect.bottom):
 					self.win = True
-	
 	def checkpoint(self, times):
 		hit_list = pygame.sprite.spritecollide(self, self.checkpoints, False)
 		for hit in hit_list:
@@ -196,6 +231,7 @@ class Player(pygame.sprite.Sprite):
 		self.death()
 		self.door()
 		self.checkpoint(times)
+		self.jumpbox()
 		if not C.SLOW_MODE:
 			self.rect.x += self.spd_x
 		else:
@@ -211,6 +247,15 @@ class Player(pygame.sprite.Sprite):
 		
 		if not self.touch_S(0):
 			self.spd_y += .15
+		if self.bounce:
+			if self.spd_x > 0.3:
+				self.spd_x -= .05
+			elif self.spd_x < -0.3:
+				self.spd_x += .05
+			else:
+				self.spd_x = 0
+				
+				self.bounce = False
 			
 		
 	def go_left(self):

@@ -94,10 +94,10 @@ def Level(nombre):
 						return False, False
 					elif pause == 'Salir':
 						return False, True
-				elif event.key == pygame.K_LEFT:
+				elif event.key == pygame.K_LEFT and not player.bounce:
 					player.go_left()
 					print 'Tecla - Izquierda'
-				elif event.key == pygame.K_RIGHT:
+				elif event.key == pygame.K_RIGHT and not player.bounce:
 					player.go_right()
 					print 'Tecla - Derecha'
 				elif event.key == pygame.K_UP and player.touch_S(0):
@@ -124,6 +124,8 @@ def Level(nombre):
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()
 				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
+					player.p_input_l = False
+					player.p_input_r = False
 					player.stop()
 		#print milisecs
 		FPS = clock.get_fps()
