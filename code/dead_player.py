@@ -5,12 +5,12 @@ from misc_functions import show_fps
 
 def DeadPlayer(prev_screen):
 		
-	menu_image = pygame.image.load('images/retry.png').convert()
+	menu_image = pygame.image.load('images/gui/retry.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
 	menu_list = [(399,284),(518,284)]
 	
-	cursor_image = pygame.image.load('images/confirmation_cursor.png').convert()
+	cursor_image = pygame.image.load('images/gui/cursor/confirmation_cursor.png').convert()
 	cursor_image.set_colorkey(CHROMA_KEY)
 	cursor_rect = cursor_image.get_rect()
 	

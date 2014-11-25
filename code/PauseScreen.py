@@ -6,12 +6,12 @@ from confirmation import Confirmation
 
 def Pause_Screen(prev_screen):
 		
-	menu_image = pygame.image.load('images/pause_menu.png').convert()
+	menu_image = pygame.image.load('images/gui/pause_menu.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
 	menu_list = [(425,221),(425,269),(425,317), (425,365)] #48
 	
-	cursor_image = pygame.image.load('images/pause_menu_cursor.png').convert()
+	cursor_image = pygame.image.load('images/gui/cursor/pause_menu_cursor.png').convert()
 	cursor_image.set_colorkey(CHROMA_KEY)
 	cursor_rect = cursor_image.get_rect()
 	

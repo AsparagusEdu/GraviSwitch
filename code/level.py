@@ -3,13 +3,13 @@ from constants import *
 from load_level import load_level
 import sound
 from player import *
-from misc_functions import static_boxes, show_fps, dead_player
+from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
 def Level(nombre):
 	
-	SCREEN.blit(pygame.image.load('images/loading.png'),(0,0))
+	SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 	pygame.display.flip()
 	
 	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt')

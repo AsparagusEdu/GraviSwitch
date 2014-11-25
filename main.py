@@ -1,5 +1,5 @@
 import pygame, os, sys, code.constants as C
-from code.menu import Demo_Menu
+from code.menu import Demo_Menu, Main_Menu
 
 def main():
 	pygame.init()
@@ -8,7 +8,8 @@ def main():
 	pygame.display.set_icon(icon)
 	pygame.display.set_caption(C.GAME_NAME)
 	
-	Demo_Menu()
+	Main_Menu()
+	pygame.quit()
 main()
 #-------TO DO------
 '''

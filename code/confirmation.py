@@ -5,12 +5,12 @@ from misc_functions import show_fps
 
 def Confirmation(prev_screen):
 		
-	menu_image = pygame.image.load('images/confirmation.png').convert()
+	menu_image = pygame.image.load('images/gui/confirmation.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
 	menu_list = [(399,284),(518,284)]
 	
-	cursor_image = pygame.image.load('images/confirmation_cursor.png').convert()
+	cursor_image = pygame.image.load('images/gui/cursor/confirmation_cursor.png').convert()
 	cursor_image.set_colorkey(CHROMA_KEY)
 	cursor_rect = cursor_image.get_rect()
 	
@@ -21,13 +21,12 @@ def Confirmation(prev_screen):
 	pause = True
 	
 	while pause:
-		if SHOW_FPS:
-			SCREEN.blit(prev_screen, (0,0))
-		SCREEN.blit(menu_image, menu_pos)
 		FPS = clock.get_fps()
 		if SHOW_FPS:
+			SCREEN.blit(prev_screen, (0,0))
 			show_fps(FPS)
-			
+		SCREEN.blit(menu_image, menu_pos)
+		
 		if cursor_state == -1: #Precaucion para que no salga fuera de rango
 			cursor_state = 1
 		elif cursor_state == 2:

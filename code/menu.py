@@ -1,7 +1,8 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MUSIC
 from level import *
-from titlescreen import Demo_TitleScreen
+from titlescreen import Demo_TitleScreen, Main_TitleScreen
+from LevelSelect import Level_Select
 import sound
 #import music
 
@@ -199,4 +200,12 @@ class Demo_Menu():
 						return (False, 'level5', False)
 			clock.tick(10)
 
-#class Main_Menu():
+class Main_Menu():
+	def __init__(self):
+		TScreen = pygame.image.load('images/demo/titlescreen.png').convert()
+		
+		EXIT_GAME = Main_TitleScreen()
+		while not EXIT_GAME:
+			SCREEN.blit(TScreen, (0,0))
+			EXIT_GAME = Level_Select(TScreen)
+		
