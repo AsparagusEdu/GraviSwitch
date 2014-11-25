@@ -12,6 +12,7 @@ def Level_Select(prev_screen):
 	menu_list = [(399,284),(518,284)]
 	
 	cursor_state = 1
+	demo = 1
 
 	clock = pygame.time.Clock()
 	
@@ -24,10 +25,11 @@ def Level_Select(prev_screen):
 	EXIT_GAME = False
 	
 	while not EXIT_MENU:
-		if cursor_state == 0: #Precaucion para que no salga fuera de rango
-			cursor_state = 6
-		elif cursor_state == 7:
-			cursor_state = 1
+		
+		if cursor_state <= demo -1: #Precaucion para que no salga fuera de rango. Modificado cuando se activan los niveles demo.
+			cursor_state = 4
+		elif cursor_state == 5:
+			cursor_state = demo
 		
 		FPS = clock.get_fps()
 		if SHOW_FPS:
@@ -52,6 +54,12 @@ def Level_Select(prev_screen):
 						pygame.mixer.music.play(-1)
 				elif event.key == pygame.K_ESCAPE:
 					return True
+					
+				elif event.key == pygame.K_p:
+					if demo == 1:
+						demo = -6
+					else:
+						demo = 1
 				
 				elif event.key == pygame.K_RIGHT:
 					cursor_state +=1

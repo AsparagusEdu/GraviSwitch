@@ -18,4 +18,4 @@ W  W   WW W     WWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW 
 :F fondo_marble.png
 :M marble.mp3
-:W wallmarble.png
+:W marble1.png

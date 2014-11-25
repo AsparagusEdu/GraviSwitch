@@ -18,4 +18,4 @@ W                          WWWWW
 W                           WWWW
 :F fondo_marble.png
 :M marble.mp3
-:W wallscrapbrain.png
+:W scrap2.png

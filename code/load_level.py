@@ -15,7 +15,7 @@ def Read_File(nombre):
 	pared = None
 	
 	for linea in archivo:
-		if len(linea) == 0:
+		if len(linea) == 0 or linea[0] == '#':
 			continue
 		linea = linea.strip("\n")
 		if linea[0] != ':':
@@ -37,7 +37,7 @@ def Read_File(nombre):
 	if musica == None:
 		musica = 'cheetah.mp3'
 	if pared == None:
-		pared = 'wall1.png'
+		pared = 'default1.png'
 	return mapa, fondo, musica, pared
 	
 
