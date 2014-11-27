@@ -60,5 +60,6 @@ Testing
 - Yerko
 - Francisco Amaro
 - Daniel Nahum
+- Cristian Arancibia D:
 
 '''

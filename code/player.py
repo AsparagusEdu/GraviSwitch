@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
 		
 		self.image = pygame.image.load('images/Isaac1.png').convert_alpha()
 		self.rect = self.image.get_rect()
+		#self.image = pygame.image.load('images/Isaac2.png').convert()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
 		

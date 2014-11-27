@@ -13,6 +13,7 @@ def Read_File(nombre):
 	fondo = None
 	musica = None
 	pared = None
+	graviswitch = True
 	
 	for linea in archivo:
 		if len(linea) == 0 or linea[0] == '#':
@@ -31,6 +32,11 @@ def Read_File(nombre):
 		elif linea[1] == 'W':
 			pared = linea.strip(':W ')
 			print pared
+		elif linea[1] == 'G':
+			if linea.strip(':G ') == 'False':
+				graviswitch = False
+				print linea
+				
 	archivo.close()
 	if fondo == None:
 		fondo = 'fondo_test0.png'
@@ -38,11 +44,11 @@ def Read_File(nombre):
 		musica = 'cheetah.mp3'
 	if pared == None:
 		pared = 'default1.png'
-	return mapa, fondo, musica, pared
+	return mapa, fondo, musica, pared, graviswitch
 	
 
 def load_level(nombre):
-	mapa, fondo, musica, pared = Read_File(nombre)
+	mapa, fondo, musica, pared, graviswitch = Read_File(nombre)
 	
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
@@ -112,6 +118,6 @@ def load_level(nombre):
 		pos_y += 1
 	
 	grupos =[col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list]
-	info = [p_id, p_inicio, fondo, musica, pared]
+	info = [p_id, p_inicio, fondo, musica, pared, graviswitch]
 	return (info, grupos)
 

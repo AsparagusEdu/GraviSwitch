@@ -175,7 +175,7 @@ class Wall(pygame.sprite.Sprite):
 			if top:
 				if left:
 					if topleft:
-						parte1 = get_image(sheet, 0,0, 16,16).convert()
+						parte1 = get_image(sheet, 64,16, 16,16).convert()
 					else:
 						parte1 = get_image(sheet, 32,16, 16,16).convert()
 				else:
@@ -183,7 +183,7 @@ class Wall(pygame.sprite.Sprite):
 				
 				if right:
 					if topright:
-						parte2 = get_image(sheet, 0,0, 16,16).convert()
+						parte2 = get_image(sheet, 64,32, 16,16).convert()
 					else:
 						parte2 = get_image(sheet, 32,32, 16,16).convert()
 				else:
@@ -203,7 +203,7 @@ class Wall(pygame.sprite.Sprite):
 			if bottom:
 				if left:
 					if bottomleft:
-						parte4 = get_image(sheet, 0,0, 16,16).convert()
+						parte4 = get_image(sheet, 64,64, 16,16).convert()
 					else:
 						parte4 = get_image(sheet, 32,64, 16,16).convert()
 				else:
@@ -211,7 +211,7 @@ class Wall(pygame.sprite.Sprite):
 				
 				if right:
 					if bottomright:
-						parte3 = get_image(sheet, 0,0, 16,16).convert()
+						parte3 = get_image(sheet, 64,48, 16,16).convert()
 					else:
 						parte3 = get_image(sheet, 32,48, 16,16).convert()
 				else:

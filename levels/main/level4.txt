@@ -16,6 +16,6 @@ WW                         D WWW
 W                        WWWWWWW
 W                          WWWWW
 W                           WWWW
-:F fondo_marble.png
+:F fondo_marble2.png
 :M marble.mp3
 :W scrap2.png

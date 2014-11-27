@@ -8,6 +8,7 @@ from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
 def Level(nombre):
+	MUSIC = True
 	
 	SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 	pygame.display.flip()
@@ -20,6 +21,7 @@ def Level(nombre):
 	fondo = pygame.image.load('images/backgrounds/' + fondo).convert()
 	musica = lvl_info[3]
 	pared = lvl_info[4]
+	graviswitch = lvl_info[5]
 	
 	col_list = lvl_lists[0]
 	box_list = lvl_lists[1]
@@ -59,7 +61,7 @@ def Level(nombre):
 		wall.change_terrain(pared)
 	
 	
-	sprite_list.add(player) 
+	#sprite_list.add(player) 
 	updatable_list.add(player)
 	
 	gravity = 'S'
@@ -94,6 +96,13 @@ def Level(nombre):
 						return False, False
 					elif pause == 'Salir':
 						return False, True
+				elif event.key == pygame.K_m:
+					if MUSIC:
+						MUSIC = False
+						pygame.mixer.music.stop()
+					else:
+						MUSIC = True
+						pygame.mixer.music.play(-1)
 				elif event.key == pygame.K_LEFT and not player.bounce:
 					player.go_left()
 					print 'Tecla - Izquierda'
@@ -103,23 +112,25 @@ def Level(nombre):
 				elif event.key == pygame.K_UP and player.touch_S(0):
 					player.jump()
 					print 'Tecla - Salto'
-				elif event.key == pygame.K_w:
-					switch = True
-					if static_boxes(box_list):
-						gravity = 'N'
-						print 'Gravedad - NORTE' #DEBUG
-				elif event.key == pygame.K_s:
-					if static_boxes(box_list):
-						gravity = 'S'
-						print 'Gravedad - SUR' #DEBUG
-				elif event.key == pygame.K_d:
-					if static_boxes(box_list):
-						gravity = 'E'
-						print 'Gravedad - ESTE'
-				elif event.key == pygame.K_a:
-					if static_boxes(box_list):
-						gravity = 'O'
-						print 'Gravedad - OESTE'
+				
+				if graviswitch:
+					if event.key == pygame.K_w:
+						switch = True
+						if static_boxes(box_list):
+							gravity = 'N'
+							print 'Gravedad - NORTE' #DEBUG
+					elif event.key == pygame.K_s:
+						if static_boxes(box_list):
+							gravity = 'S'
+							print 'Gravedad - SUR' #DEBUG
+					elif event.key == pygame.K_d:
+						if static_boxes(box_list):
+							gravity = 'E'
+							print 'Gravedad - ESTE'
+					elif event.key == pygame.K_a:
+						if static_boxes(box_list):
+							gravity = 'O'
+							print 'Gravedad - OESTE'
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()
@@ -161,6 +172,7 @@ def Level(nombre):
 		else:
 			SCREEN.blit(fondo, (0,0))
 			door_list.draw(SCREEN)
+			SCREEN.blit(player.image, (player.rect.x, player.rect.y)) #Modificable
 			sprite_list.draw(SCREEN)
 			bfilter_list.draw(SCREEN)
 			checkpoint_list.draw(SCREEN)
