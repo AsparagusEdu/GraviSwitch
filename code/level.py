@@ -172,7 +172,7 @@ def Level(nombre):
 		else:
 			SCREEN.blit(fondo, (0,0))
 			door_list.draw(SCREEN)
-			SCREEN.blit(player.image, (player.rect.x, player.rect.y)) #Modificable
+			SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
 			sprite_list.draw(SCREEN)
 			bfilter_list.draw(SCREEN)
 			checkpoint_list.draw(SCREEN)
