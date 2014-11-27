@@ -2,7 +2,7 @@ import pygame
 from constants import BLOCK_SIZE
 from Wall import Wall
 from Box import Box, JumpBox
-from spike import Spike
+from Spike import Spike
 from Door import Door
 from Box_Filter import Box_Filter
 from Checkpoint import Checkpoint
