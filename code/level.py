@@ -117,19 +117,23 @@ def Level(nombre):
 					if event.key == pygame.K_w:
 						switch = True
 						if static_boxes(box_list):
+							sound.graviswitch.play()
 							gravity = 'N'
 							print 'Gravedad - NORTE' #DEBUG
 					elif event.key == pygame.K_s:
 						if static_boxes(box_list):
 							gravity = 'S'
+							sound.graviswitch.play()
 							print 'Gravedad - SUR' #DEBUG
 					elif event.key == pygame.K_d:
 						if static_boxes(box_list):
 							gravity = 'E'
+							sound.graviswitch.play()
 							print 'Gravedad - ESTE'
 					elif event.key == pygame.K_a:
 						if static_boxes(box_list):
 							gravity = 'O'
+							sound.graviswitch.play()
 							print 'Gravedad - OESTE'
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:

@@ -1,7 +1,7 @@
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WSSSSSSSWSSSSSSSSSSSSSSSSSSSSSSW
 WW      S   W       S         SW
-WW                            SW
+WW                  S         SW
 WWP                      D    SW
 WWWWB W   W     W    WWWWWWWWWSW
 WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
@@ -16,6 +16,6 @@ WS                            SW
 WS                            SW
 WSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-:F fondo_marble.png
+:F fondo_marble2.png
 :M marble.mp3
 :W marble1.png
