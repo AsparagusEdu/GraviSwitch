@@ -18,5 +18,5 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :F fondo_marble2.png
 :M cheetah.mp3
-:W marble2.png
+:W marble.png
 :G False

@@ -18,4 +18,4 @@ WWW   P     F       BBWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :F fondo_test1.png
 :M smb3world1.mp3
-:W grey1.png
+:W grey.png

@@ -17,4 +17,4 @@
         W     W D W            
         WWWWWWWWWWW             
 :F fondo_test2.png
-:W grey1.png
+:W grey.png

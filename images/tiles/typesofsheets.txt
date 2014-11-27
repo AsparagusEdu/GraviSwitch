@@ -1,2 +1,0 @@
-marble1.png:default1.png:grey1.png:scrap1.png
-marble2.png:default2.png:grey2.png:scrap2.png

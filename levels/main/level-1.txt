@@ -18,4 +18,4 @@ WWW   P  BB     WWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :F fondo_test2.png
 :M tropicalresort.mp3
-:W grey1.png
+:W grey.png
