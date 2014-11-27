@@ -87,10 +87,10 @@ class Player(pygame.sprite.Sprite):
 					self.rect.right = bloxy.rect.left
 				elif bloxy.spd_y > 0:
 					self.spd_y = 0
-					self.rect.bottom = bloxy.rect.top
+					self.rect.top = bloxy.rect.bottom
 				elif bloxy.spd_y < 0:
 					self.spd_y = 0
-					self.rect.top = bloxy.rect.bottom
+					self.rect.bottom = bloxy.rect.top
 			else:
 				self.dead = True
 				sound.dead.play()
@@ -284,7 +284,3 @@ class Player(pygame.sprite.Sprite):
 		for i in hit_list:
 			if i.ID != self.ID:
 				self.spd_y = -3
-                                
-				
-				
-		
