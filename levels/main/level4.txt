@@ -19,3 +19,4 @@ W                           WWWW
 :F fondo_marble2.png
 :M marble.mp3
 :W scrap.png
+:G False
