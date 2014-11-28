@@ -27,8 +27,8 @@ def Level_Select(prev_screen):
 	while not EXIT_MENU:
 		
 		if cursor_state <= demo -1: #Precaucion para que no salga fuera de rango. Modificado cuando se activan los niveles demo.
-			cursor_state = 6
-		elif cursor_state == 7:
+			cursor_state = 10
+		elif cursor_state == 11:
 			cursor_state = demo
 		
 		FPS = clock.get_fps()
@@ -37,7 +37,10 @@ def Level_Select(prev_screen):
 			show_fps(FPS)
 		SCREEN.blit(menu_image, menu_pos)
 		cursor_image = fonty.render(str(cursor_state), False, (255,255,255))
-		SCREEN.blit(cursor_image, (502,304))
+		if cursor_state >= 10:
+			SCREEN.blit(cursor_image, (491,304))
+		else:	
+			SCREEN.blit(cursor_image, (502,304))
 		
 		pygame.display.flip()
 		

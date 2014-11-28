@@ -1,0 +1,21 @@
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WW  F                   F      W
+WW                      F  D   W
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW                      WWWWWWWW
+WW P                    WWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+:F fondo_marble2.png
+:M cheetah.mp3
+:W marble.png

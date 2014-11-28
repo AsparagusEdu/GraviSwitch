@@ -103,15 +103,19 @@ def Level(nombre):
 					else:
 						MUSIC = True
 						pygame.mixer.music.play(-1)
-				elif event.key == pygame.K_LEFT and not player.bounce:
+				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
 					player.go_left()
-					print 'Tecla - Izquierda'
-				elif event.key == pygame.K_RIGHT and not player.bounce:
+					#print 'Tecla - Izquierda'
+				elif event.key == pygame.K_RIGHT and not player.bounce and not player.crouch:
 					player.go_right()
-					print 'Tecla - Derecha'
-				elif event.key == pygame.K_UP and player.touch_S(0):
+					#print 'Tecla - Derecha'
+				elif event.key == pygame.K_UP and player.touch_S(0) and not player.crouch:
 					player.jump()
-					print 'Tecla - Salto'
+					#print 'Tecla - Salto'
+				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
+					player.crouch = True
+					player.image = player.crouch_image
+					#player.spd_x = 0
 				
 				if graviswitch:
 					if event.key == pygame.K_w:
@@ -119,22 +123,22 @@ def Level(nombre):
 						if static_boxes(box_list):
 							sound.graviswitch.play()
 							gravity = 'N'
-							print 'Gravedad - NORTE' #DEBUG
+							#print 'Gravedad - NORTE' #DEBUG
 					elif event.key == pygame.K_s:
 						if static_boxes(box_list):
 							gravity = 'S'
 							sound.graviswitch.play()
-							print 'Gravedad - SUR' #DEBUG
+							#print 'Gravedad - SUR' #DEBUG
 					elif event.key == pygame.K_d:
 						if static_boxes(box_list):
 							gravity = 'E'
 							sound.graviswitch.play()
-							print 'Gravedad - ESTE'
+							#print 'Gravedad - ESTE'
 					elif event.key == pygame.K_a:
 						if static_boxes(box_list):
 							gravity = 'O'
 							sound.graviswitch.play()
-							print 'Gravedad - OESTE'
+							#print 'Gravedad - OESTE'
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()
@@ -142,6 +146,9 @@ def Level(nombre):
 					player.p_input_l = False
 					player.p_input_r = False
 					player.stop()
+				elif event.key == pygame.K_DOWN:
+					player.crouch = False
+					player.image = player.stand_image
 		#print milisecs
 		FPS = clock.get_fps()
 		

@@ -16,10 +16,18 @@ class Player(pygame.sprite.Sprite):
 	def __init__(self, x_init, y_init):
 		pygame.sprite.Sprite.__init__(self)
 		
-		self.image = pygame.image.load('images/IsaacCol.png').convert()
+		self.stand_image = pygame.image.load('images/Isaac/stand.png').convert()
+		self.stand_image.set_colorkey(C.CHROMA_KEY)
+		#self.moving_image
+		self.crouch_image = pygame.image.load('images/Isaac/crouch.png').convert()
+		self.crouch_image.set_colorkey(C.CHROMA_KEY)
+		
+		
+		
+		self.image = pygame.image.load('images/Isaac/IsaacCol.png').convert()
 		self.rect = self.image.get_rect()
-		self.image = pygame.image.load('images/Isaac1.png').convert()
-		self.image.set_colorkey(C.CHROMA_KEY)
+		self.image = self.stand_image
+		
 		#self.image = pygame.image.load('images/Isaac2.png').convert()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
@@ -30,6 +38,7 @@ class Player(pygame.sprite.Sprite):
 		self.init_y = self.rect.y
 		
 		self.bounce = False
+		self.crouch = False
 		self.p_input_l = False
 		self.p_input_r = False
 		
