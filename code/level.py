@@ -115,6 +115,7 @@ def Level(nombre):
 				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
 					player.crouch = True
 					player.image = player.crouch_image
+					print 'Crouch - ON'
 					#player.spd_x = 0
 				
 				if graviswitch:
@@ -146,9 +147,10 @@ def Level(nombre):
 					player.p_input_l = False
 					player.p_input_r = False
 					player.stop()
-				elif event.key == pygame.K_DOWN:
+				elif event.key == pygame.K_DOWN and player.crouch:
 					player.crouch = False
 					player.image = player.stand_image
+					print 'Crouch - OFF'
 		#print milisecs
 		FPS = clock.get_fps()
 		

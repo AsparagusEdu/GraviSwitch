@@ -44,6 +44,8 @@ class Player(pygame.sprite.Sprite):
 		
 	def reboot(self, grav):
 		self.dead = False
+		self.bounce = False
+		self.crouch = False
 		self.spd_y = 0
 		self.spd_x = 0
 		self.rect.x = self.init_x
@@ -228,6 +230,14 @@ class Player(pygame.sprite.Sprite):
 					self.init_x = hit.rect.x + 8
 					self.init_y = hit.rect.y
 					hit.ani1_frame += 5 * times
+					
+	def box_ride(self):
+		self.rect.y += 1
+		hit_list = pygame.sprite.spritecollide(self, self.level, False)
+		self.rect.y -= 1
+		for hit in hit_list:
+			if type(hit) is Box.Box:
+				self.rect.x += hit.spd_x
 	
 	def collision_y(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
@@ -253,6 +263,11 @@ class Player(pygame.sprite.Sprite):
 		self.door()
 		self.checkpoint(times)
 		self.jumpbox()
+		
+		if self.crouch:
+			#print 'box'
+			self.box_ride()
+		
 		if not C.SLOW_MODE:
 			self.rect.x += self.spd_x
 		else:
