@@ -115,6 +115,8 @@ def Level(nombre):
 				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
 					player.crouch = True
 					player.image = player.crouch_image
+					if player.direction == 'Left':
+						player.image = pygame.transform.flip(player.image, True, False)
 					print 'Crouch - ON'
 					#player.spd_x = 0
 				
@@ -150,6 +152,8 @@ def Level(nombre):
 				elif event.key == pygame.K_DOWN and player.crouch:
 					player.crouch = False
 					player.image = player.stand_image
+					if player.direction == 'Left':
+						player.image = pygame.transform.flip(player.image, True, False)
 					print 'Crouch - OFF'
 		#print milisecs
 		FPS = clock.get_fps()

@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
 		self.crouch_image = pygame.image.load('images/Isaac/crouch.png').convert()
 		self.crouch_image.set_colorkey(C.CHROMA_KEY)
 		
-		
+		self.direction = 'Right'
 		
 		self.image = pygame.image.load('images/Isaac/IsaacCol.png').convert()
 		self.rect = self.image.get_rect()
@@ -39,13 +39,13 @@ class Player(pygame.sprite.Sprite):
 		
 		self.bounce = False
 		self.crouch = False
-		self.p_input_l = False
-		self.p_input_r = False
 		
 	def reboot(self, grav):
 		self.dead = False
 		self.bounce = False
 		self.crouch = False
+		self.image = self.stand_image
+		
 		self.spd_y = 0
 		self.spd_x = 0
 		self.rect.x = self.init_x
@@ -296,9 +296,15 @@ class Player(pygame.sprite.Sprite):
 		
 	def go_left(self):
 		self.spd_x = -2
+		if self.direction == 'Right':
+			self.image = pygame.transform.flip(self.image, True, False)
+			self.direction = 'Left'
 		
 	def go_right(self):
 		self.spd_x = 2
+		if self.direction == 'Left':
+			self.image = pygame.transform.flip(self.image, True, False)
+			self.direction = 'Right'
 	def stop(self):
 		self.spd_x = 0
 	def jump(self):
