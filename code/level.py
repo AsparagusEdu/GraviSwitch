@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+import constants as C
 from load_level import load_level
 import sound
 from player import *
@@ -8,9 +8,9 @@ from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
 def Level(nombre):
-	MUSIC = True
+	MUSIC = C.MUSIC
 	
-	SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
+	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 	pygame.display.flip()
 	
 	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt')
@@ -36,7 +36,7 @@ def Level(nombre):
 																					 #|
 	Win_image = pygame.image.load('images/win.png').convert()                        #|
 	Win_rect = Win_image.get_rect()                                                  #|
-	Win_pos = (SCREEN_WIDTH/2 - Win_rect.w/2 , SCREEN_HEIGHT/2 - Win_rect.h/2)   #|
+	Win_pos = (C.SCREEN_WIDTH/2 - Win_rect.w/2 , C.SCREEN_HEIGHT/2 - Win_rect.h/2)   #|
 	
 	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert()
 	#---------------------------------------------------------------------------------|
@@ -68,7 +68,7 @@ def Level(nombre):
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
-	if MUSIC:
+	if C.MUSIC:
 		music = pygame.mixer.music.load('sound/music/' + musica)
 		pygame.mixer.music.play(-1)
 	
@@ -85,6 +85,9 @@ def Level(nombre):
 					if pause == 'Continuar':
 						pass
 					elif pause == 'Reiniciar':
+						pygame.mixer.music.fadeout(500)
+						C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
+						pygame.display.flip()
 						for obj in updatable_list.sprites():
 							gravity = 'S'
 							obj.reboot(gravity)
@@ -92,16 +95,18 @@ def Level(nombre):
 							che.reboot()
 						player.rect.x, player.rect.y = pos_x, pos_y
 						player.init_x, player.init_y = pos_x, pos_y
+						pygame.time.wait(2000)
+						pygame.mixer.music.play(-1)
 					elif pause == 'Menu':
 						return False, False
 					elif pause == 'Salir':
 						return False, True
 				elif event.key == pygame.K_m:
-					if MUSIC:
-						MUSIC = False
+					if C.MUSIC:
+						C.MUSIC = False
 						pygame.mixer.music.stop()
 					else:
-						MUSIC = True
+						C.MUSIC = True
 						pygame.mixer.music.play(-1)
 				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
 					player.go_left()
@@ -164,8 +169,10 @@ def Level(nombre):
 			
 		if player.dead == True:
 			print 'DEAD'
+			pygame.mixer.music.fadeout(500)
 			revive, G_OVER = DeadPlayer(NOFPS_SCREEN) #dead_player()
 			if revive:
+				pygame.mixer.music.play(-1)
 				for obj in updatable_list.sprites():
 					gravity = 'S'
 					obj.reboot(gravity)
@@ -176,7 +183,7 @@ def Level(nombre):
 			
 		elif player.win == True:
 			while True:
-				SCREEN.blit(Win_image, Win_pos)
+				C.SCREEN.blit(Win_image, Win_pos)
 				pygame.display.flip()
 				for event in pygame.event.get():
 					clock = pygame.time.Clock() #Reloj
@@ -187,15 +194,15 @@ def Level(nombre):
 					clock.tick(60)
 			
 		else:
-			SCREEN.blit(fondo, (0,0))
-			door_list.draw(SCREEN)
-			SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
-			sprite_list.draw(SCREEN)
-			bfilter_list.draw(SCREEN)
-			checkpoint_list.draw(SCREEN)
+			C.SCREEN.blit(fondo, (0,0))
+			door_list.draw(C.SCREEN)
+			C.SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
+			sprite_list.draw(C.SCREEN)
+			bfilter_list.draw(C.SCREEN)
+			checkpoint_list.draw(C.SCREEN)
 			
-			if SHOW_FPS:
-				NOFPS_SCREEN.blit(SCREEN, (0,0))
+			if C.SHOW_FPS:
+				NOFPS_SCREEN.blit(C.SCREEN, (0,0))
 				show_fps(FPS)
 			pygame.display.flip()
 		'''
@@ -208,7 +215,7 @@ def Level(nombre):
 		if player.rect.left >= SCREEN_WIDTH:
 			return False
 		'''
-		clock.tick(MAX_FPS)
+		clock.tick(C.MAX_FPS)
 		
 		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 	

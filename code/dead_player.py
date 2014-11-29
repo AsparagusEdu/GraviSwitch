@@ -19,6 +19,7 @@ def DeadPlayer(prev_screen):
 	clock = pygame.time.Clock()
 	
 	pause = True
+	pygame.time.wait(1000)
 	
 	while pause:
 		if SHOW_FPS:

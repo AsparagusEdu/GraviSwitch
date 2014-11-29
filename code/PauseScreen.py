@@ -19,6 +19,8 @@ def Pause_Screen(prev_screen):
 
 	clock = pygame.time.Clock()
 	
+	sound.openmenu.play()
+	
 	pause = True
 	
 	while pause:
