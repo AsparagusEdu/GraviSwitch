@@ -14,6 +14,7 @@ def Read_File(nombre):
 	musica = None
 	pared = None
 	graviswitch = True
+	evento_final = 'NivComp'
 	
 	for linea in archivo:
 		if len(linea) == 0 or linea[0] == '#':
@@ -39,6 +40,10 @@ def Read_File(nombre):
 					print 'GraviSwitch - OFF'
 				else:
 					print 'GraviSwitch - ON'
+			elif linea[0] == ':Eventofinal':
+				if linea[1] == 'None':
+					evento_final = None
+				
 					
 	archivo.close()
 	if fondo == None:
@@ -47,11 +52,11 @@ def Read_File(nombre):
 		musica = 'cheetah.mp3'
 	if pared == None:
 		pared = 'default1.png'
-	return mapa, fondo, musica, pared, graviswitch
+	return mapa, fondo, musica, pared, graviswitch, evento_final
 	
 
 def load_level(nombre):
-	mapa, fondo, musica, pared, graviswitch = Read_File(nombre)
+	mapa, fondo, musica, pared, graviswitch, evento_final = Read_File(nombre)
 	
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
@@ -121,6 +126,6 @@ def load_level(nombre):
 		pos_y += 1
 	
 	grupos =[col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list]
-	info = [p_id, p_inicio, fondo, musica, pared, graviswitch]
+	info = [p_id, p_inicio, fondo, musica, pared, graviswitch, evento_final]
 	return (info, grupos)
 

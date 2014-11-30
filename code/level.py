@@ -22,6 +22,7 @@ def Level(nombre):
 	musica = lvl_info[3]
 	pared = lvl_info[4]
 	graviswitch = lvl_info[5]
+	evento_final = lvl_info[6]
 	
 	col_list = lvl_lists[0]
 	box_list = lvl_lists[1]
@@ -182,16 +183,19 @@ def Level(nombre):
 				return False, True
 			
 		elif player.win == True:
-			while True:
-				C.SCREEN.blit(Win_image, Win_pos)
-				pygame.display.flip()
-				for event in pygame.event.get():
-					clock = pygame.time.Clock() #Reloj
-					if event.type == pygame.QUIT:
-						return True, True
-					if event.type == pygame.KEYDOWN:
-						return True, False
-					clock.tick(60)
+			if evento_final == 'NivComp':
+				while True:
+					C.SCREEN.blit(Win_image, Win_pos)
+					pygame.display.flip()
+					for event in pygame.event.get():
+						clock = pygame.time.Clock() #Reloj
+						if event.type == pygame.QUIT:
+							return True, True
+						if event.type == pygame.KEYDOWN:
+							return True, False
+						clock.tick(60)
+			else:
+				return True, False
 			
 		else:
 			C.SCREEN.blit(fondo, (0,0))

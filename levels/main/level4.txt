@@ -20,3 +20,4 @@ W                           WWWW
 :Musica BondEsque.wav
 :Pared scrap.png
 :Graviswitch False
+:Eventofinal None
