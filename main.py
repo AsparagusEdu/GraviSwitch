@@ -53,6 +53,9 @@ Character Design
 External Resourcing
 - Matias Ruiz
 
+Music (from OpenGameArt.org)
+- BBandRage
+
 Testing
 - "Zadaka"
 - Felipe "DiFroggy" Vasquez

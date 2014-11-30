@@ -17,6 +17,6 @@ W       W       WWWWWWWWWWWW
 W  W   WW W     WWWWWWWWWWWWW   
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW 
 :F fondo_marble1.png
-:M marble.mp3
+:M Bond Esque.wav
 :W marble.png
 :G False

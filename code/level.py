@@ -66,7 +66,6 @@ def Level(nombre):
 	
 	gravity = 'S'
 	lvl_exit = False #Variable para terminar de procesar el nivel
-	milisecs = 170 #Milisegundos ideales que se demoraria en cada cuadro.
 	
 	if C.MUSIC:
 		music = pygame.mixer.music.load('sound/music/' + musica)
@@ -110,13 +109,14 @@ def Level(nombre):
 						pygame.mixer.music.play(-1)
 				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
 					player.go_left()
-					#print 'Tecla - Izquierda'
+					print 'Tecla - Izquierda'
 				elif event.key == pygame.K_RIGHT and not player.bounce and not player.crouch:
 					player.go_right()
-					#print 'Tecla - Derecha'
+					print 'Tecla - Derecha'
 				elif event.key == pygame.K_UP and player.touch_S(0) and not player.crouch:
+					sound.jump.play()
 					player.jump()
-					#print 'Tecla - Salto'
+					print 'Tecla - Salto'
 				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
 					player.crouch = True
 					player.image = player.crouch_image
@@ -160,7 +160,7 @@ def Level(nombre):
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
 					print 'Crouch - OFF'
-		#print milisecs
+
 		FPS = clock.get_fps()
 		
 		box_list.update(gravity, FPS/60)
@@ -205,19 +205,8 @@ def Level(nombre):
 				NOFPS_SCREEN.blit(C.SCREEN, (0,0))
 				show_fps(FPS)
 			pygame.display.flip()
-		'''
-		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
-			return False
-		if player.rect.bottom <= 0:
-			return False
-		if player.rect.right <= 0:
-			return False
-		if player.rect.left >= SCREEN_WIDTH:
-			return False
-		'''
+
 		clock.tick(C.MAX_FPS)
-		
-		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
 	
 	
 		''' #DEMO
@@ -373,18 +362,7 @@ def Demo_Level(nombre):
 			bfilter_list.draw(SCREEN)
 			checkpoint_list.draw(SCREEN)
 			pygame.display.flip()
-		'''
-		'''
-		if player.rect.y >= SCREEN_HEIGHT: #En caso de salirse de la pantalla
-			return False
-		if player.rect.bottom <= 0:
-			return False
-		if player.rect.right <= 0:
-			return False
-		if player.rect.left >= SCREEN_WIDTH:
-			return False
-		'''
-		'''
+		
 		clock.tick(MAX_FPS)
 		
 		milisecs = clock.get_time() # Milisegundos que demora en hacer un cuadro.
