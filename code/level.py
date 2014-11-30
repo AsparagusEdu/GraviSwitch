@@ -7,7 +7,7 @@ from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
-def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute, evento que pasa al terminar nivel.
+def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin extension, Mute, evento que pasa al terminar nivel.
 	
 	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0)) #Pantalla de carga
 	pygame.display.flip()
@@ -61,10 +61,12 @@ def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute
 	gravity = 'S' #Gravedad default
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	
-	music = pygame.mixer.music.load('sound/music/' + musica) #Carga y reproduce la musica del nivel
-	pygame.mixer.music.play(-1)
-	if MUTE_MUSIC:
-		pygame.mixer.music.pause()
+	if musica != prev_song:
+		music = pygame.mixer.music.load('sound/music/' + musica) #Carga y reproduce la musica del nivel
+		pygame.mixer.music.play(-1)
+		prev_song = musica
+		if MUTE_MUSIC:
+			pygame.mixer.music.pause()
 	
 	clock = pygame.time.Clock() #Reloj
 	while not lvl_exit:
@@ -92,9 +94,9 @@ def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute
 						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
 						pygame.mixer.music.play(-1)
 					elif pause == 'Menu':
-						return False, False, False, MUTE_MUSIC
+						return False, False, False, MUTE_MUSIC, prev_song
 					elif pause == 'Salir':
-						return False, False, True, MUTE_MUSIC
+						return False, False, True, MUTE_MUSIC, prev_song
 				elif event.key == pygame.K_m: #Activar/Desactivar Musica
 					if MUTE_MUSIC:
 						print 'MUSIC - ON'
@@ -175,9 +177,9 @@ def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute
 					gravity = 'S'
 					obj.reboot(gravity)
 			elif not G_OVER:
-				return False, False, False, MUTE_MUSIC
+				return False, False, False, MUTE_MUSIC, prev_song
 			else:
-				return False, False, True, MUTE_MUSIC
+				return False, False, True, MUTE_MUSIC, prev_song
 			
 		elif player.win == True:
 			if evento_final == 'NivComp':
@@ -188,12 +190,12 @@ def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute
 					for event in pygame.event.get():
 						clock = pygame.time.Clock() #Reloj
 						if event.type == pygame.QUIT:
-							return True, False, True, MUTE_MUSIC
+							return True, False, True, MUTE_MUSIC, prev_song
 						if event.type == pygame.KEYDOWN:
-							return True, False, False, MUTE_MUSIC
+							return True, False, False, MUTE_MUSIC, prev_song
 						clock.tick(60)
 			else:
-				return True, True, False, MUTE_MUSIC
+				return True, True, False, MUTE_MUSIC, prev_song
 			
 		else:
 			C.SCREEN.blit(fondo, (0,0))

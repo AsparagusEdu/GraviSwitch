@@ -10,9 +10,10 @@ def Adventure(MUTE_MUSIC):
 	EXIT_MENU = True
 	EXIT_GAME = False
 	lvl = 1 #Nivel de donde continua el modo aventura
+	prev_song = 'None'
 	
 	while EXIT_MENU:
-		finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC = level.Level('level' + str(lvl), MUTE_MUSIC)
+		finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(lvl), MUTE_MUSIC, prev_song)
 		lvl += 1
 		if EXIT_GAME: #Si en algun momento se necesita salir del juego
 			return True, MUTE_MUSIC

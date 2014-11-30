@@ -18,6 +18,7 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 	
 	fonty = pygame.font.SysFont('Pokemon FireLeaf', 60) #Pokemon FireLeaf
 	music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+	prev_song = 's3kfileselect'
 	pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()
@@ -50,7 +51,7 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 				return True
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
-					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC = level.Level('level' + str(cursor_state), MUTE_MUSIC, 'NivComp')
+					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'NivComp')
 					
 					if EXIT_GAME:
 						return True, MUTE_MUSIC
