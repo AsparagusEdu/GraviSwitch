@@ -20,23 +20,26 @@ def Read_File(nombre):
 			continue
 		linea = linea.strip("\n")
 		if linea[0] != ':':
-			linea.split()
 			mapa.append(linea)
 			print linea
-		elif linea[1] == 'F':
-			fondo = linea.strip(':F ')
-			print fondo
-		elif linea[1] == 'M':
-			musica = linea.strip(':M ')
-			print musica
-		elif linea[1] == 'W':
-			pared = linea.strip(':W ')
-			print pared
-		elif linea[1] == 'G':
-			if linea.strip(':G ') == 'False':
-				graviswitch = False
-				print linea
-				
+		else:
+			linea = linea.split(' ')
+			if linea[0] == ':Fondo':
+				fondo = linea[1]
+				print fondo
+			elif linea[0] == ':Musica':
+				musica = linea[1]
+				print musica
+			elif linea[0] == ':Pared':
+				pared = linea[1]
+				print pared
+			elif linea[0] == ':Graviswitch':
+				if linea[1] == 'False':
+					graviswitch = False
+					print 'GraviSwitch - OFF'
+				else:
+					print 'GraviSwitch - ON'
+					
 	archivo.close()
 	if fondo == None:
 		fondo = 'fondo_test0.png'

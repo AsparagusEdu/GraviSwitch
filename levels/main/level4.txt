@@ -16,7 +16,7 @@ WW                         D WWW
 W                        WWWWWWW
 W                          WWWWW
 W                           WWWW
-:F fondo_marble2.png
-:M Bond Esque.wav
-:W scrap.png
-:G False
+:Fondo fondo_marble2.png
+:Musica BondEsque.wav
+:Pared scrap.png
+:Graviswitch False

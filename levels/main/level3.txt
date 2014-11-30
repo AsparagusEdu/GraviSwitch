@@ -16,7 +16,7 @@ WWWWWW WW WWWW WWWWWWWWWWWWWWWWW
   WWWWWWW W      W    WWWWWWWWWW
  WWWWWWWWSW        D WWWWWWWWWWW
  WWWWWWWWWWWWW   WWWWWWWWWWWWWWW
-:F fondo_marble2.png
-:M Bond Esque.wav
-:W marble.png
-:G False
+:Fondo fondo_marble2.png
+:Musica BondEsque.wav
+:Pared marble.png
+:Graviswitch False
