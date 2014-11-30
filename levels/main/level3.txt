@@ -20,4 +20,3 @@ WWWWWW WW WWWW WWWWWWWWWWWWWWWWW
 :Musica BondEsque.wav
 :Pared marble.png
 :Graviswitch False
-:Eventofinal None

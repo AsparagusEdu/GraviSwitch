@@ -18,6 +18,5 @@ W                          WWWWW
 W                           WWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
-:Pared scrap.png
+:Pared marble.png
 :Graviswitch False
-:Eventofinal None

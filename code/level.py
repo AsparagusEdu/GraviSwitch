@@ -7,14 +7,14 @@ from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
-def Level(nombre, MUTE_MUSIC, evento_final = None):
+def Level(nombre, MUTE_MUSIC, evento_final = None): #Archivo sin extension, Mute, evento que pasa al terminar nivel.
 	
-	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
+	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0)) #Pantalla de carga
 	pygame.display.flip()
 	
-	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt')
+	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt') #Cargando nivel
 	
-	p_id = lvl_info[0]
+	p_id = lvl_info[0] #Cargando datos del nivel.
 	p_inicio = lvl_info[1]
 	fondo = lvl_info[2]
 	fondo = pygame.image.load('images/backgrounds/' + fondo).convert()
@@ -22,7 +22,7 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 	pared = lvl_info[4]
 	graviswitch = lvl_info[5]
 	
-	col_list = lvl_lists[0]
+	col_list = lvl_lists[0] #Cargando Objetos del nivel
 	box_list = lvl_lists[1]
 	wall_list = lvl_lists[2]
 	door_list = lvl_lists[3]
@@ -31,17 +31,14 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 	bfilter_list = lvl_lists[6]
 	checkpoint_list = lvl_lists[7]
 	
-	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
-																					 #|
-	Win_image = pygame.image.load('images/gui/win.png').convert()                        #|
-	Win_rect = Win_image.get_rect()                                                  #|
-	Win_pos = (C.SCREEN_WIDTH/2 - Win_rect.w/2 , C.SCREEN_HEIGHT/2 - Win_rect.h/2)   #|
+	Win_image = pygame.image.load('images/gui/win.png').convert() #Imagen al ganar el nivel.
+	Win_rect = Win_image.get_rect()
+	Win_pos = (C.SCREEN_WIDTH/2 - Win_rect.w/2 , C.SCREEN_HEIGHT/2 - Win_rect.h/2)   
 	
-	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert()
-	#---------------------------------------------------------------------------------|
+	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert() #Imagen de relleno
 	
-	pos_x, pos_y = p_inicio #Posiciones de inicio
-	player = Player(pos_x, pos_y)
+	pos_x, pos_y = p_inicio #Posiciones de inicio del personaje
+	player = Player(pos_x, pos_y) #Creacion del personaje
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	player.doors = door_list
@@ -55,18 +52,16 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 		box.player = player
 	
 	
-	for wall in wall_list.sprites():
+	for wall in wall_list.sprites(): #Carga de autotiles de paredes
 		wall.level = wall_list
 		wall.change_terrain(pared)
-	
-	
-	#sprite_list.add(player) 
+	 
 	updatable_list.add(player)
 	
-	gravity = 'S'
+	gravity = 'S' #Gravedad default
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	
-	music = pygame.mixer.music.load('sound/music/' + musica)
+	music = pygame.mixer.music.load('sound/music/' + musica) #Carga y reproduce la musica del nivel
 	pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()
@@ -74,16 +69,16 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 	clock = pygame.time.Clock() #Reloj
 	while not lvl_exit:
 		
-		for event in pygame.event.get():
+		for event in pygame.event.get(): #Toma los eventos actuales del nivel
 			if event.type == pygame.QUIT:
 				return False, False, True #Nivel terminado, Volver al Menu, Salir del juego
 			elif event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_ESCAPE:
+				if event.key == pygame.K_ESCAPE: #Menu de pausa
 					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)
 					player.spd_x = 0
 					if pause == 'Continuar':
 						pass
-					elif pause == 'Reiniciar':
+					elif pause == 'Reiniciar': #Reinicia todos los valores anteriores
 						pygame.mixer.music.fadeout(500)
 						C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 						pygame.display.flip()
@@ -94,13 +89,13 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 							che.reboot()
 						player.rect.x, player.rect.y = pos_x, pos_y
 						player.init_x, player.init_y = pos_x, pos_y
-						pygame.time.wait(1000)
+						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
 						pygame.mixer.music.play(-1)
 					elif pause == 'Menu':
 						return False, False, False, MUTE_MUSIC
 					elif pause == 'Salir':
 						return False, False, True, MUTE_MUSIC
-				elif event.key == pygame.K_m:
+				elif event.key == pygame.K_m: #Activar/Desactivar Musica
 					if MUTE_MUSIC:
 						print 'MUSIC - ON'
 						MUTE_MUSIC = False
@@ -111,17 +106,17 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 						pygame.mixer.music.pause()
 						
 				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
-					player.go_left()
+					player.go_left() #Mover a la izquierda siempre y cuando no este rebotando o agachandose
 					print 'Tecla - Izquierda'
 				elif event.key == pygame.K_RIGHT and not player.bounce and not player.crouch:
 					player.go_right()
 					print 'Tecla - Derecha'
 				elif event.key == pygame.K_UP and player.touch_S(0) and not player.crouch:
-					sound.jump.play()
+					sound.jump.play() #Salto en el suelo y sin agacharse
 					player.jump()
 					print 'Tecla - Salto'
 				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
-					player.crouch = True
+					player.crouch = True #Agacharse en el suelo y quieto
 					player.image = player.crouch_image
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
@@ -129,33 +124,31 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 					#player.spd_x = 0
 				
 				if graviswitch:
-					if event.key == pygame.K_w:
+					if event.key == pygame.K_w: #Controlando la gravedad
 						switch = True
 						if static_boxes(box_list):
 							sound.graviswitch.play()
 							gravity = 'N'
-							#print 'Gravedad - NORTE' #DEBUG
+							print 'Gravedad - NORTE' #DEBUG
 					elif event.key == pygame.K_s:
 						if static_boxes(box_list):
 							gravity = 'S'
 							sound.graviswitch.play()
-							#print 'Gravedad - SUR' #DEBUG
+							print 'Gravedad - SUR' #DEBUG
 					elif event.key == pygame.K_d:
 						if static_boxes(box_list):
 							gravity = 'E'
 							sound.graviswitch.play()
-							#print 'Gravedad - ESTE'
+							print 'Gravedad - ESTE'
 					elif event.key == pygame.K_a:
 						if static_boxes(box_list):
 							gravity = 'O'
 							sound.graviswitch.play()
-							#print 'Gravedad - OESTE'
+							print 'Gravedad - OESTE'
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()
 				elif event.key == pygame.K_RIGHT and player.spd_x > 0:
-					player.p_input_l = False
-					player.p_input_r = False
 					player.stop()
 				elif event.key == pygame.K_DOWN and player.crouch:
 					player.crouch = False
@@ -168,13 +161,12 @@ def Level(nombre, MUTE_MUSIC, evento_final = None):
 		
 		box_list.update(gravity, FPS/60)
 		player.update(gravity, FPS/60)
-		#updatable_list.update(gravity)
 			
 		if player.dead == True:
 			print 'DEAD'
 			if not MUTE_MUSIC:
 				pygame.mixer.music.pause()
-			revive, G_OVER = DeadPlayer(NOFPS_SCREEN) #dead_player()
+			revive, G_OVER = DeadPlayer(NOFPS_SCREEN)
 			if revive:
 				if not MUTE_MUSIC:
 					pygame.mixer.music.unpause()

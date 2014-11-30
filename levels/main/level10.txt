@@ -19,4 +19,3 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
 :Pared marble.png
-:Eventofinal None
