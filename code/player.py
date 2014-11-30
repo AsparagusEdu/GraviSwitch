@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
 		self.bounce = False
 		self.crouch = False
 		self.image = self.stand_image
+		self.direction = 'Right'
 		
 		self.spd_y = 0
 		self.spd_x = 0

@@ -77,7 +77,7 @@ def Level(nombre):
 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				return False, True #Nivel terminado, Salir del juego
+				return False, False, True #Nivel terminado, Volver al Menu, Salir del juego
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					pause = Pause_Screen(NOFPS_SCREEN)
@@ -95,12 +95,12 @@ def Level(nombre):
 							che.reboot()
 						player.rect.x, player.rect.y = pos_x, pos_y
 						player.init_x, player.init_y = pos_x, pos_y
-						pygame.time.wait(2000)
+						pygame.time.wait(1000)
 						pygame.mixer.music.play(-1)
 					elif pause == 'Menu':
-						return False, False
+						return False, False, False
 					elif pause == 'Salir':
-						return False, True
+						return False, False, True
 				elif event.key == pygame.K_m:
 					if C.MUSIC:
 						C.MUSIC = False
@@ -178,9 +178,9 @@ def Level(nombre):
 					gravity = 'S'
 					obj.reboot(gravity)
 			elif not G_OVER:
-				return False, False
+				return False, False, False
 			else:
-				return False, True
+				return False, False, True
 			
 		elif player.win == True:
 			if evento_final == 'NivComp':
@@ -190,12 +190,12 @@ def Level(nombre):
 					for event in pygame.event.get():
 						clock = pygame.time.Clock() #Reloj
 						if event.type == pygame.QUIT:
-							return True, True
+							return True, False, True
 						if event.type == pygame.KEYDOWN:
-							return True, False
+							return True, True, False
 						clock.tick(60)
 			else:
-				return True, False
+				return True, True, False
 			
 		else:
 			C.SCREEN.blit(fondo, (0,0))

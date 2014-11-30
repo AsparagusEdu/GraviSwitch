@@ -1,8 +1,9 @@
 import pygame
-from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MUSIC
+from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MUSIC, MAX_FPS, SHOW_FPS
 from level import *
 from titlescreen import Demo_TitleScreen, Main_TitleScreen
 from LevelSelect import Level_Select
+from Adventure import Adventure
 import sound
 #import music
 
@@ -202,10 +203,29 @@ class Demo_Menu():
 
 class Main_Menu():
 	def __init__(self):
-		TScreen = pygame.image.load('images/demo/titlescreen.png').convert()
+		MMenu = pygame.image.load('images/gui/main_menu.png').convert()
+		clock = pygame.time.Clock()
 		
 		EXIT_GAME = Main_TitleScreen()
-		while not EXIT_GAME:
-			SCREEN.blit(TScreen, (0,0))
-			EXIT_GAME = Level_Select(TScreen)
 		
+		while not EXIT_GAME:
+			FPS = clock.get_fps()
+			SCREEN.blit(MMenu, (0,0))
+			if SHOW_FPS:
+				show_fps(FPS)
+			pygame.display.flip()
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					return None
+				elif event.type == pygame.KEYDOWN:
+					if event.key == pygame.K_ESCAPE:
+						return None
+					elif event.key == pygame.K_a:
+						EXIT_GAME = Adventure()
+						pygame.mixer.music.stop()
+					elif event.key == pygame.K_l:
+						SCREEN.blit(MMenu, (0,0))
+						EXIT_GAME = Level_Select(MMenu)
+						pygame.mixer.music.stop()
+			clock.tick(MAX_FPS)
+						

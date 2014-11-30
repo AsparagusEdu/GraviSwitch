@@ -49,14 +49,14 @@ def Level_Select(prev_screen):
 				return True
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
-					finished_level, EXIT_GAME = level.Level('level' + str(cursor_state))
+					finished_level, EXIT_MENU, EXIT_GAME = level.Level('level' + str(cursor_state))
 					if EXIT_GAME:
 						return True
 					if MUSIC:
 						music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
 						pygame.mixer.music.play(-1)
 				elif event.key == pygame.K_ESCAPE:
-					return True
+					return False
 					
 				elif event.key == pygame.K_p:
 					if demo == 1:

@@ -24,7 +24,6 @@ main()
   Y si utilizamos esto como explicacion para permitir que las cajas puedan lanzar al jugador hacia arriba?
 
 - Crear un switch y un sistema de "corriente"
-- Permitir al jugador oprimir abajo para que monte una caja de forma horizontal.
 
 '''
 
