@@ -7,8 +7,7 @@ from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
-def Level(nombre):
-	MUSIC = C.MUSIC
+def Level(nombre, MUTE_MUSIC, evento_final = None):
 	
 	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 	pygame.display.flip()
@@ -22,7 +21,6 @@ def Level(nombre):
 	musica = lvl_info[3]
 	pared = lvl_info[4]
 	graviswitch = lvl_info[5]
-	evento_final = lvl_info[6]
 	
 	col_list = lvl_lists[0]
 	box_list = lvl_lists[1]
@@ -35,7 +33,7 @@ def Level(nombre):
 	
 	#-----IMAGENES, RECTANGULOS Y POSICIONES DE MENSAJES DE VICTORIA Y DERROTA--------|
 																					 #|
-	Win_image = pygame.image.load('images/win.png').convert()                        #|
+	Win_image = pygame.image.load('images/gui/win.png').convert()                        #|
 	Win_rect = Win_image.get_rect()                                                  #|
 	Win_pos = (C.SCREEN_WIDTH/2 - Win_rect.w/2 , C.SCREEN_HEIGHT/2 - Win_rect.h/2)   #|
 	
@@ -68,9 +66,10 @@ def Level(nombre):
 	gravity = 'S'
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	
-	if C.MUSIC:
-		music = pygame.mixer.music.load('sound/music/' + musica)
-		pygame.mixer.music.play(-1)
+	music = pygame.mixer.music.load('sound/music/' + musica)
+	pygame.mixer.music.play(-1)
+	if MUTE_MUSIC:
+		pygame.mixer.music.pause()
 	
 	clock = pygame.time.Clock() #Reloj
 	while not lvl_exit:
@@ -80,7 +79,7 @@ def Level(nombre):
 				return False, False, True #Nivel terminado, Volver al Menu, Salir del juego
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					pause = Pause_Screen(NOFPS_SCREEN)
+					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)
 					player.spd_x = 0
 					if pause == 'Continuar':
 						pass
@@ -98,16 +97,19 @@ def Level(nombre):
 						pygame.time.wait(1000)
 						pygame.mixer.music.play(-1)
 					elif pause == 'Menu':
-						return False, False, False
+						return False, False, False, MUTE_MUSIC
 					elif pause == 'Salir':
-						return False, False, True
+						return False, False, True, MUTE_MUSIC
 				elif event.key == pygame.K_m:
-					if C.MUSIC:
-						C.MUSIC = False
-						pygame.mixer.music.stop()
+					if MUTE_MUSIC:
+						print 'MUSIC - ON'
+						MUTE_MUSIC = False
+						pygame.mixer.music.unpause()
 					else:
-						C.MUSIC = True
-						pygame.mixer.music.play(-1)
+						print 'MUSIC - OFF'
+						MUTE_MUSIC = True
+						pygame.mixer.music.pause()
+						
 				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
 					player.go_left()
 					print 'Tecla - Izquierda'
@@ -170,32 +172,36 @@ def Level(nombre):
 			
 		if player.dead == True:
 			print 'DEAD'
-			pygame.mixer.music.fadeout(500)
+			if not MUTE_MUSIC:
+				pygame.mixer.music.pause()
 			revive, G_OVER = DeadPlayer(NOFPS_SCREEN) #dead_player()
 			if revive:
-				pygame.mixer.music.play(-1)
+				if not MUTE_MUSIC:
+					pygame.mixer.music.unpause()
+				
 				for obj in updatable_list.sprites():
 					gravity = 'S'
 					obj.reboot(gravity)
 			elif not G_OVER:
-				return False, False, False
+				return False, False, False, MUTE_MUSIC
 			else:
-				return False, False, True
+				return False, False, True, MUTE_MUSIC
 			
 		elif player.win == True:
 			if evento_final == 'NivComp':
 				while True:
 					C.SCREEN.blit(Win_image, Win_pos)
 					pygame.display.flip()
+					pygame.time.wait(500)
 					for event in pygame.event.get():
 						clock = pygame.time.Clock() #Reloj
 						if event.type == pygame.QUIT:
-							return True, False, True
+							return True, False, True, MUTE_MUSIC
 						if event.type == pygame.KEYDOWN:
-							return True, True, False
+							return True, False, False, MUTE_MUSIC
 						clock.tick(60)
 			else:
-				return True, True, False
+				return True, True, False, MUTE_MUSIC
 			
 		else:
 			C.SCREEN.blit(fondo, (0,0))

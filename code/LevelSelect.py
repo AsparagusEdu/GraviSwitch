@@ -1,10 +1,10 @@
 import pygame
-from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS, MUSIC
+from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
 from misc_functions import show_fps
 import level
 
-def Level_Select(prev_screen):
+def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para poder blitearse en ella.
 		
 	menu_image = pygame.image.load('images/gui/levelselect.png').convert()
 	menu_rect = menu_image.get_rect()
@@ -17,9 +17,10 @@ def Level_Select(prev_screen):
 	clock = pygame.time.Clock()
 	
 	fonty = pygame.font.SysFont('Pokemon FireLeaf', 60) #Pokemon FireLeaf
-	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
-		pygame.mixer.music.play(-1)
+	music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+	pygame.mixer.music.play(-1)
+	if MUTE_MUSIC:
+		pygame.mixer.music.pause()
 		
 	EXIT_MENU = False
 	EXIT_GAME = False
@@ -49,20 +50,32 @@ def Level_Select(prev_screen):
 				return True
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
-					finished_level, EXIT_MENU, EXIT_GAME = level.Level('level' + str(cursor_state))
+					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC = level.Level('level' + str(cursor_state), MUTE_MUSIC, 'NivComp')
+					
 					if EXIT_GAME:
-						return True
-					if MUSIC:
-						music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
-						pygame.mixer.music.play(-1)
+						return True, MUTE_MUSIC
+					music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+					pygame.mixer.music.play(-1)
+					if MUTE_MUSIC:
+						pygame.mixer.music.pause()
 				elif event.key == pygame.K_ESCAPE:
-					return False
+					return False, MUTE_MUSIC
 					
 				elif event.key == pygame.K_p:
 					if demo == 1:
 						demo = -6
 					else:
 						demo = 1
+				elif event.key == pygame.K_m:
+					if not MUTE_MUSIC:
+						print 'MUSIC - OFF'
+						MUTE_MUSIC = True
+						pygame.mixer.music.pause()
+						
+					else:
+						print 'MUSIC - ON'
+						MUTE_MUSIC = False
+						pygame.mixer.music.unpause()
 				
 				elif event.key == pygame.K_RIGHT:
 					cursor_state +=1
@@ -72,4 +85,4 @@ def Level_Select(prev_screen):
 					sound.cursor.play()
 		
 		clock.tick(MAX_FPS)
-		
+	return True, MUTE_MUSIC

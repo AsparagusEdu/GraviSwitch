@@ -1,5 +1,6 @@
 import pygame
-from constants import SCREEN, MUSIC
+from constants import SCREEN, MAX_FPS, SHOW_FPS
+from misc_functions import show_fps
 def Demo_TitleScreen():
 	title = pygame.image.load('images/demo/titlescreen.png').convert()
 	'''
@@ -23,7 +24,7 @@ def Demo_TitleScreen():
 		pygame.display.flip()
 		clock.tick(10)
 
-def Main_TitleScreen():
+def Main_TitleScreen(MUTE_MUSIC): #Booleano
 	title = pygame.image.load('images/demo/titlescreen.png').convert()
 	'''
 	if MUSIC:
@@ -43,5 +44,8 @@ def Main_TitleScreen():
 					return False
 				
 		SCREEN.blit(title, (0,0))
+		FPS = clock.get_fps()
+		if SHOW_FPS:
+			show_fps(FPS)
 		pygame.display.flip()
-		clock.tick(10)
+		clock.tick(MAX_FPS)

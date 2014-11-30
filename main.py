@@ -34,11 +34,7 @@ Game Director
 
 Programming
 - Eduardo Quezada
-- Matias Ruiz
 - Carlos Barahona
-
-Programming Director
-- Eduardo Quezada
 
 Level Design
 - Carlos Barahona
@@ -48,6 +44,10 @@ Level Design
 Character Design
 - Matias Ruiz
 - "Zadaka"
+
+Graphics
+- Matias Ruiz
+- Eduardo Quezada
 
 External Resourcing
 - Matias Ruiz
@@ -62,6 +62,6 @@ Testing
 - Yerko
 - Francisco Amaro
 - Daniel Nahum
-- Cristian Arancibia D:
+- Cristian Arancibia
 
 '''

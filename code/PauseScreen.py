@@ -4,7 +4,7 @@ import sound
 from misc_functions import show_fps
 from confirmation import Confirmation
 
-def Pause_Screen(prev_screen):
+def Pause_Screen(prev_screen, MUTE_MUSIC):
 		
 	menu_image = pygame.image.load('images/gui/pause_menu.png').convert()
 	menu_rect = menu_image.get_rect()
@@ -44,22 +44,29 @@ def Pause_Screen(prev_screen):
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
 					if cursor_state == 0:
-						return 'Continuar'
+						return 'Continuar', MUTE_MUSIC
 					elif cursor_state == 1:
 						if Confirmation(prev_screen):
-							return 'Reiniciar'
+							return 'Reiniciar', MUTE_MUSIC
 					elif cursor_state == 2:
 						if Confirmation(prev_screen):
-							return 'Menu'
+							return 'Menu', MUTE_MUSIC
 					elif cursor_state == 3:
 						if Confirmation(prev_screen):
-							return 'Salir'
+							return 'Salir', MUTE_MUSIC
 				elif event.key == pygame.K_DOWN:
 					cursor_state +=1
 					sound.cursor.play()
 				elif event.key == pygame.K_UP:
 					cursor_state -=1
 					sound.cursor.play()
+				elif event.key == pygame.K_m:
+					if MUTE_MUSIC:
+						print 'MUSIC - ON'
+						MUTE_MUSIC = False
+					else:
+						print 'MUSIC - OFF'
+						MUTE_MUSIC = True
 		
 		clock.tick(MAX_FPS)
 		
