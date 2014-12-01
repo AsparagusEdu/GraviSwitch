@@ -6,6 +6,7 @@ import Spike
 import constants as C
 import Door
 import Checkpoint
+import GraviSwitch
 
 from misc_functions import check_if_box
 
@@ -13,7 +14,7 @@ class Player(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
 	level = None
-	def __init__(self, x_init, y_init):
+	def __init__(self, x_init, y_init, gravi):
 		pygame.sprite.Sprite.__init__(self)
 		
 		self.stand_image = pygame.image.load('images/Isaac/stand.png').convert()
@@ -23,6 +24,10 @@ class Player(pygame.sprite.Sprite):
 		self.crouch_image.set_colorkey(C.CHROMA_KEY)
 		
 		self.direction = 'Right'
+		if gravi:
+			self.graviswitch = True
+		else:
+			self.graviswitch = False
 		
 		self.image = pygame.image.load('images/Isaac/IsaacCol.png').convert()
 		self.rect = self.image.get_rect()
@@ -231,6 +236,14 @@ class Player(pygame.sprite.Sprite):
 					self.init_x = hit.rect.x + 8
 					self.init_y = hit.rect.y
 					hit.ani1_frame += 5 * times
+	def graviswitch_touch(self):
+		hit_list = pygame.sprite.spritecollide(self, self.gravis, False)
+		for hit in hit_list:
+			if type(hit) is GraviSwitch.GraviSwitch:
+				if hit.rect.left + 1 < self.rect.centerx < hit.rect.right - 1:
+					self.graviswitch = True
+					hit.state = 'None'
+					hit.image = hit.ani1[4]
 					
 	def box_ride(self):
 		self.rect.y += 1
@@ -263,6 +276,8 @@ class Player(pygame.sprite.Sprite):
 		self.death()
 		self.door()
 		self.checkpoint(times)
+		if not self.graviswitch:
+			self.graviswitch_touch()
 		self.jumpbox()
 		
 		if self.crouch:

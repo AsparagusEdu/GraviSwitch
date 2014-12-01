@@ -40,11 +40,12 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 	NOFPS_SCREEN = pygame.image.load('images/demo/ben.png').convert() #Imagen de relleno
 	
 	pos_x, pos_y = p_inicio #Posiciones de inicio del personaje
-	player = Player(pos_x, pos_y) #Creacion del personaje
+	player = Player(pos_x, pos_y, graviswitch) #Creacion del personaje
 	player.ID = p_id
 	player.level = col_list #Definimos el nivel dentro del usuario para que tenga referencia de este
 	player.doors = door_list
 	player.checkpoints = checkpoint_list
+	player.gravis = gravi_list
 	
 	for box in box_list.sprites(): #Annade propiedades del nivel a las cajas
 		box.level = bfilter_list
@@ -173,7 +174,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 		player.update(gravity, FPS/60)
 		
 			
-		if player.dead == True:
+		if player.dead:
 			print 'DEAD'
 			if not MUTE_MUSIC:
 				pygame.mixer.music.pause()
@@ -192,7 +193,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 			else:
 				return False, False, True, MUTE_MUSIC, prev_song
 			
-		elif player.win == True:
+		elif player.win:
 			if evento_final == 'NivComp':
 				while True:
 					C.SCREEN.blit(Win_image, Win_pos)
@@ -207,7 +208,10 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						clock.tick(60)
 			else:
 				return True, True, False, MUTE_MUSIC, prev_song
-			
+		
+		elif player.graviswitch and not graviswitch:
+			graviswitch = True
+		
 		else:
 			C.SCREEN.blit(fondo, (0,0))
 			door_list.draw(C.SCREEN)

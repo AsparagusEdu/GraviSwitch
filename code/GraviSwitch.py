@@ -11,7 +11,7 @@ class GraviSwitch(pygame.sprite.Sprite):
 		
 		self.ani1 = []
 		self.frame = 0 #60 frames total (1 sec of animation)
-		ani1_cod = [(0,0),(32,0),(64,0),(96,0), (124,0)]
+		ani1_cod = [(0,0),(32,0),(64,0),(96,0), (128,0)]
 		ani1_sheet = pygame.image.load('images/tiles/graviswitch.png').convert()
 		
 		for i in ani1_cod:
@@ -44,16 +44,19 @@ class GraviSwitch(pygame.sprite.Sprite):
 		
 		if graviswitch:
 			self.state = 'Manual'
+			self.or_state = 'Manual'
 		else:
 			self.state = 'Auto'
+			self.or_state = 'Auto'
 		
 		self.rect = self.image.get_rect()		
 		self.rect.y = y
 		self.rect.x = x
 		
 	def reboot(self, grav):
-		self.image = self.ani1[0]
+		self.image = self.ani1[self.spin_frame[0]]
 		self.frame = 0
+		self.state = self.or_state
 
 	def update(self, grav):
 		self.frame += 1

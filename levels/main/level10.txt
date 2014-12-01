@@ -12,9 +12,9 @@ WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
-GW                      WWWWWWWW
-WW P  B                 WWWWWWWW
-GWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WW                      WWWWWWWW
+WW P  B   G             WWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
