@@ -1,6 +1,6 @@
 import pygame
 import sound
-from misc_functions import get_image
+from misc_functions import get_image, static_boxes
 from constants import CHROMA_KEY
 
 class GraviSwitch(pygame.sprite.Sprite):
@@ -10,7 +10,7 @@ class GraviSwitch(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		
 		self.ani1 = []
-		self.ani1_frame = 0 #60 frames total (1 sec of animation)
+		self.frame = 0 #60 frames total (1 sec of animation)
 		ani1_cod = [(0,0),(32,0),(64,0),(96,0), (124,0)]
 		ani1_sheet = pygame.image.load('images/tiles/graviswitch.png').convert()
 		
@@ -29,10 +29,12 @@ class GraviSwitch(pygame.sprite.Sprite):
 		self.rect.y = y
 		self.rect.x = x
 		
-	def reboot(self):
+	def reboot(self, grav):
 		self.image = self.ani1[0]
+		self.frame = 0
 
 	def update(self, grav):
+		self.frame += 1
 		if self.state == 'Manual':
 			if grav == 'S':
 				self.image = self.ani1[0]
@@ -42,7 +44,23 @@ class GraviSwitch(pygame.sprite.Sprite):
 				self.image = self.ani1[2]
 			elif grav == 'E':
 				self.image = self.ani1[3]
-		#elif self.state == 'Auto':
-		#	self.image = self.ani1[0]
+			return grav
+		elif self.state == 'Auto': #Un ciclo cada 240 segundos
+			if self.frame % 240 == 0: 
+				self.image = self.ani1[0]
+				return 'S'
+			elif self.frame % 240 == 60:
+				self.image = self.ani1[2]
+				return 'O'
+			elif self.frame % 240  == 120:
+				self.image = self.ani1[1]
+				return 'N'
+			elif self.frame % 240  == 180:
+				self.image = self.ani1[3]
+				return 'E'
+			else:
+				return grav
+		elif self.state == 'None':
+			return grav
 		
 			

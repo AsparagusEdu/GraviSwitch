@@ -12,10 +12,11 @@ WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
-WW                      WWWWWWWW
-WW P  B          G      WWWWWWWW
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+GW                      WWWWWWWW
+WW P  B                 WWWWWWWW
+GWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
 :Pared marble.png
+:Graviswitch False

@@ -300,7 +300,6 @@ class Player(pygame.sprite.Sprite):
 		if self.direction == 'Right':
 			self.image = pygame.transform.flip(self.image, True, False)
 			self.direction = 'Left'
-		
 	def go_right(self):
 		self.spd_x = 2
 		if self.direction == 'Left':

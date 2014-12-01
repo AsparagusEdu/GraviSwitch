@@ -88,8 +88,10 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						for obj in updatable_list.sprites():
 							gravity = 'S'
 							obj.reboot(gravity)
-						for che in checkpoint_list.sprites():
-							che.reboot()
+						for obj in checkpoint_list.sprites():
+							obj.reboot()
+						for che in gravi_list.sprites():
+							che.reboot(gravity)
 						player.rect.x, player.rect.y = pos_x, pos_y
 						player.init_x, player.init_y = pos_x, pos_y
 						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
@@ -162,9 +164,12 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 
 		FPS = clock.get_fps()
 		
+		if static_boxes(box_list):
+			for i in gravi_list.sprites():
+				gravity = i.update(gravity)
 		box_list.update(gravity, FPS/60)
 		player.update(gravity, FPS/60)
-		gravi_list.update(gravity)
+		
 			
 		if player.dead == True:
 			print 'DEAD'
@@ -177,6 +182,8 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 				
 				for obj in updatable_list.sprites():
 					gravity = 'S'
+					obj.reboot(gravity)
+				for obj in gravi_list.sprites():
 					obj.reboot(gravity)
 			elif not G_OVER:
 				return False, False, False, MUTE_MUSIC, prev_song
@@ -204,6 +211,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 			door_list.draw(C.SCREEN)
 			checkpoint_list.draw(C.SCREEN)
 			gravi_list.draw(C.SCREEN)
+			#C.SCREEN.blit(gravi_arrow.image, (gravi_arrow.rect.x, gravi_arrow.rect.y))
 			C.SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
 			sprite_list.draw(C.SCREEN)
 			bfilter_list.draw(C.SCREEN)
