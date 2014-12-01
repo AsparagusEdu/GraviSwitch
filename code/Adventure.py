@@ -21,5 +21,5 @@ def Adventure(MUTE_MUSIC):
 			return False, MUTE_MUSIC
 		
 		clock.tick(MAX_FPS)
-	
+	return False, MUTE_MUSIC
 		
