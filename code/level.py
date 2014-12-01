@@ -30,6 +30,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 	sprite_list = lvl_lists[5]
 	bfilter_list = lvl_lists[6]
 	checkpoint_list = lvl_lists[7]
+	gravi_list = lvl_lists[8]
 	
 	Win_image = pygame.image.load('images/gui/win.png').convert() #Imagen al ganar el nivel.
 	Win_rect = Win_image.get_rect()
@@ -163,6 +164,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 		
 		box_list.update(gravity, FPS/60)
 		player.update(gravity, FPS/60)
+		gravi_list.update(gravity)
 			
 		if player.dead == True:
 			print 'DEAD'
@@ -200,10 +202,13 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 		else:
 			C.SCREEN.blit(fondo, (0,0))
 			door_list.draw(C.SCREEN)
+			checkpoint_list.draw(C.SCREEN)
+			gravi_list.draw(C.SCREEN)
 			C.SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
 			sprite_list.draw(C.SCREEN)
 			bfilter_list.draw(C.SCREEN)
-			checkpoint_list.draw(C.SCREEN)
+			
+			
 			
 			if C.SHOW_FPS:
 				NOFPS_SCREEN.blit(C.SCREEN, (0,0))

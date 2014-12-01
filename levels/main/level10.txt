@@ -13,7 +13,7 @@ WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
-WW P  B                 WWWWWWWW
+WW P  B          G      WWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png

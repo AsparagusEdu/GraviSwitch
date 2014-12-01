@@ -6,6 +6,7 @@ from Spike import Spike
 from Door import Door
 from Box_Filter import Box_Filter
 from Checkpoint import Checkpoint
+from GraviSwitch import GraviSwitch
 
 def Read_File(nombre):
 	archivo = open("levels/" + nombre)
@@ -62,6 +63,7 @@ def load_level(nombre):
 	door_list = pygame.sprite.Group()
 	bfilter_list = pygame.sprite.Group()
 	checkpoint_list = pygame.sprite.Group()
+	gravi_list = pygame.sprite.Group()
 	
 	id_given = 0
 	door_id = 0
@@ -117,11 +119,17 @@ def load_level(nombre):
 				checkpoint_list.add(checkpoint)
 				checkpoint.ID = id_given
 				id_given += 1
+			elif cuadro == 'G':
+				gravi = GraviSwitch(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE, graviswitch)
+				gravi_list.add(gravi)
+				gravi.ID = id_given
+				id_given += 1
+				
 				
 			pos_x += 1
 		pos_y += 1
 	
-	grupos =[col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list]
+	grupos =[col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list, gravi_list]
 	info = [p_id, p_inicio, fondo, musica, pared, graviswitch]
 	return (info, grupos)
 
