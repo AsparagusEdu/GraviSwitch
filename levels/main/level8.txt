@@ -1,15 +1,15 @@
 WWWPWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWW WWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WW                 F          WW
-WW      F     F     WWWWW  D  WW
-WW                      WWWWWWWW
-WWWW                    WWWWWWWW
-WWG                     WWWWWWWW
-WWW                     WWWWWWWW
-WW      B    WB   WB    WWWWWWWW
-WW      F     F    F    WWWWWWWW
-WW                      WWWWWWWW
-WW                      WWWWWWWW
+WW                    WWWWWWWWWW
+WW                     WWWWWWWWW
+WW     F                WWWWWWWW
+WW          F          WWWWWWWWW
+WWWW             F      WWWWWWWW
+WWG    B              F WWWWWWWW
+WWW    F    B                WWW
+WW          F    B        D  WWW
+WW               F    BWWWWWWWWW
+WW                    F WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW
 WW                      WWWWWWWW

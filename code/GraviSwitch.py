@@ -75,6 +75,7 @@ class GraviSwitch(pygame.sprite.Sprite):
 				if self.frame % (self.spin_spd * len(self.spin_dir)) == i*self.spin_spd:
 					self.image = self.ani1[self.spin_frame[i]]
 					print 'Gravedad - ' + self.spin_dir[i]
+					sound.graviswitch.play()
 					return self.spin_dir[i]
 			'''
 			if self.spin == 0:
