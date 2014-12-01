@@ -59,8 +59,9 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 		wall.change_terrain(pared)
 	 
 	updatable_list.add(player)
-	
-	gravity = 'S' #Gravedad default
+	gravity = 'S'
+	for i in gravi_list.sprites():
+		gravity = i.spin_dir[0] #Gravedad default
 	lvl_exit = False #Variable para terminar de procesar el nivel
 	
 	if musica != prev_song:
@@ -135,22 +136,22 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						if static_boxes(box_list):
 							sound.graviswitch.play()
 							gravity = 'N'
-							print 'Gravedad - NORTE' #DEBUG
+							print 'Gravedad - N' #DEBUG
 					elif event.key == pygame.K_s:
 						if static_boxes(box_list):
 							gravity = 'S'
 							sound.graviswitch.play()
-							print 'Gravedad - SUR' #DEBUG
+							print 'Gravedad - S' #DEBUG
 					elif event.key == pygame.K_d:
 						if static_boxes(box_list):
 							gravity = 'E'
 							sound.graviswitch.play()
-							print 'Gravedad - ESTE'
+							print 'Gravedad - E'
 					elif event.key == pygame.K_a:
 						if static_boxes(box_list):
 							gravity = 'O'
 							sound.graviswitch.play()
-							print 'Gravedad - OESTE'
+							print 'Gravedad - O'
 			elif event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT and player.spd_x < 0:
 					player.stop()

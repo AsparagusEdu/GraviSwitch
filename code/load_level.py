@@ -11,11 +11,12 @@ from GraviSwitch import GraviSwitch
 def Read_File(nombre):
 	archivo = open("levels/" + nombre)
 	mapa = []
-	fondo = None
-	musica = None
-	pared = None
+	fondo = 'fondo_test0.png'
+	musica = 'cheetah.mp3'
+	pared = 'default1.png'
 	graviswitch = True
 	g_spin = 0
+	g_spin_spd = 120
 	
 	for linea in archivo:
 		if len(linea) == 0 or linea[0] == '#':
@@ -43,19 +44,15 @@ def Read_File(nombre):
 					print 'GraviSwitch - ON'
 			elif linea[0] == ':G_Spin':
 				g_spin = int(linea[1])
+			elif linea[0] == ':G_Spin_Spd':
+				g_spin_spd = int(linea[1])
 					
 	archivo.close()
-	if fondo == None:
-		fondo = 'fondo_test0.png'
-	if musica == None:
-		musica = 'cheetah.mp3'
-	if pared == None:
-		pared = 'default1.png'
-	return mapa, fondo, musica, pared, graviswitch, g_spin
+	return mapa, fondo, musica, pared, graviswitch, g_spin, g_spin_spd
 	
 
 def load_level(nombre):
-	mapa, fondo, musica, pared, graviswitch, g_spin = Read_File(nombre)
+	mapa, fondo, musica, pared, graviswitch, g_spin, g_spin_spd = Read_File(nombre)
 	
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
