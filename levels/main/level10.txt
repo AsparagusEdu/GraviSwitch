@@ -20,4 +20,4 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Musica BondEsque.wav
 :Pared marble.png
 :Graviswitch False
-:G_Spin 1
+:G_Spin 4

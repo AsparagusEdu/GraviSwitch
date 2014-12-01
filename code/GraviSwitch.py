@@ -29,6 +29,12 @@ class GraviSwitch(pygame.sprite.Sprite):
 		elif spin == 2:
 			self.spin_dir = ['S','E','N','O']
 			self.spin_frame = [0,3,2,1]
+		elif spin == 3:
+			self.spin_dir = ['S','N']
+			self.spin_frame = [0,2]
+		elif spin == 4:
+			self.spin_dir = ['E','O']
+			self.spin_frame = [3,1]
 		
 		self.image = self.ani1[0]
 		if graviswitch:
