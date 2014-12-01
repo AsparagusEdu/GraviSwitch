@@ -118,7 +118,7 @@ def load_level(nombre):
 				checkpoint_list.add(checkpoint)
 				checkpoint.ID = id_given
 				id_given += 1
-			elif cuadro == 'G':
+			elif cuadro == 'G' and len(gravi_list) == 0:
 				gravi_arrow = GraviSwitch(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE, graviswitch, g_spin)
 				gravi_list.add(gravi_arrow)
 				gravi_arrow.ID = id_given

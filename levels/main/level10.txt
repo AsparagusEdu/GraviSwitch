@@ -21,3 +21,4 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Pared marble.png
 :Graviswitch False
 :G_Spin 4
+#:G_Spin_spd 120
