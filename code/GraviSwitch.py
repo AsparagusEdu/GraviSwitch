@@ -6,13 +6,14 @@ from constants import CHROMA_KEY
 class GraviSwitch(pygame.sprite.Sprite):
 	spd_x = 0
 	spd_y = 0
-	def __init__(self, x, y, graviswitch):
+	def __init__(self, x, y, graviswitch, spin = 1):
 		pygame.sprite.Sprite.__init__(self)
 		
 		self.ani1 = []
 		self.frame = 0 #60 frames total (1 sec of animation)
 		ani1_cod = [(0,0),(32,0),(64,0),(96,0), (124,0)]
 		ani1_sheet = pygame.image.load('images/tiles/graviswitch.png').convert()
+		self.spin = spin
 		
 		for i in ani1_cod:
 			cuadro = get_image(ani1_sheet, i[0], i[1], 32,32).convert()
@@ -46,20 +47,38 @@ class GraviSwitch(pygame.sprite.Sprite):
 				self.image = self.ani1[3]
 			return grav
 		elif self.state == 'Auto': #Un ciclo cada 240 segundos
-			if self.frame % 240 == 0: 
-				self.image = self.ani1[0]
-				return 'S'
-			elif self.frame % 240 == 60:
-				self.image = self.ani1[2]
-				return 'O'
-			elif self.frame % 240  == 120:
-				self.image = self.ani1[1]
-				return 'N'
-			elif self.frame % 240  == 180:
-				self.image = self.ani1[3]
-				return 'E'
-			else:
+			if self.spin == 0:
 				return grav
+			elif self.spin == 1:
+				if self.frame % 240 == 0: 
+					self.image = self.ani1[0]
+					return 'S'
+				elif self.frame % 240 == 60:
+					self.image = self.ani1[2]
+					return 'O'
+				elif self.frame % 240  == 120:
+					self.image = self.ani1[1]
+					return 'N'
+				elif self.frame % 240  == 180:
+					self.image = self.ani1[3]
+					return 'E'
+				else:
+					return grav
+			elif self.spin == 2:
+				if self.frame % 240 == 0: 
+					self.image = self.ani1[0]
+					return 'S'
+				elif self.frame % 240 == 60:
+					self.image = self.ani1[3]
+					return 'E'
+				elif self.frame % 240  == 120:
+					self.image = self.ani1[1]
+					return 'N'
+				elif self.frame % 240  == 180:
+					self.image = self.ani1[2]
+					return 'O'
+				else:
+					return grav
 		elif self.state == 'None':
 			return grav
 		

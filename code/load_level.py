@@ -15,6 +15,7 @@ def Read_File(nombre):
 	musica = None
 	pared = None
 	graviswitch = True
+	g_spin = 0
 	
 	for linea in archivo:
 		if len(linea) == 0 or linea[0] == '#':
@@ -40,7 +41,8 @@ def Read_File(nombre):
 					print 'GraviSwitch - OFF'
 				else:
 					print 'GraviSwitch - ON'
-				
+			elif linea[0] == ':G_Spin':
+				g_spin = int(linea[1])
 					
 	archivo.close()
 	if fondo == None:
@@ -49,11 +51,11 @@ def Read_File(nombre):
 		musica = 'cheetah.mp3'
 	if pared == None:
 		pared = 'default1.png'
-	return mapa, fondo, musica, pared, graviswitch
+	return mapa, fondo, musica, pared, graviswitch, g_spin
 	
 
 def load_level(nombre):
-	mapa, fondo, musica, pared, graviswitch = Read_File(nombre)
+	mapa, fondo, musica, pared, graviswitch, g_spin = Read_File(nombre)
 	
 	sprite_list = pygame.sprite.Group()
 	updatable_list = pygame.sprite.Group() #Un grupo por tipo de accion a sprites.
@@ -120,7 +122,7 @@ def load_level(nombre):
 				checkpoint.ID = id_given
 				id_given += 1
 			elif cuadro == 'G':
-				gravi_arrow = GraviSwitch(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE, graviswitch)
+				gravi_arrow = GraviSwitch(pos_x*BLOCK_SIZE, pos_y*BLOCK_SIZE, graviswitch, g_spin)
 				gravi_list.add(gravi_arrow)
 				gravi_arrow.ID = id_given
 				id_given += 1
@@ -130,6 +132,6 @@ def load_level(nombre):
 		pos_y += 1
 	
 	grupos =[col_list, box_list, wall_list, door_list, updatable_list, sprite_list, bfilter_list, checkpoint_list, gravi_list]
-	info = [p_id, p_inicio, fondo, musica, pared, graviswitch]
+	info = [p_id, p_inicio, fondo, musica, pared, graviswitch, g_spin]
 	return (info, grupos)
 

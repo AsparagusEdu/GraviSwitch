@@ -21,6 +21,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 	musica = lvl_info[3]
 	pared = lvl_info[4]
 	graviswitch = lvl_info[5]
+	g_spin = lvl_info[6]
 	
 	col_list = lvl_lists[0] #Cargando Objetos del nivel
 	box_list = lvl_lists[1]
