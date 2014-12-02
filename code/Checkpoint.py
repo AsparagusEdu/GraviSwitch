@@ -9,6 +9,7 @@ class Checkpoint(pygame.sprite.Sprite):
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
 		
+		self.on = False
 		self.ani1 = []
 		self.ani1_frame = 0 #60 frames total (1 sec of animation)
 		ani1_cod = [(0,0),(32,0),(64,0),(96,0)]
@@ -26,14 +27,19 @@ class Checkpoint(pygame.sprite.Sprite):
 		self.rect.x = x
 		
 	def reboot(self):
+		self.on = False
+		self.ani1_frame = 0
 		self.image = self.ani1[0]
 
-	def ani1_play(self):
-		if self.image == self.ani1[0] and self.ani1_frame >= 15:
-			self.image = self.ani1[1]
-			sound.checkpoint.play()
-		elif self.image == self.ani1[1] and self.ani1_frame >= 30:
-			self.image = self.ani1[2]
-		elif self.image == self.ani1[2] and self.ani1_frame >= 45:
-			self.image = self.ani1[3]
+	def update(self):
+		self.ani1_frame += 1
+		if self.on and self.ani1_frame != 60:
+			
+			if self.image == self.ani1[0] and self.ani1_frame >= 15:
+				self.image = self.ani1[1]
+				sound.checkpoint.play()
+			elif self.image == self.ani1[1] and self.ani1_frame >= 30:
+				self.image = self.ani1[2]
+			elif self.image == self.ani1[2] and self.ani1_frame >= 45:
+				self.image = self.ani1[3]
 			

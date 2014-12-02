@@ -56,6 +56,7 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 					if EXIT_GAME:
 						return True, MUTE_MUSIC
 					music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+					pygame.mixer.music.set_volume(1.0)
 					pygame.mixer.music.play(-1)
 					if MUTE_MUSIC:
 						pygame.mixer.music.pause()

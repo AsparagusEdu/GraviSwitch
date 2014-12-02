@@ -230,12 +230,11 @@ class Player(pygame.sprite.Sprite):
 	def checkpoint(self, times):
 		hit_list = pygame.sprite.spritecollide(self, self.checkpoints, False)
 		for hit in hit_list:
-			if type(hit) is Checkpoint.Checkpoint and hit.image != hit.ani1[3]:
-				if hit.rect.left + 1 < self.rect.centerx < hit.rect.right - 1:
-					hit.ani1_play()
+			if type(hit) is Checkpoint.Checkpoint:
+				if hit.rect.left + 1 < self.rect.centerx < hit.rect.right - 1 and not hit.on:
 					self.init_x = hit.rect.x + 8
 					self.init_y = hit.rect.y
-					hit.ani1_frame += 5 * times
+					hit.on = True
 	def graviswitch_touch(self):
 		hit_list = pygame.sprite.spritecollide(self, self.gravis, False)
 		for hit in hit_list:
