@@ -8,7 +8,7 @@ import Door
 import Checkpoint
 import GraviSwitch
 
-from misc_functions import check_if_box
+from misc_functions import check_if_box, get_image
 
 class Player(pygame.sprite.Sprite):
 	spd_x = 0
@@ -17,11 +17,7 @@ class Player(pygame.sprite.Sprite):
 	def __init__(self, x_init, y_init, gravi):
 		pygame.sprite.Sprite.__init__(self)
 		
-		self.stand_image = pygame.image.load('images/Isaac/stand.png').convert()
-		self.stand_image.set_colorkey(C.CHROMA_KEY)
-		#self.moving_image
-		self.crouch_image = pygame.image.load('images/Isaac/crouch.png').convert()
-		self.crouch_image.set_colorkey(C.CHROMA_KEY)
+		self.load_images()
 		
 		self.direction = 'Right'
 		if gravi:
@@ -45,6 +41,23 @@ class Player(pygame.sprite.Sprite):
 		self.bounce = False
 		self.crouch = False
 		
+	def load_images(self):
+		sheet = pygame.image.load('images/Isaac/yirorescale2.png').convert()
+		
+		self.stand_image = get_image(sheet, 0, 0, 32, 32)
+		self.stand_image.set_colorkey(C.CHROMA_KEY)
+		
+		self.crouch_image = get_image(sheet, 0, 32, 32, 32)
+		self.crouch_image.set_colorkey(C.CHROMA_KEY)
+		
+		'''
+		self.stand_image = pygame.image.load('images/Isaac/stand.png').convert()
+		self.stand_image.set_colorkey(C.CHROMA_KEY)
+		
+		self.crouch_image = pygame.image.load('images/Isaac/crouch.png').convert()
+		self.crouch_image.set_colorkey(C.CHROMA_KEY)
+		'''
+	
 	def reboot(self, grav):
 		self.dead = False
 		self.bounce = False

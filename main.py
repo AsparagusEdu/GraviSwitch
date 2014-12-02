@@ -17,11 +17,7 @@ main()
 - SOLUCIONAR FRAMERATE RASPBERRY!!
 
 - Sistema de guardado
-- Arreglar animacion del checkpoint.
 - Mostrar al jugador muriendo.
-
-- BUG?: El jugador no puede saltar de cajas que van cayendo hacia arriba.
-  Y si utilizamos esto como explicacion para permitir que las cajas puedan lanzar al jugador hacia arriba?
 
 - Crear un switch y un sistema de "corriente"
 
