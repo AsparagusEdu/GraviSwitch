@@ -18,31 +18,35 @@ class Player(pygame.sprite.Sprite):
 		pygame.sprite.Sprite.__init__(self)
 		
 		self.load_images()
-		
-		self.direction = 'Right'
-		if gravi:
-			self.graviswitch = True
-		else:
-			self.graviswitch = False
+		self.set_states(gravi)
 		
 		self.image = pygame.image.load('images/Isaac/IsaacCol.png').convert()
 		self.rect = self.image.get_rect()
-		self.image = self.stand_image
+		self.image = self.jump_ani[4]
+		self.jump_ani_frame = 25
 		
 		#self.image = pygame.image.load('images/Isaac2.png').convert()
 		self.rect.x = x_init + 8
 		self.rect.y = y_init
 		
+		
+		self.init_x = self.rect.x
+		self.init_y = self.rect.y	
+	
+	def set_states(self, gravi):
+		self.state = 'Stand'
+		self.air = True
+		self.direction = 'Right'
 		self.dead = False
 		self.win = False
-		self.init_x = self.rect.x
-		self.init_y = self.rect.y
-		
 		self.bounce = False
 		self.crouch = False
-		
+		if gravi:
+			self.graviswitch = True
+		else:
+			self.graviswitch = False
 	def load_images(self):
-		sheet = pygame.image.load('images/Isaac/yirorescale2.png').convert()
+		sheet = pygame.image.load('images/Isaac/yirorescale.png').convert()
 		
 		self.stand_image = get_image(sheet, 0, 0, 32, 32)
 		self.stand_image.set_colorkey(C.CHROMA_KEY)
@@ -50,20 +54,31 @@ class Player(pygame.sprite.Sprite):
 		self.crouch_image = get_image(sheet, 0, 32, 32, 32)
 		self.crouch_image.set_colorkey(C.CHROMA_KEY)
 		
-		'''
-		self.stand_image = pygame.image.load('images/Isaac/stand.png').convert()
-		self.stand_image.set_colorkey(C.CHROMA_KEY)
+		self.walk_ani = []
+		self.walk_ani_cod = [(32,0),(64,0),(96,0), (128,0), (160,0), (192,0), (224,0), (256,0), (288,0), (320,0), (352,0)]
+		self.walk_ani_frame = 0
+		for i in self.walk_ani_cod:
+			cuadro = get_image(sheet, i[0], i[1], 32,32).convert()
+			cuadro.set_colorkey(C.CHROMA_KEY)
+			self.walk_ani.append(cuadro)
 		
-		self.crouch_image = pygame.image.load('images/Isaac/crouch.png').convert()
-		self.crouch_image.set_colorkey(C.CHROMA_KEY)
-		'''
-	
+		self.jump_ani = []
+		self.jump_ani_cod = [(32,32), (64,32), (96,32), (128,32), (160,32)]
+		self.jump_ani_frame = 0
+		for i in self.jump_ani_cod:
+			cuadro = get_image(sheet, i[0], i[1], 32,38).convert()
+			cuadro.set_colorkey(C.CHROMA_KEY)
+			self.jump_ani.append(cuadro)
+		
 	def reboot(self, grav):
 		self.dead = False
 		self.bounce = False
 		self.crouch = False
 		self.image = self.stand_image
 		self.direction = 'Right'
+		self.state = 'Stand'
+		self.image = self.jump_ani[4]
+		self.jump_ani_frame = 25
 		
 		self.spd_y = 0
 		self.spd_x = 0
@@ -121,6 +136,11 @@ class Player(pygame.sprite.Sprite):
 				elif bloxy.spd_y < 0:
 					self.spd_y = 0
 					self.rect.bottom = bloxy.rect.top
+					self.air = False
+					self.walk_ani_frame = 0
+					self.image = self.stand_image
+					if self.direction == 'Left':
+						self.image = pygame.transform.flip(self.image, True, False)
 			else:
 				self.dead = True
 				sound.dead.play()
@@ -141,9 +161,19 @@ class Player(pygame.sprite.Sprite):
 			elif bloxy.spd_y < 0 and not self.touch_N(colis):
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
+				self.air = False
+				self.walk_ani_frame = 0
+				self.image = self.stand_image
+				if self.direction == 'Left':
+					self.image = pygame.transform.flip(self.image, True, False)
 			elif bloxy.spd_y < 0 and self.spd_y > 0: #BUGFIX para que el jugador pueda caer de una caja en movimiento a otra
 				self.spd_y = 0
 				self.rect.bottom = bloxy.rect.top
+				self.air = False
+				self.walk_ani_frame = 0
+				self.image = self.stand_image
+				if self.direction == 'Left':
+					self.image = pygame.transform.flip(self.image, True, False)
 			elif bloxy.spd_y > 0 and self.spd_y < 0:
 				self.spd_y = 0
 				self.rect.top = bloxy.rect.bottom
@@ -203,7 +233,7 @@ class Player(pygame.sprite.Sprite):
 			self.dead = True
 			sound.dead.play()
 	
-	def jumpbox(self): #Detecta cuando el jugador llego a una puerta
+	def jumpbox(self):
 		self.rect.y -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y +=1
@@ -271,10 +301,16 @@ class Player(pygame.sprite.Sprite):
 			if block.ID != self.ID:
 				if self.spd_y > 0 or block.spd_y < 0:
 					self.rect.bottom = block.rect.top
+					self.air = False
+					self.walk_ani_frame = 0
+					self.image = self.stand_image
+					if self.direction == 'Left':
+						self.image = pygame.transform.flip(self.image, True, False)
 				elif self.spd_y < 0 or block.spd_y > 0:
 					self.rect.top = block.rect.bottom
 				# Detener movimiento vertical
 				self.spd_y = 0
+				
 	def collision_x(self):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		for block in hit_list:
@@ -288,12 +324,12 @@ class Player(pygame.sprite.Sprite):
 		self.death()
 		self.door()
 		self.checkpoint(times)
+		self.ani_update()
 		if not self.graviswitch:
 			self.graviswitch_touch()
 		self.jumpbox()
 		
 		if self.crouch:
-			#print 'box'
 			self.box_ride()
 		
 		if not C.SLOW_MODE:
@@ -321,23 +357,61 @@ class Player(pygame.sprite.Sprite):
 				
 				self.bounce = False
 			
+	def ani_update(self):
+		#print self.walk_ani_frame
+		if self.state == 'Walk' and not self.air:
+			
+			if self.walk_ani_frame % 4 == 0:
+				self.image = self.walk_ani[self.walk_ani_frame / 4]
+				if self.direction == 'Left':
+					self.image = pygame.transform.flip(self.image, True, False)
+					
+				if self.walk_ani_frame == 40:
+					self.walk_ani_frame = 1
+			
+			self.walk_ani_frame += 1
+		
+		elif self.air:
+			#print self.jump_ani_frame
+			if self.jump_ani_frame < 30:
+				if self.jump_ani_frame % 6 == 0:
+					self.image = self.jump_ani[self.jump_ani_frame / 6]
+					if self.direction == 'Left':
+						self.image = pygame.transform.flip(self.image, True, False)
+						
+					#if self.jump_ani_frame == 16:
+						#self.jump_ani_frame = 1
+				
+				self.jump_ani_frame += 1
 		
 	def go_left(self):
+		self.state = 'Walk'
 		self.spd_x = -2
 		if self.direction == 'Right':
-			self.image = pygame.transform.flip(self.image, True, False)
+			#self.image = pygame.transform.flip(self.image, True, False)
 			self.direction = 'Left'
 	def go_right(self):
+		self.state = 'Walk'
 		self.spd_x = 2
 		if self.direction == 'Left':
-			self.image = pygame.transform.flip(self.image, True, False)
+			#self.image = pygame.transform.flip(self.image, True, False)
 			self.direction = 'Right'
 	def stop(self):
 		self.spd_x = 0
+		self.state = 'Stand'
+		if not self.air:
+			self.image = self.stand_image
+		if self.direction == 'Left':
+			self.image = pygame.transform.flip(self.image, True, False)
+		self.walk_ani_frame = 0
+		
 	def jump(self):
 		self.rect.y +=2
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y -=2
+		self.air = True
+		
+		self.jump_ani_frame = 0
 		for i in hit_list:
 			if i.ID != self.ID:
 				self.spd_y = -3

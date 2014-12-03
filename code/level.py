@@ -100,6 +100,10 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						player.init_x, player.init_y = pos_x, pos_y
 						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
 						pygame.mixer.music.play(-1)
+						pygame.mixer.music.pause()
+						if not MUTE_MUSIC:
+							
+							pygame.mixer.music.unpause()
 					elif pause == 'Menu':
 						return False, False, False, MUTE_MUSIC, prev_song
 					elif pause == 'Salir':

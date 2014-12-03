@@ -46,11 +46,13 @@ def DeadPlayer(prev_screen):
 					elif cursor_state == 1:
 						return False, False
 				elif event.key == pygame.K_RIGHT:
-					cursor_state +=1
-					sound.cursor.play()
+					if cursor_state == 0:
+						cursor_state +=1
+						sound.cursor.play()
 				elif event.key == pygame.K_LEFT:
-					cursor_state -=1
-					sound.cursor.play()
+					if cursor_state == 1:
+						cursor_state -=1
+						sound.cursor.play()
 		
 		clock.tick(MAX_FPS)
 		
