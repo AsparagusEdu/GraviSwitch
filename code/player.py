@@ -241,6 +241,8 @@ class Player(pygame.sprite.Sprite):
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
 					self.spd_y = 6
+					self.air = True
+					self.jump_ani_frame = 24
 		self.rect.y +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y -=1
@@ -248,6 +250,8 @@ class Player(pygame.sprite.Sprite):
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
 					self.spd_y = -6
+					self.air = True
+					self.jump_ani_frame = 0
 		self.rect.x -=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x +=1
@@ -256,6 +260,8 @@ class Player(pygame.sprite.Sprite):
 				if type(hit) is Box.JumpBox:
 					self.bounce = True
 					self.spd_x = 4
+					self.air = True
+					self.jump_ani_frame = 24
 		self.rect.x +=1
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.x -=1
@@ -264,6 +270,8 @@ class Player(pygame.sprite.Sprite):
 				if type(hit) is Box.JumpBox:
 					self.bounce = True
 					self.spd_x = -4
+					self.air = True
+					self.jump_ani_frame = 24
 	def door(self): #Detecta cuando el jugador llego a una puerta
 		hit_list = pygame.sprite.spritecollide(self, self.doors, False)
 		for hit in hit_list:
@@ -348,6 +356,7 @@ class Player(pygame.sprite.Sprite):
 		if not self.touch_S(0):
 			self.spd_y += .15
 		if self.bounce:
+			self.image = self.jump_ani[4]
 			if self.spd_x > 0.3:
 				self.spd_x -= .09
 			elif self.spd_x < -0.3:
@@ -356,6 +365,7 @@ class Player(pygame.sprite.Sprite):
 				self.spd_x = 0
 				
 				self.bounce = False
+				
 			
 	def ani_update(self):
 		#print self.walk_ani_frame
@@ -410,7 +420,6 @@ class Player(pygame.sprite.Sprite):
 		hit_list = pygame.sprite.spritecollide(self, self.level, False)
 		self.rect.y -=2
 		self.air = True
-		
 		self.jump_ani_frame = 0
 		for i in hit_list:
 			if i.ID != self.ID:
