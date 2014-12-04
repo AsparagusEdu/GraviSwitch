@@ -4,8 +4,8 @@ WWW          FFFFFFFFFFFFWWWWWWW
 WWW          FFFFFFFFFF  WW   WW
 WWW        WWJJJJJJJJJJF WDB  WW
 WWW       WWWWWWWWWWWWW  WWW  WW
-WWW     WWWWWWW  WWW  W  WWW  WW
-WWW WWWWWWWWWW     W  W  WWW  WW
+WWW     WWWWWWW       W  WWW  WW
+WWW WWWWWWWWWW        W  WWW  WW
 WWW WWWWWWWWWW        W       WW
 WWW WWWWWWWWW         W       WW
 WWWB                  W  WWW  WW
@@ -16,6 +16,6 @@ WWWWWWWWWWWWWWWWWW    WJJWWWWWWW
 WWW         F    W  B WWWWWWWWWW
 WWW   P     F       BBWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-:F fondo_test1.png
-:M smb3world1.mp3
-:W grey.png
+:Fondo fondo_marble2.png
+:Musica marble.mp3
+:Pared marble.png

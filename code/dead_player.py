@@ -2,6 +2,7 @@ import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
 from misc_functions import show_fps
+from confirmation import Confirmation
 
 def DeadPlayer(prev_screen):
 		
@@ -43,7 +44,7 @@ def DeadPlayer(prev_screen):
 				if event.key == pygame.K_RETURN:
 					if cursor_state == 0:
 						return True, False
-					elif cursor_state == 1:
+					elif cursor_state == 1 and Confirmation(prev_screen):
 						return False, False
 				elif event.key == pygame.K_RIGHT:
 					if cursor_state == 0:
