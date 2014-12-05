@@ -180,6 +180,23 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 		checkpoint_list.update()
 			
 		if player.dead:
+			player.image = player.dead_image
+			if player.direction == 'Left':
+				player.image = pygame.transform.flip(player.image, True, False)
+			
+			C.SCREEN.blit(fondo, (0,0))
+			door_list.draw(C.SCREEN)
+			checkpoint_list.draw(C.SCREEN)
+			gravi_list.draw(C.SCREEN)
+			#C.SCREEN.blit(gravi_arrow.image, (gravi_arrow.rect.x, gravi_arrow.rect.y))
+			C.SCREEN.blit(player.image, (player.rect.x - 8, player.rect.y -4)) #Modificable
+			sprite_list.draw(C.SCREEN)
+			bfilter_list.draw(C.SCREEN)
+			pygame.display.flip()
+			if C.SHOW_FPS:
+				NOFPS_SCREEN.blit(C.SCREEN, (0,0))
+				show_fps(FPS)
+			
 			print 'DEAD'
 			if not MUTE_MUSIC:
 				pygame.mixer.music.pause()

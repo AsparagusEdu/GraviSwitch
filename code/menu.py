@@ -4,6 +4,7 @@ from level import *
 from titlescreen import Demo_TitleScreen, Main_TitleScreen
 from LevelSelect import Level_Select
 from Adventure import Adventure
+from savegame import save_read, save_menu
 import sound
 #import music
 
@@ -222,11 +223,13 @@ class Main_Menu():
 					if event.key == pygame.K_ESCAPE:
 						return None
 					elif event.key == pygame.K_a:
-						EXIT_GAME, MUTE_MUSIC = Adventure(MUTE_MUSIC)
+						EXIT_GAME, MUTE_MUSIC = Adventure(MUTE_MUSIC, 0)
 						pygame.mixer.music.stop()
 					elif event.key == pygame.K_l:
 						SCREEN.blit(MMenu, (0,0))
-						EXIT_GAME, MUTE_MUSIC = Level_Select(MMenu, MUTE_MUSIC)
+						EXIT_GAME = save_menu(MUTE_MUSIC)
+						
+						#EXIT_GAME, MUTE_MUSIC = Level_Select(MMenu, MUTE_MUSIC)
 						pygame.mixer.music.stop()
 					elif event.key == pygame.K_m:
 						if MUTE_MUSIC:

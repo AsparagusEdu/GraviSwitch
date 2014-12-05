@@ -3,7 +3,7 @@ from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, 
 import sound
 from misc_functions import show_fps
 
-def Confirmation(prev_screen):
+def Confirmation(prev_screen = 0):
 		
 	menu_image = pygame.image.load('images/gui/confirmation.png').convert()
 	menu_rect = menu_image.get_rect()
@@ -23,7 +23,6 @@ def Confirmation(prev_screen):
 	while pause:
 		FPS = clock.get_fps()
 		if SHOW_FPS:
-			SCREEN.blit(prev_screen, (0,0))
 			show_fps(FPS)
 		SCREEN.blit(menu_image, menu_pos)
 		

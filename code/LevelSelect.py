@@ -4,8 +4,16 @@ import sound
 from misc_functions import show_fps
 import level
 
-def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para poder blitearse en ella.
-		
+def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla anterior para poder blitearse en ella.
+	back = pygame.image.load('images/backgrounds/fondo_marble2.png').convert()
+	back_rect = back.get_rect()
+	back2 = pygame.image.load('images/gui/file_menu.png').convert()
+	back2_rect = back2.get_rect()
+	
+
+	
+	
+	
 	menu_image = pygame.image.load('images/gui/levelselect.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
@@ -17,9 +25,9 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 	clock = pygame.time.Clock()
 	
 	fonty = pygame.font.SysFont('Pokemon FireLeaf', 60) #Pokemon FireLeaf
-	music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
-	prev_song = 's3kfileselect'
-	pygame.mixer.music.play(-1)
+	#music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+	#prev_song = 's3kfileselect'
+	#pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()
 		
@@ -35,8 +43,12 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 		
 		FPS = clock.get_fps()
 		if SHOW_FPS:
-			SCREEN.blit(prev_screen, (0,0))
+			#SCREEN.blit(prev_screen, (0,0))
 			show_fps(FPS)
+			
+		SCREEN.blit(back, (0,0))
+		back2_rect.center = back_rect.center
+		SCREEN.blit(back2, back2_rect.topleft)
 		SCREEN.blit(menu_image, menu_pos)
 		cursor_image = fonty.render(str(cursor_state), False, (255,255,255))
 		if cursor_state >= 10:
@@ -62,7 +74,7 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 						pygame.mixer.music.pause()
 					prev_song = 's3kfileselect'
 				elif event.key == pygame.K_ESCAPE:
-					return False, MUTE_MUSIC
+					return False, MUTE_MUSIC, prev_song
 					
 				elif event.key == pygame.K_p:
 					if demo == 1:
@@ -88,4 +100,4 @@ def Level_Select(prev_screen, MUTE_MUSIC): #Utiliza la pantalla anterior para po
 					sound.cursor.play()
 		
 		clock.tick(MAX_FPS)
-	return True, MUTE_MUSIC
+	return True, MUTE_MUSIC, prev_song

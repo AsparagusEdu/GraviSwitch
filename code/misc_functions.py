@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, GAME_NAME
 from Box import *
 
 def static_boxes(box_list):#Recibe lista de objetos "Box" como parametro
@@ -14,9 +14,10 @@ def get_image(sheet, x, y, width, height):
 		return image
 
 def show_fps(FPS):
-	fonty = pygame.font.SysFont('Arial', 20) #Pokemon FireLeaf
-	image = fonty.render('FPS:' + str(int(FPS)), False, (0,0,0))
-	SCREEN.blit(image, (0,0))
+	pygame.display.set_caption(C.GAME_NAME + ' - FPS: ' + str(int(FPS)))
+	#fonty = pygame.font.SysFont('Arial', 20) #Pokemon FireLeaf
+	#image = fonty.render('FPS:' + str(int(FPS)), False, (0,0,0))
+	#SCREEN.blit(image, (0,0))
 
 def check_if_box(block):
 	if type(block) is Box:

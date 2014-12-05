@@ -54,6 +54,9 @@ class Player(pygame.sprite.Sprite):
 		self.crouch_image = get_image(sheet, 0, 32, 32, 32)
 		self.crouch_image.set_colorkey(C.CHROMA_KEY)
 		
+		self.dead_image = get_image(sheet, 192, 32, 32, 38)
+		self.dead_image.set_colorkey(C.CHROMA_KEY)
+		
 		self.walk_ani = []
 		self.walk_ani_cod = [(32,0),(64,0),(96,0), (128,0), (160,0), (192,0), (224,0), (256,0), (288,0), (320,0), (352,0)]
 		self.walk_ani_frame = 0
@@ -330,6 +333,8 @@ class Player(pygame.sprite.Sprite):
 				
 	def update(self,grav, times):
 		self.death()
+		if self.dead:
+			return
 		self.door()
 		self.checkpoint(times)
 		self.ani_update()
