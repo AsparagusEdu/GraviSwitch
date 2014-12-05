@@ -206,38 +206,13 @@ class Main_Menu():
 	def __init__(self):
 		MMenu = pygame.image.load('images/gui/main_menu.png').convert()
 		clock = pygame.time.Clock()
+		EXIT_GAME = False
+		EXIT_MENU = False
 		
 		MUTE_MUSIC = False
-		EXIT_GAME = Main_TitleScreen(MUTE_MUSIC)
-		
 		while not EXIT_GAME:
-			FPS = clock.get_fps()
-			SCREEN.blit(MMenu, (0,0))
-			if SHOW_FPS:
-				show_fps(FPS)
-			pygame.display.flip()
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					return None
-				elif event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_ESCAPE:
-						return None
-					elif event.key == pygame.K_a:
-						EXIT_GAME, MUTE_MUSIC = Adventure(MUTE_MUSIC, 0)
-						pygame.mixer.music.stop()
-					elif event.key == pygame.K_l:
-						SCREEN.blit(MMenu, (0,0))
-						EXIT_GAME = save_menu(MUTE_MUSIC)
-						
-						#EXIT_GAME, MUTE_MUSIC = Level_Select(MMenu, MUTE_MUSIC)
-						pygame.mixer.music.stop()
-					elif event.key == pygame.K_m:
-						if MUTE_MUSIC:
-							print 'MUSIC - ON'
-							MUTE_MUSIC = False
-						else:
-							print 'MUSIC - OFF'
-							MUTE_MUSIC = True
-							
-			clock.tick(MAX_FPS)
+			EXIT_GAME, EXIT_MENU = Main_TitleScreen(MUTE_MUSIC)
+			if not EXIT_MENU:
+				EXIT_MENU = save_menu(MUTE_MUSIC)
+			
 						

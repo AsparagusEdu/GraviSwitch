@@ -36,12 +36,12 @@ def Main_TitleScreen(MUTE_MUSIC): #Booleano
 	while not over:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				return True
+				return True, True
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					return True
+					return True, True
 				elif event.key == pygame.K_RETURN:
-					return False
+					return False, False
 				
 		SCREEN.blit(title, (0,0))
 		FPS = clock.get_fps()
