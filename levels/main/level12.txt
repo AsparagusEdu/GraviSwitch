@@ -1,23 +1,21 @@
-WWWPWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WWW WWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WW             S        S     WW
-WW                            WW
-WW    S     S                 WW
-WW                S           WW
-WWWWF    F F   F   F    F   D WW
-WWGF     JF    JF F     JF  WWWW
-WWW F    F F   F   F    F     WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
-WW                            WW
+WWPWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WW WWSSSSSSSSWWWWWWWWWWWWWWWWWWW
+WW WW  F   F   SW       F     WW
+WW WW  FCP F   SW             WW
+WW WW  WWWFS   SW        F    WW
+WW WW  WWWJS   SW         WWWWWW
+WW WW  WWW SS  SW        FFFFFWW
+WW WW  WWW S   SW W           WW
+WW WW SWWW S   SW   W         WW
+WW WW  WWW S   SW     W       WW
+WW WW  WWW S   SW       W     WW
+WW WW  WWW S   SW             WW
+WW WW  WWW S  SWW             WW
+WW WW  WWWWS   SW             WW
+WW WW  WWWWS   SW   WWWWWWWWWWWW
+WWFW   WWWWS   SW             WW
+WW    JWWWWS     C            WW
+WWWWWWWWWWWWSWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
 :Pared marble.png
-#:Graviswitch False
-#:G_Spin 4

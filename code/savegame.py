@@ -18,6 +18,9 @@ def save_read(save_num):
 	
 	return lastlevel
 	
+
+	
+	
 def save_menu(MUTE_MUSIC):
 	save1 = save_read(1)
 	save2 = save_read(2)
@@ -71,11 +74,13 @@ def save_menu(MUTE_MUSIC):
 				elif event.key == pygame.K_RETURN:
 					if cursor_state == 0: #Valores relleno
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(1, MUTE_MUSIC, prev_song, save1)
-						
+						save1 = save_read(1)
 					elif cursor_state == 1:
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(2, MUTE_MUSIC, prev_song, save2)
+						save2 = save_read(2)
 					elif cursor_state == 2:
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(3, MUTE_MUSIC, prev_song, save3)
+						save3 = save_read(3)
 					elif cursor_state == 3:
 						EXIT_GAME = True
 					if prev_song != 's3kfileselect':

@@ -26,11 +26,12 @@ def Demo_TitleScreen():
 
 def Main_TitleScreen(MUTE_MUSIC): #Booleano
 	title = pygame.image.load('images/demo/titlescreen.png').convert()
-	'''
-	if MUSIC:
-		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
-		pygame.mixer.music.play(-1)
-	'''
+	
+	music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+	pygame.mixer.music.play(-1)
+	if MUTE_MUSIC:
+		pygame.mixer.music.pause()
+	
 	clock = pygame.time.Clock()
 	over = False
 	while not over:

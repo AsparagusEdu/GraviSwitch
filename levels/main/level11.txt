@@ -17,5 +17,5 @@ WWW         F    W  B WWWWWWWWWW
 WWW   P     F       BBWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
-:Musica marble.mp3
+:Musica BondEsque.wav
 :Pared marble.png

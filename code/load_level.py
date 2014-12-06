@@ -24,7 +24,7 @@ def Read_File(nombre):
 		linea = linea.strip("\n")
 		if linea[0] != ':':
 			mapa.append(linea)
-			print linea
+			#print linea
 		else:
 			linea = linea.split(' ')
 			if linea[0] == ':Fondo':

@@ -83,6 +83,9 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 				if event.key == pygame.K_ESCAPE: #Menu de pausa
 					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)
 					player.spd_x = 0
+					if not player.air:
+						player.state = 'Stand'
+						player.image = player.stand_image
 					if pause == 'Continuar':
 						pass
 					elif pause == 'Reiniciar': #Reinicia todos los valores anteriores

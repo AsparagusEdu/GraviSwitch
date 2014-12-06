@@ -3,7 +3,14 @@ from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, 
 import sound
 from misc_functions import show_fps
 from LevelSelect import Level_Select
+#from savegame import save_write
 import level
+
+def save_write(save_num, lastlevel):
+	archivo = open('saves/save' + str(save_num) + '.txt', 'w')
+	archivo.write('lastlevel=' + str(lastlevel))
+	archivo.close()
+	
 
 def Adventure(save_num, MUTE_MUSIC, prev_song, lvl = 0):
 	clock = pygame.time.Clock()
@@ -18,7 +25,10 @@ def Adventure(save_num, MUTE_MUSIC, prev_song, lvl = 0):
 	
 	while EXIT_MENU:
 		finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(lvl), MUTE_MUSIC, prev_song)
-		lvl += 1
+		if finished_level:
+			save_write(save_num, lvl)
+			print 'SAVED'
+			lvl += 1
 		if EXIT_GAME: #Si en algun momento se necesita salir del juego
 			return True, MUTE_MUSIC, prev_song
 		elif lvl > 12: #Ultimo nivel del modo aventura
