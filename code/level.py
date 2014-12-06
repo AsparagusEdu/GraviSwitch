@@ -123,20 +123,16 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						
 				elif event.key == pygame.K_LEFT and not player.bounce and not player.crouch:
 					player.go_left() #Mover a la izquierda siempre y cuando no este rebotando o agachandose
-					print 'Tecla - Izquierda'
 				elif event.key == pygame.K_RIGHT and not player.bounce and not player.crouch:
 					player.go_right()
-					print 'Tecla - Derecha'
 				elif event.key == pygame.K_UP and player.touch_S(0) and not player.crouch:
 					sound.jump.play() #Salto en el suelo y sin agacharse
 					player.jump()
-					print 'Tecla - Salto'
 				elif event.key == pygame.K_DOWN and player.touch_S(0) and player.spd_x == 0:
 					player.crouch = True #Agacharse en el suelo y quieto
 					player.image = player.crouch_image
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
-					print 'Crouch - ON'
 					#player.spd_x = 0
 				
 				if graviswitch:
@@ -171,7 +167,6 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 					player.image = player.stand_image
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
-					print 'Crouch - OFF'
 
 		FPS = clock.get_fps()
 		
