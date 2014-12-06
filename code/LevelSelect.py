@@ -24,7 +24,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 
 	clock = pygame.time.Clock()
 	
-	fonty = pygame.font.SysFont('Pokemon FireLeaf', 60) #Pokemon FireLeaf
+	fonty = pygame.font.Font('I-Choose-You.ttf', 60) #Pokemon FireLeaf
 	#music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
 	#prev_song = 's3kfileselect'
 	#pygame.mixer.music.play(-1)
@@ -37,8 +37,8 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 	while not EXIT_MENU:
 		
 		if cursor_state <= demo -1: #Precaucion para que no salga fuera de rango. Modificado cuando se activan los niveles demo.
-			cursor_state = 12
-		elif cursor_state == 13:
+			cursor_state = 13
+		elif cursor_state == 14:
 			cursor_state = demo
 		
 		FPS = clock.get_fps()
@@ -51,10 +51,8 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 		SCREEN.blit(back2, back2_rect.topleft)
 		SCREEN.blit(menu_image, menu_pos)
 		cursor_image = fonty.render(str(cursor_state), False, (255,255,255))
-		if cursor_state >= 10:
-			SCREEN.blit(cursor_image, (491,304))
-		else:	
-			SCREEN.blit(cursor_image, (502,304))
+		cursor_rect = cursor_image.get_rect()
+		SCREEN.blit(cursor_image, (SCREEN_WIDTH/2 - cursor_rect.w/2 +4,298))
 		
 		pygame.display.flip()
 		

@@ -1,7 +1,7 @@
 WWPWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WW WWSSSSSSSSWWWWWWWWWWWWWWWWWWW
-WW WW  F   F   SW       F     WW
-WW WW  FCP F   SW             WW
+WW WW  F       SW       F     WW
+WW WW  FCP     SW             WW
 WW WW  WWWFS   SW        F    WW
 WW WW  WWWJS   SW         WWWWWW
 WW WW  WWW SS  SW        FFFFFWW
@@ -15,7 +15,7 @@ WW WW  WWWWS   SW             WW
 WW WW  WWWWS   SW   WWWWWWWWWWWW
 WWFW   WWWWS   SW             WW
 WW    JWWWWS     C            WW
-WWWWWWWWWWWWSWWWWWWWWWWWWWWWWWWW
+WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica BondEsque.wav
 :Pared marble.png
