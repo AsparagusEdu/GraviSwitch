@@ -92,6 +92,8 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						pygame.mixer.music.fadeout(500)
 						C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 						pygame.display.flip()
+						player.graviswitch = False
+						graviswitch = False
 						for obj in updatable_list.sprites():
 							gravity = 'S'
 							obj.reboot(gravity)
@@ -200,6 +202,8 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 				pygame.mixer.music.pause()
 			revive, G_OVER = DeadPlayer(NOFPS_SCREEN)
 			if revive:
+				player.graviswitch = False
+				graviswitch = False
 				if not MUTE_MUSIC:
 					pygame.mixer.music.unpause()
 				

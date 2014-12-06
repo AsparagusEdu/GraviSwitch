@@ -8,5 +8,7 @@ graviswitch = pygame.mixer.Sound('sound/effects/graviswitch2.wav')
 openmenu = pygame.mixer.Sound('sound/effects/openmenu.wav')
 jump = pygame.mixer.Sound('sound/effects/jump.wav')
 
+itemget = pygame.mixer.Sound('sound/jingles/itemget.wav')
+
 checkpoint.set_volume(0.4)
 graviswitch.set_volume(0.7)

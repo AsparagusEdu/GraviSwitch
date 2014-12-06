@@ -58,13 +58,13 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				return True
+				return True, MUTE_MUSIC, prev_song
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
 					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'NivComp')
 					
 					if EXIT_GAME:
-						return True, MUTE_MUSIC
+						return True, MUTE_MUSIC, prev_song
 					music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
 					pygame.mixer.music.set_volume(1.0)
 					pygame.mixer.music.play(-1)

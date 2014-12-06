@@ -94,9 +94,7 @@ def save_menu(MUTE_MUSIC):
 			if event.type == pygame.QUIT:
 				return False, True
 			elif event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_ESCAPE:
-					return 'Back'
-				elif event.key == pygame.K_RETURN:
+				if event.key == pygame.K_RETURN:
 					if cursor_state == 0: #Valores relleno
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(1, MUTE_MUSIC, prev_song, save1)
 						save1 = save_read(1)

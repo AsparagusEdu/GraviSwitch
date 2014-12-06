@@ -41,6 +41,7 @@ class Player(pygame.sprite.Sprite):
 		self.win = False
 		self.bounce = False
 		self.crouch = False
+		self.firstgravi = False
 		if gravi:
 			self.graviswitch = True
 		else:
@@ -295,8 +296,17 @@ class Player(pygame.sprite.Sprite):
 			if type(hit) is GraviSwitch.GraviSwitch:
 				if hit.rect.left + 1 < self.rect.centerx < hit.rect.right - 1:
 					self.graviswitch = True
+					self.firstgravi = True
+					pygame.mixer.music.pause()
+					sound.itemget.play()
 					hit.state = 'None'
 					hit.image = hit.ani1[4]
+					pygame.time.wait(5000)
+					pygame.event.clear()
+					self.spd_x = 0
+					self.state = 'Stand'
+					self.image = self.stand_image
+					pygame.mixer.music.unpause()
 					
 	def box_ride(self):
 		self.rect.y += 1
@@ -371,7 +381,6 @@ class Player(pygame.sprite.Sprite):
 				
 				self.bounce = False
 				
-			
 	def ani_update(self):
 		#print self.walk_ani_frame
 		if self.state == 'Walk' and not self.air:
