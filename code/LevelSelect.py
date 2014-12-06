@@ -48,7 +48,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 			
 		SCREEN.blit(back, (0,0))
 		back2_rect.center = back_rect.center
-		SCREEN.blit(back2, back2_rect.topleft)
+		#SCREEN.blit(back2, back2_rect.topleft)
 		SCREEN.blit(menu_image, menu_pos)
 		cursor_image = fonty.render(str(cursor_state), False, (255,255,255))
 		cursor_rect = cursor_image.get_rect()

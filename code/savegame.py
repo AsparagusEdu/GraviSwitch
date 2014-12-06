@@ -50,6 +50,28 @@ def save_menu(MUTE_MUSIC):
 	cursor_image = cursor_image1
 	
 	cursor_state = 0
+	
+	fonty = pygame.font.Font('I-Choose-You.ttf', 40)
+	if save1 == 'COMPLETADO':
+		text1 = 'COMPLETADO'
+	else:
+		text1 = 'Nivel ' + str(int(save1) +1)
+	text1_i = fonty.render(text1, False, (255,255,255))
+	text1_r = text1_i.get_rect()
+	
+	if save2 == 'COMPLETADO':
+		text2 = 'COMPLETADO'
+	else:
+		text2 = 'Nivel ' + str(int(save2) +1)
+	text2_i = fonty.render(text2, False, (255,255,255))
+	text2_r = text2_i.get_rect()
+	
+	if save3 == 'COMPLETADO':
+		text3 = 'COMPLETADO'
+	else:
+		text3 = 'Nivel ' + str(int(save3) +1)
+	text3_i = fonty.render(text3, False, (255,255,255))
+	text3_r = text3_i.get_rect()
 
 	clock = pygame.time.Clock()
 	
@@ -62,6 +84,9 @@ def save_menu(MUTE_MUSIC):
 			show_fps(FPS)
 		SCREEN.blit(background, (0,0))
 		SCREEN.blit(menu_image, menu_pos)
+		SCREEN.blit(text1_i, (310 - text1_r.w/2, 230))
+		SCREEN.blit(text2_i, (515 - text2_r.w/2, 230))
+		SCREEN.blit(text3_i, (720 - text3_r.w/2, 230))
 		SCREEN.blit(cursor_image, menu_list[cursor_state])
 		pygame.display.flip()
 		
@@ -75,12 +100,30 @@ def save_menu(MUTE_MUSIC):
 					if cursor_state == 0: #Valores relleno
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(1, MUTE_MUSIC, prev_song, save1)
 						save1 = save_read(1)
+						if save1 == 'COMPLETADO':
+							text1 = 'COMPLETADO'
+						else:
+							text1 = 'Nivel ' + str(int(save1) +1)
+						text1_i = fonty.render(text1, False, (255,255,255))
+						text1_r = text1_i.get_rect()
 					elif cursor_state == 1:
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(2, MUTE_MUSIC, prev_song, save2)
 						save2 = save_read(2)
+						if save2 == 'COMPLETADO':
+							text2 = 'COMPLETADO'
+						else:
+							text2 = 'Nivel ' + str(int(save2) +1)
+						text2_i = fonty.render(text2, False, (255,255,255))
+						text2_r = text2_i.get_rect()
 					elif cursor_state == 2:
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(3, MUTE_MUSIC, prev_song, save3)
 						save3 = save_read(3)
+						if save3 == 'COMPLETADO':
+							text3 = 'COMPLETADO'
+						else:
+							text3 = 'Nivel ' + str(int(save3) +1)
+						text3_i = fonty.render(text3, False, (255,255,255))
+						text3_r = text3_i.get_rect()
 					elif cursor_state == 3:
 						EXIT_GAME = True
 					if prev_song != 's3kfileselect':
