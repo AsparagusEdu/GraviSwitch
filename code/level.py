@@ -7,12 +7,12 @@ from misc_functions import static_boxes, show_fps
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
-def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin extension, Mute, evento que pasa al terminar nivel.
+def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Archivo sin extension, Mute, evento que pasa al terminar nivel.
 	
 	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0)) #Pantalla de carga
 	pygame.display.flip()
 	
-	lvl_info, lvl_lists = load_level('main/' + nombre + '.txt') #Cargando nivel
+	lvl_info, lvl_lists = load_level(lvl_source + nombre + '.txt') #Cargando nivel
 	
 	p_id = lvl_info[0] #Cargando datos del nivel.
 	p_inicio = lvl_info[1]

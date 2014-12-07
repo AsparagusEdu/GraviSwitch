@@ -61,7 +61,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 				return True, MUTE_MUSIC, prev_song
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
-					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'NivComp')
+					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'main/', 'NivComp')
 					
 					if EXIT_GAME:
 						return True, MUTE_MUSIC, prev_song

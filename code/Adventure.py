@@ -24,7 +24,7 @@ def Adventure(save_num, MUTE_MUSIC, prev_song, lvl = 0):
 	prev_song = 'None'
 	
 	while EXIT_MENU:
-		finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(lvl), MUTE_MUSIC, prev_song)
+		finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(lvl), MUTE_MUSIC, prev_song, 'main/')
 		if finished_level:
 			save_write(save_num, lvl)
 			print 'SAVED'
