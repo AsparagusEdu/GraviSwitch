@@ -67,7 +67,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 	
 	if musica != prev_song:
 		music = pygame.mixer.music.load('sound/music/' + musica) #Carga y reproduce la musica del nivel
-		pygame.mixer.music.set_volume(0.4)
+		pygame.mixer.music.set_volume(0.6)
 		pygame.mixer.music.play(-1)
 		prev_song = musica
 		if MUTE_MUSIC:

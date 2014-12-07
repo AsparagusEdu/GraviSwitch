@@ -63,6 +63,7 @@ def load_level(nombre):
 	id_given = 0
 	door_id = 0
 	pos_y = 0
+	
 	for linea in mapa:
 		pos_x = 0
 		for cuadro in linea:

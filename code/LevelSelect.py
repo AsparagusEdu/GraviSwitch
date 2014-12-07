@@ -3,16 +3,13 @@ from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, 
 import sound
 from misc_functions import show_fps
 import level
+import level_editor
 
 def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla anterior para poder blitearse en ella.
 	back = pygame.image.load('images/backgrounds/fondo_marble2.png').convert()
 	back_rect = back.get_rect()
 	back2 = pygame.image.load('images/gui/file_menu.png').convert()
 	back2_rect = back2.get_rect()
-	
-
-	
-	
 	
 	menu_image = pygame.image.load('images/gui/levelselect.png').convert()
 	menu_rect = menu_image.get_rect()
@@ -75,10 +72,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 					return False, MUTE_MUSIC, prev_song
 					
 				elif event.key == pygame.K_p:
-					if demo == 1:
-						demo = -6
-					else:
-						demo = 1
+					level_editor.Edit_Level(1, MUTE_MUSIC)
 				elif event.key == pygame.K_m:
 					if not MUTE_MUSIC:
 						print 'MUSIC - OFF'

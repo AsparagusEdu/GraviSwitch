@@ -16,9 +16,6 @@ main()
 - Terminar con el menu.
 - SOLUCIONAR FRAMERATE RASPBERRY!!
 
-- Sistema de guardado
-- Mostrar al jugador muriendo.
-
 - Crear un switch y un sistema de "corriente"
 
 '''

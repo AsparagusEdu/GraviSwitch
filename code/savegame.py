@@ -18,9 +18,6 @@ def save_read(save_num):
 	
 	return lastlevel
 	
-
-	
-	
 def save_menu(MUTE_MUSIC):
 	save1 = save_read(1)
 	save2 = save_read(2)
