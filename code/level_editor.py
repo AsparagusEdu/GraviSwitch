@@ -33,6 +33,9 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	#print x_position
 	#print y_position
 	
+	editor_screen = pygame.Surface((1024,576))
+	editor_screen.fill((175,167,124))
+	
 	data = {} #info del mapa
 	data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
 	base.close()
@@ -46,14 +49,19 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	cursor_image1.set_colorkey(CHROMA_KEY)
 	cursor_rect1 = cursor_image1.get_rect()
 	
-	x2_pos = [1039, 1123]
-	y2_pos = [78,164,249, 325]
+	x2_pos = [1039, 1123,1037]
+	y2_pos = [78,164,249, 325,413,466,519]
+	states = [['W','B','F','G','B1','B2','B3'],['D','J','S','C','B1','B2','B3'],['W','B','F','G','B1','B2','B3']]
 	
 	current_x2 = 0
 	current_y2 = 0
-	cursor_image2 = pygame.image.load('images/gui/cursor/lvl_editor2.png').convert()
-	cursor_image2.set_colorkey(CHROMA_KEY)
+	cursor_image2a = pygame.image.load('images/gui/cursor/lvl_editor2.png').convert()
+	cursor_image2a.set_colorkey(CHROMA_KEY)
+	cursor_image2b = pygame.image.load('images/gui/cursor/lvl_editor3.png').convert()
+	cursor_image2b.set_colorkey(CHROMA_KEY)
+	cursor_image2 = cursor_image2a
 	cursor_rect2 = cursor_image2.get_rect()
+	cursor2_state = 'W'
 	
 	clock = pygame.time.Clock()
 	
@@ -62,7 +70,10 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 		cursor_pos2 = [x2_pos[current_x2], y2_pos[current_y2]]
 		cursor_rect1.topleft = cursor_pos1
 		cursor_rect2.topleft = cursor_pos2
+		cursor2_state = states[current_x2][current_y2]
+		print cursor2_state
 		SCREEN.blit(fondo,(0,0))
+		SCREEN.blit(editor_screen,(0,0))
 		SCREEN.blit(cursor_image1,cursor_rect1)
 		SCREEN.blit(cursor_image2,cursor_rect2)
 		pygame.display.flip()
@@ -93,25 +104,43 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 				elif event.key == pygame.K_RIGHT:
 					if current_x2 == 1:
 						current_x2 = 0
+					elif current_x2 == 2:
+						pass
 					else:
 						current_x2 += 1
 				elif event.key == pygame.K_LEFT:
 					if current_x2 == 0:
 						current_x2 = 1
+					elif current_x2 == 2:
+						pass
 					else:
 						current_x2 -= 1		
 				elif event.key == pygame.K_UP:
 					if current_y2 == 0:
-						current_y2 = 3
+						current_y2 = 6
+						current_x2 = 2
+						cursor_image2 = cursor_image2b
+					elif current_y2 == 4:
+						current_x2 = 0
+						cursor_image2 = cursor_image2a
+						current_y2 -=1
 					else:
 						current_y2 -= 1
 				elif event.key == pygame.K_DOWN:
 					if current_y2 == 3:
+						current_x2 = 2
+						current_y2 +=1
+						cursor_image2 = cursor_image2b
+					elif current_y2 == 6:
 						current_y2 = 0
+						current_x2 = 0
+						cursor_image2 = cursor_image2a
 					else:
 						current_y2 += 1
 				
 				elif event.key == pygame.K_RETURN:
+					
+					'''
 					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
 					if EXIT_MENU:
 						return EXIT_GAME, MUTE_MUSIC
@@ -124,7 +153,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					pygame.mixer.music.play(-1)
 					if MUTE_MUSIC:
 						pygame.mixer.music.pause()
-				
+					'''
 		
 		#fsdfsdfsdfsdf
 		FPS = clock.get_fps()
