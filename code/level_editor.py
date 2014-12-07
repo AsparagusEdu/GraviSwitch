@@ -3,12 +3,16 @@ from constants import SCREEN, SCREEN_WIDTH, SCREEN_HEIGHT, SHOW_FPS, MAX_FPS, CH
 from level import Level
 from load_level import Read_File
 from misc_functions import show_fps
+from confirmation import Confirmation
 
 
 def Save_Level(map_data, archivo):
 	for linea in map_data['mapa']:
 		archivo.write(linea)
 		archivo.write('\n')
+	archivo.write(':Fondo ' + map_data['fondo'] + '\n')
+	archivo.write(':Musica ' + map_data['musica'] + '\n')
+	archivo.write(':Pared ' + map_data['pared'] + '\n')
 
 def Test_Level(map_data, archivo, MUTE_MUSIC):
 	Save_Level(map_data, archivo)
@@ -33,24 +37,56 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	#print x_position
 	#print y_position
 	
+	wall_image = pygame.image.load('images/tiles/wall_base.png').convert()
+	box_image = pygame.image.load('images/tiles/box.png').convert()
+	player_image = pygame.image.load('images/Isaac/stand.png').convert()
+	player_image.set_colorkey(CHROMA_KEY)
+	
 	editor_screen = pygame.Surface((1024,576))
 	editor_screen.fill((175,167,124))
 	
 	data = {} #info del mapa
 	data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
 	base.close()
+	no_place = []
 	
+	current_y1 = 0
+	for linea in data['mapa']:
+		current_x1 = 0
+		for cuadro in linea.strip('\n'):
+			if cuadro == 'W':
+				editor_screen.blit(wall_image, (current_x1*32,current_y1*32))
+			elif cuadro == 'P':
+				editor_screen.blit(player_image, (current_x1*32,current_y1*32))
+				no_place.append((current_x1*32,current_y1*32))
+			elif cuadro == 'B':
+				editor_screen.blit(box_image, (current_x1*32,current_y1*32))
+			elif cuadro == 'J':
+				pass
+			elif cuadro == 'S':
+				pass
+			elif cuadro == 'D':
+				pass
+			elif cuadro == 'F':
+				pass
+			elif cuadro == 'C':
+				pass
+			elif cuadro == 'G' and len(gravi_list) == 0:
+				pass
+			current_x1 += 1
+		current_y1 +=1
+
 	pygame.display.set_mode((SCREEN_WIDTH +192, SCREEN_HEIGHT))
 	fondo = pygame.image.load('images/backgrounds/lvl_editor.png').convert()
 	
-	current_x1 = 0
+	current_x1 = 0#Reciclando variables
 	current_y1 = 0
 	cursor_image1 = pygame.image.load('images/gui/cursor/lvl_editor1.png').convert()
 	cursor_image1.set_colorkey(CHROMA_KEY)
 	cursor_rect1 = cursor_image1.get_rect()
 	
-	x2_pos = [1039, 1123,1037]
-	y2_pos = [78,164,249, 325,413,466,519]
+	x2_pos = [1035, 1099,1037]
+	y2_pos = [69,133,197, 255,413,466,519]
 	states = [['W','B','F','G','B1','B2','B3'],['D','J','S','C','B1','B2','B3'],['W','B','F','G','B1','B2','B3']]
 	
 	current_x2 = 0
@@ -71,7 +107,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 		cursor_rect1.topleft = cursor_pos1
 		cursor_rect2.topleft = cursor_pos2
 		cursor2_state = states[current_x2][current_y2]
-		print cursor2_state
+		#print cursor2_state
 		SCREEN.blit(fondo,(0,0))
 		SCREEN.blit(editor_screen,(0,0))
 		SCREEN.blit(cursor_image1,cursor_rect1)
@@ -79,9 +115,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 		pygame.display.flip()
 		for event in pygame.event.get():
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_ESCAPE:
-					EXIT_MENU = True
-				elif event.key == pygame.K_d:
+				if event.key == pygame.K_d:
 					if current_x1 == 31:
 						current_x1 = 0
 					else:
@@ -137,23 +171,44 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						cursor_image2 = cursor_image2a
 					else:
 						current_y2 += 1
-				
 				elif event.key == pygame.K_RETURN:
+					if cursor2_state == 'B1':
+						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
+						if EXIT_MENU:
+							return EXIT_GAME, MUTE_MUSIC
+						templvl = open('levels/custom/temp.txt', 'w')
+						SCREEN.blit(fondo,(0,0))
+						pygame.display.flip()
+						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
+						prev_song = 's3kfileselect'
+						pygame.mixer.music.set_volume(1.0)
+						pygame.mixer.music.play(-1)
+						if MUTE_MUSIC:
+							pygame.mixer.music.pause()
+					elif cursor2_state == 'B2' and finished_level:
+						print 'GUADDAD'
+					elif cursor2_state == 'B3' and Confirmation():
+						EXIT_MENU = True
+					else:
+						if cursor2_state == 'W':
+							paste_image = wall_image
+						elif cursor2_state == 'B':
+							paste_image = box_image
+						elif cursor2_state == 'J':
+							pass
+						elif cursor2_state == 'S':
+							pass
+						elif cursor2_state == 'D':
+							pass
+						elif cursor2_state == 'F':
+							pass
+						elif cursor2_state == 'C':
+							pass
+						elif cursor2_state == 'G':
+							pass
+						editor_screen.blit(paste_image, (current_x1*32,current_y1*32))
+						#data['mapa'][current_x1][current_y1] = cursor2_state
 					
-					'''
-					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
-					if EXIT_MENU:
-						return EXIT_GAME, MUTE_MUSIC
-					templvl = open('levels/custom/temp.txt', 'w')
-					SCREEN.blit(fondo,(0,0))
-					pygame.display.flip()
-					music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
-					prev_song = 's3kfileselect'
-					pygame.mixer.music.set_volume(1.0)
-					pygame.mixer.music.play(-1)
-					if MUTE_MUSIC:
-						pygame.mixer.music.pause()
-					'''
 		
 		#fsdfsdfsdfsdf
 		FPS = clock.get_fps()

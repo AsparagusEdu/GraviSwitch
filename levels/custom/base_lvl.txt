@@ -14,7 +14,7 @@ WWW                          WWW
 WWW                          WWW
 WWW                          WWW
 WWW                          WWW 
-WWW P                        WWW
+WWW                          WWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
 :Musica AdventureHO2.mp3
