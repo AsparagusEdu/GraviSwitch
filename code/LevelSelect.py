@@ -37,8 +37,8 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 	while not EXIT_MENU:
 		
 		if cursor_state <= demo -1: #Precaucion para que no salga fuera de rango. Modificado cuando se activan los niveles demo.
-			cursor_state = 13
-		elif cursor_state == 14:
+			cursor_state = 30
+		elif cursor_state == 31:
 			cursor_state = demo
 		
 		FPS = clock.get_fps()
