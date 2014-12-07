@@ -64,7 +64,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 			elif cuadro == 'B':
 				editor_screen.blit(box_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'J':
-				pass
+				editor_screen.blit(jump_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'S':
 				pass
 			elif cuadro == 'D':
@@ -183,6 +183,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						current_y2 += 1
 				elif event.key == pygame.K_RETURN:
 					if cursor2_state == 'B1':
+						
 						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
 						if EXIT_MENU:
 							return EXIT_GAME, MUTE_MUSIC
@@ -195,8 +196,9 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						pygame.mixer.music.play(-1)
 						if MUTE_MUSIC:
 							pygame.mixer.music.pause()
-					elif cursor2_state == 'B2' and finished_level:
-						print 'GUADDAD'
+					elif cursor2_state == 'B2':
+						if finished_level:
+							print 'GUADDAD'
 					elif cursor2_state == 'B3' and Confirmation():
 						EXIT_MENU = True
 					elif (current_x1, current_y1) in no_place:
@@ -219,9 +221,23 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						elif cursor2_state == 'G':
 							pass
 						editor_screen.blit(paste_image, (current_x1*32,current_y1*32))
+						
 						#data['mapa'][current_x1][current_y1] = cursor2_state
-					
-		
+						templine = ''
+						temp_x = 0
+						#print current_x1
+						linea = data['mapa'][current_x1]
+						#print linea
+						for cuadro in data['mapa'][current_y1]:
+							#print cuadro
+							if temp_x == current_x1:
+								templine += cursor2_state
+							else:
+								templine += cuadro
+							temp_x += 1
+							#print templine
+						print templine
+						data['mapa'][current_y1] = templine
 		#fsdfsdfsdfsdf
 		FPS = clock.get_fps()
 		if SHOW_FPS:
