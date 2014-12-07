@@ -78,7 +78,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 		
 		for event in pygame.event.get(): #Toma los eventos actuales del nivel
 			if event.type == pygame.QUIT:
-				return False, False, True #Nivel terminado, Volver al Menu, Salir del juego
+				return False, False, True, MUTE_MUSIC, prev_song #Nivel terminado, Volver al Menu, Salir del juego
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE: #Menu de pausa
 					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)

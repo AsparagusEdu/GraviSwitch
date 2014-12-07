@@ -72,7 +72,9 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 					return False, MUTE_MUSIC, prev_song
 					
 				elif event.key == pygame.K_p:
-					level_editor.Edit_Level(1, MUTE_MUSIC)
+					EXIT_GAME, MUTE_MUSIC = level_editor.Edit_Level(1, MUTE_MUSIC)
+					if not EXIT_GAME:
+						return True, MUTE_MUSIC, prev_song
 				elif event.key == pygame.K_m:
 					if not MUTE_MUSIC:
 						print 'MUSIC - OFF'
