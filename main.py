@@ -55,6 +55,7 @@ Music (from OpenGameArt.org)
 - Jumping Bat by Snabisch
 
 Testing
+- Isidora Quezada
 - "Zadaka"
 - Felipe "DiFroggy" Vasquez
 - Felipe Moscoso

@@ -290,7 +290,7 @@ class Player(pygame.sprite.Sprite):
 					self.init_x = hit.rect.x + 8
 					self.init_y = hit.rect.y
 					hit.on = True
-	def graviswitch_touch(self):
+	def graviswitch_touch(self, MUTE_MUSIC):
 		hit_list = pygame.sprite.spritecollide(self, self.gravis, False)
 		for hit in hit_list:
 			if type(hit) is GraviSwitch.GraviSwitch:
@@ -306,7 +306,8 @@ class Player(pygame.sprite.Sprite):
 					self.spd_x = 0
 					self.state = 'Stand'
 					self.image = self.stand_image
-					pygame.mixer.music.unpause()
+					if not MUTE_MUSIC:
+						pygame.mixer.music.unpause()
 					
 	def box_ride(self):
 		self.rect.y += 1
@@ -341,7 +342,7 @@ class Player(pygame.sprite.Sprite):
 				elif self.spd_x < 0:
 					self.rect.left = block.rect.right
 				
-	def update(self,grav, times):
+	def update(self,grav, times, MUTE_MUSIC):
 		self.death()
 		if self.dead:
 			return
@@ -349,7 +350,7 @@ class Player(pygame.sprite.Sprite):
 		self.checkpoint(times)
 		self.ani_update()
 		if not self.graviswitch:
-			self.graviswitch_touch()
+			self.graviswitch_touch(MUTE_MUSIC)
 		self.jumpbox()
 		
 		if self.crouch:

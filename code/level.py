@@ -178,7 +178,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 			for i in gravi_list.sprites():
 				gravity = i.update(gravity)
 		box_list.update(gravity, FPS/60)
-		player.update(gravity, FPS/60)
+		player.update(gravity, FPS/60, MUTE_MUSIC)
 		checkpoint_list.update()
 			
 		if player.dead:
