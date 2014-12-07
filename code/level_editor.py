@@ -4,6 +4,7 @@ from level import Level
 from load_level import Read_File
 from misc_functions import show_fps
 from confirmation import Confirmation
+import sound
 
 
 def Save_Level(map_data, archivo):
@@ -41,6 +42,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	box_image = pygame.image.load('images/tiles/box.png').convert()
 	player_image = pygame.image.load('images/Isaac/stand.png').convert()
 	player_image.set_colorkey(CHROMA_KEY)
+	jump_image = pygame.image.load('images/tiles/jumpbox.png').convert()
 	
 	editor_screen = pygame.Surface((1024,576))
 	editor_screen.fill((175,167,124))
@@ -48,7 +50,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	data = {} #info del mapa
 	data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
 	base.close()
-	no_place = []
+	no_place = [] #Espacios prohibidos para colocar bloques.
 	
 	current_y1 = 0
 	for linea in data['mapa']:
@@ -58,7 +60,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 				editor_screen.blit(wall_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'P':
 				editor_screen.blit(player_image, (current_x1*32,current_y1*32))
-				no_place.append((current_x1*32,current_y1*32))
+				no_place.append((current_x1,current_y1))
 			elif cuadro == 'B':
 				editor_screen.blit(box_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'J':
@@ -116,26 +118,31 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 		for event in pygame.event.get():
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_d:
+					sound.cursorleft.play()
 					if current_x1 == 31:
 						current_x1 = 0
 					else:
 						current_x1 += 1
 				elif event.key == pygame.K_a:
+					sound.cursorleft.play()
 					if current_x1 == 0:
 						current_x1 = 31
 					else:
 						current_x1 -= 1		
 				elif event.key == pygame.K_w:
+					sound.cursorleft.play()
 					if current_y1 == 0:
 						current_y1 = 17
 					else:
 						current_y1 -= 1
 				elif event.key == pygame.K_s:
+					sound.cursorleft.play()
 					if current_y1 == 17:
 						current_y1 = 0
 					else:
 						current_y1 += 1
 				elif event.key == pygame.K_RIGHT:
+					sound.cursorright.play()
 					if current_x2 == 1:
 						current_x2 = 0
 					elif current_x2 == 2:
@@ -143,6 +150,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					else:
 						current_x2 += 1
 				elif event.key == pygame.K_LEFT:
+					sound.cursorright.play()
 					if current_x2 == 0:
 						current_x2 = 1
 					elif current_x2 == 2:
@@ -150,6 +158,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					else:
 						current_x2 -= 1		
 				elif event.key == pygame.K_UP:
+					sound.cursorright.play()
 					if current_y2 == 0:
 						current_y2 = 6
 						current_x2 = 2
@@ -161,6 +170,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					else:
 						current_y2 -= 1
 				elif event.key == pygame.K_DOWN:
+					sound.cursorright.play()
 					if current_y2 == 3:
 						current_x2 = 2
 						current_y2 +=1
@@ -189,13 +199,15 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						print 'GUADDAD'
 					elif cursor2_state == 'B3' and Confirmation():
 						EXIT_MENU = True
+					elif (current_x1, current_y1) in no_place:
+						print 'NOOOOOOO'
 					else:
 						if cursor2_state == 'W':
 							paste_image = wall_image
 						elif cursor2_state == 'B':
 							paste_image = box_image
 						elif cursor2_state == 'J':
-							pass
+							paste_image = jump_image
 						elif cursor2_state == 'S':
 							pass
 						elif cursor2_state == 'D':
