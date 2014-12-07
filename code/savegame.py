@@ -13,7 +13,7 @@ def save_read(save_num):
 		linea = linea.split('=')
 		if linea[0] == 'lastlevel':
 			lastlevel = int(linea[1])
-			if lastlevel == 12:
+			if lastlevel == 13:
 				lastlevel = 'COMPLETADO'
 	
 	return lastlevel
@@ -28,7 +28,7 @@ def save_menu(MUTE_MUSIC):
 	
 	background = pygame.image.load('images/backgrounds/fondo_marble2.png').convert()
 	
-	music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+	music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
 	prev_song = 's3kfileselect'
 	pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
@@ -125,7 +125,7 @@ def save_menu(MUTE_MUSIC):
 					elif cursor_state == 3:
 						EXIT_GAME = True
 					if prev_song != 's3kfileselect':
-						music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
 						pygame.mixer.music.set_volume(1.0)
 						pygame.mixer.music.play(-1)
 						prev_song = 's3kfileselect'

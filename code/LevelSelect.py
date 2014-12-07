@@ -65,7 +65,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 					
 					if EXIT_GAME:
 						return True, MUTE_MUSIC, prev_song
-					music = pygame.mixer.music.load('sound/music/s3kfileselect.mp3')
+					music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
 					pygame.mixer.music.set_volume(1.0)
 					pygame.mixer.music.play(-1)
 					if MUTE_MUSIC:

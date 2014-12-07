@@ -1,5 +1,5 @@
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WWW          C      F        WWW
+WWW          C               WWW
 WWWWWWWWWWFFFWWWWWWWW        WWW
 WWW           W   B  W       WWW
 WWW      WWW       W  W      WWW
@@ -17,5 +17,5 @@ WWW      B      WWWWWWWWWWWWWWWW
 WWW   P  BB     WWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
-:Musica BondEsque.wav
+:Musica AdventureHO2.mp3
 :Pared marble.png

@@ -27,7 +27,7 @@ def Demo_TitleScreen():
 def Main_TitleScreen(MUTE_MUSIC): #Booleano
 	title = pygame.image.load('images/demo/titlescreen.png').convert()
 	
-	music = pygame.mixer.music.load('sound/music/cheetah.mp3')
+	music = pygame.mixer.music.load('sound/music/RHFgameselect.mp3')
 	pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()

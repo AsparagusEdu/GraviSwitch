@@ -49,7 +49,10 @@ External Resourcing
 - Matias Ruiz
 
 Music (from OpenGameArt.org)
-- BBandRage
+- Bond Esque by BBandRage
+- Adventure HO! by BBandRage
+- Rock You by Snabisch
+- Jumping Bat by Snabisch
 
 Testing
 - "Zadaka"

@@ -92,15 +92,17 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 						pygame.mixer.music.fadeout(500)
 						C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
 						pygame.display.flip()
-						player.graviswitch = False
-						graviswitch = False
+						if not lvl_info[5]:
+							player.graviswitch = False
+							graviswitch = False
+							for obj in gravi_list.sprites():
+								obj.reboot(gravity)
 						for obj in updatable_list.sprites():
 							gravity = 'S'
 							obj.reboot(gravity)
 						for obj in checkpoint_list.sprites():
 							obj.reboot()
-						for che in gravi_list.sprites():
-							che.reboot(gravity)
+						
 						player.rect.x, player.rect.y = pos_x, pos_y
 						player.init_x, player.init_y = pos_x, pos_y
 						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
@@ -202,16 +204,18 @@ def Level(nombre, MUTE_MUSIC, prev_song, evento_final = None): #Archivo sin exte
 				pygame.mixer.music.pause()
 			revive, G_OVER = DeadPlayer(NOFPS_SCREEN)
 			if revive:
-				player.graviswitch = False
-				graviswitch = False
+				if not lvl_info[5]:
+					player.graviswitch = False
+					graviswitch = False
+					for obj in gravi_list.sprites():
+						obj.reboot(gravity)
 				if not MUTE_MUSIC:
 					pygame.mixer.music.unpause()
 				
 				for obj in updatable_list.sprites():
 					gravity = 'S'
 					obj.reboot(gravity)
-				for obj in gravi_list.sprites():
-					obj.reboot(gravity)
+				
 			elif not G_OVER:
 				return False, False, False, MUTE_MUSIC, prev_song
 			else:

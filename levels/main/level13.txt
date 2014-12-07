@@ -17,5 +17,5 @@ WW                            WW
 WW                            WW
 WW                            WW
 :Fondo fondo_marble2.png
-:Musica BondEsque.wav
+:Musica AdventureHO2.mp3
 :Pared marble.png

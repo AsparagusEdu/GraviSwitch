@@ -28,13 +28,10 @@ def Read_File(nombre):
 			linea = linea.split(' ')
 			if linea[0] == ':Fondo':
 				fondo = linea[1]
-				print fondo
 			elif linea[0] == ':Musica':
 				musica = linea[1]
-				print musica
 			elif linea[0] == ':Pared':
 				pared = linea[1]
-				print pared
 			elif linea[0] == ':Graviswitch':
 				if linea[1] == 'False':
 					graviswitch = False

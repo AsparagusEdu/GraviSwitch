@@ -17,7 +17,7 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 :Fondo fondo_marble2.png
-:Musica BondEsque.wav
+:Musica AdventureHO2.mp3
 :Pared marble.png
 :Graviswitch False
 :G_Spin 1
