@@ -25,7 +25,7 @@ def Demo_TitleScreen():
 		clock.tick(10)
 
 def Main_TitleScreen(MUTE_MUSIC): #Booleano
-	title = pygame.image.load('images/demo/titlescreen.png').convert()
+	title = pygame.image.load('images/backgrounds/TitleScreen.png').convert()
 	
 	music = pygame.mixer.music.load('sound/music/RHFgameselect.mp3')
 	pygame.mixer.music.play(-1)

@@ -3,7 +3,6 @@ from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, 
 import sound
 from misc_functions import show_fps
 import level
-import level_editor
 
 def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla anterior para poder blitearse en ella.
 	back = pygame.image.load('images/backgrounds/fondo_marble2.png').convert()
@@ -58,7 +57,10 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 				return True, MUTE_MUSIC, prev_song
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN:
-					finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'main/', 'NivComp')
+					try:
+						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'main/', 'NivComp')
+					except:
+						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('base_lvl', MUTE_MUSIC, prev_song, 'custom/', 'NivComp')
 					
 					if EXIT_GAME:
 						return True, MUTE_MUSIC, prev_song
@@ -71,10 +73,6 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 				elif event.key == pygame.K_ESCAPE:
 					return False, MUTE_MUSIC, prev_song
 					
-				elif event.key == pygame.K_p:
-					EXIT_GAME, MUTE_MUSIC = level_editor.Edit_Level(1, MUTE_MUSIC)
-					if not EXIT_GAME:
-						return True, MUTE_MUSIC, prev_song
 				elif event.key == pygame.K_m:
 					if not MUTE_MUSIC:
 						print 'MUSIC - OFF'
@@ -95,3 +93,4 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 		
 		clock.tick(MAX_FPS)
 	return True, MUTE_MUSIC, prev_song
+

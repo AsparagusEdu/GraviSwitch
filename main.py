@@ -39,8 +39,10 @@ Character Design
 - "Zadaka"
 
 Graphics
-- Matias Ruiz
 - Eduardo Quezada
+- Matias Ruiz
+- Leonora Quezada
+- Carlos Barahora
 
 External Resourcing
 - Matias Ruiz

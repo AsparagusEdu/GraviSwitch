@@ -10,6 +10,8 @@ graviswitch = pygame.mixer.Sound('sound/effects/graviswitch2.wav')
 openmenu = pygame.mixer.Sound('sound/effects/openmenu.wav')
 jump = pygame.mixer.Sound('sound/effects/jump.wav')
 bounce = pygame.mixer.Sound('sound/effects/bounce.wav')
+no = pygame.mixer.Sound('sound/effects/nonono.wav')
+lvlsaved = pygame.mixer.Sound('sound/effects/levelsaved.wav')
 
 itemget = pygame.mixer.Sound('sound/jingles/itemget.wav')
 

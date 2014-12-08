@@ -4,6 +4,7 @@ from confirmation import Confirmation
 import sound
 from misc_functions import show_fps
 from Adventure import Adventure
+from CustomSelect import Custom_Select
 
 def save_read(save_num):
 	archivo = open('saves/save' + str(save_num) + '.txt')
@@ -31,18 +32,19 @@ def save_menu(MUTE_MUSIC):
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()
 	
-	menu_image = pygame.image.load('images/gui/file_menu.png').convert()
+	menu_image = pygame.image.load('images/gui/file_menu2.png').convert()
 	menu_rect = menu_image.get_rect()
 	menu_pos = (SCREEN_WIDTH/2 - menu_rect.w/2 , SCREEN_HEIGHT/2 - menu_rect.h/2)
-	menu_list = [(220,136), (424,136), (626,136), (388,383)]
+	menu_list = [(220,136), (424,136), (626,136), (222,388), (548,388)]
 	
 	cursor_image1 = pygame.image.load('images/gui/cursor/file_cursor1.png').convert()
 	cursor_image1.set_colorkey(CHROMA_KEY)
-	cursor_rect1 = cursor_image1.get_rect()
 	
 	cursor_image2 = pygame.image.load('images/gui/cursor/file_cursor2.png').convert()
 	cursor_image2.set_colorkey(CHROMA_KEY)
-	cursor_rect2 = cursor_image2.get_rect()
+	
+	cursor_image3 = pygame.image.load('images/gui/cursor/file_cursor3.png').convert()
+	cursor_image3.set_colorkey(CHROMA_KEY)
 	
 	cursor_image = cursor_image1
 	
@@ -110,7 +112,7 @@ def save_menu(MUTE_MUSIC):
 							text2 = 'Nivel ' + str(int(save2) +1)
 						text2_i = fonty.render(text2, False, (255,255,255))
 						text2_r = text2_i.get_rect()
-					elif cursor_state == 2:
+					elif cursor_state == 2: #Archivo 3
 						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(3, MUTE_MUSIC, prev_song, save3)
 						save3 = save_read(3)
 						if save3 == 'COMPLETADO':
@@ -119,8 +121,10 @@ def save_menu(MUTE_MUSIC):
 							text3 = 'Nivel ' + str(int(save3) +1)
 						text3_i = fonty.render(text3, False, (255,255,255))
 						text3_r = text3_i.get_rect()
-					elif cursor_state == 3:
+					elif cursor_state == 3: #Volver
 						EXIT_GAME = True
+					elif cursor_state == 4: #Editor de niveles
+						EXIT_GAME, MUTE_MUSIC, prev_song = Custom_Select(MUTE_MUSIC, prev_song)
 					if prev_song != 's3kfileselect':
 						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
 						pygame.mixer.music.set_volume(1.0)
@@ -136,6 +140,12 @@ def save_menu(MUTE_MUSIC):
 						cursor_state = 2
 					elif cursor_state == 2:
 						cursor_state = 0
+					elif cursor_state == 3:
+						cursor_state = 4
+						cursor_image = cursor_image2
+					elif cursor_state == 4:
+						cursor_state = 3
+						cursor_image = cursor_image3
 				elif event.key == pygame.K_LEFT:
 					sound.cursor.play()
 					if cursor_state == 0:
@@ -144,14 +154,29 @@ def save_menu(MUTE_MUSIC):
 						cursor_state = 0
 					elif cursor_state == 2:
 						cursor_state = 1
+					elif cursor_state == 3:
+						cursor_state = 4
+						cursor_image = cursor_image2
+					elif cursor_state == 4:
+						cursor_state = 3
+						cursor_image = cursor_image3
 				elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
 					sound.cursor.play()
-					if cursor_state == 3:
-						cursor_state = 1
+					if cursor_state == 0:
+						cursor_state = 3
+						cursor_image = cursor_image3
+					elif cursor_state == 1 or cursor_state == 2:
+						cursor_state = 4
+						cursor_image = cursor_image2
+					elif cursor_state == 3:
+						cursor_state = 0
+						cursor_image = cursor_image1
+					elif cursor_state == 4:
+						cursor_state = 2
 						cursor_image = cursor_image1
 					else:
 						cursor_state = 3
-						cursor_image = cursor_image2
+						cursor_image = cursor_image3
 						
 				elif event.key == pygame.K_m:
 					if not MUTE_MUSIC:

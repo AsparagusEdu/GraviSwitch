@@ -6,7 +6,6 @@ from misc_functions import show_fps
 from confirmation import Confirmation
 import sound
 
-
 def Save_Level(map_data, archivo):
 	for linea in map_data['mapa']:
 		archivo.write(linea)
@@ -19,11 +18,17 @@ def Test_Level(map_data, archivo, MUTE_MUSIC):
 	Save_Level(map_data, archivo)
 	archivo.close()
 	#print map_data['mapa'][1]
-	return Level('temp', MUTE_MUSIC, 's3kfileselect', 'custom/')
+	return Level('temp', MUTE_MUSIC, 's3kfileselect', 'custom/', 'NivComp')
 
 def Edit_Level(lvl_num, MUTE_MUSIC):
-	lvl_name = 'custom' + str(lvl_num)
-	base = open('levels/custom/base_lvl.txt', 'r')
+	
+	try:
+		lvl_name = 'custom' + str(lvl_num)
+		base = open('levels/custom/' + lvl_name +'.txt', 'r')
+		base.close()
+		
+	except:
+		lvl_name = 'base_lvl'
 	templvl = open('levels/custom/temp.txt', 'w')
 	EXIT_MENU = False
 	EXIT_GAME = False
@@ -60,8 +65,11 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	editor_screen.fill((175,167,124))
 	
 	data = {} #info del mapa
-	data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
-	base.close()
+	if lvl_name == 'base_lvl':
+		data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
+	else:
+		data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/'+ lvl_name + '.txt')
+	
 	no_place = [] #Espacios prohibidos para colocar bloques.
 	
 	current_y1 = 0
@@ -82,11 +90,11 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 			elif cuadro == 'D':
 				editor_screen.blit(door_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'F':
-				pass
+				editor_screen.blit(filter_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'C':
-				pass
+				editor_screen.blit(checkpoint_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'G':
-				pass
+				editor_screen.blit(graviswitch_image, (current_x1*32,current_y1*32))
 			current_x1 += 1
 		current_y1 +=1
 
@@ -217,16 +225,18 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							pygame.mixer.music.pause()
 					elif cursor2_state == 'B2':
 						if finished_level:
-							archivo = open('levels/custom/' + lvl_name + '.txt', 'w')
+							archivo = open('levels/custom/custom' + str(lvl_num) + '.txt', 'w')
 							for linea in data['mapa']:
 								archivo.write(linea + '\n')
 							archivo.write(':Fondo ' + data['fondo'] + '\n')
 							archivo.write(':Musica ' + data['musica'] + '\n')
 							archivo.write(':Pared ' + data['pared'] + '\n')
 							archivo.close()
-							print 'GUADADO'
+							sound.lvlsaved.play()
+							#print 'GUADADO'
 						else:
-							print 'NOOOOO'
+							sound.no.play()
+							#print 'NOOOOO'
 					elif cursor2_state == 'B3' and Confirmation():
 						EXIT_MENU = True
 					elif (current_x1, current_y1) in no_place:
