@@ -43,6 +43,17 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	player_image = pygame.image.load('images/Isaac/stand.png').convert()
 	player_image.set_colorkey(CHROMA_KEY)
 	jump_image = pygame.image.load('images/tiles/jumpbox.png').convert()
+	door_image = pygame.image.load('images/tiles/door.png').convert()
+	door_image.set_colorkey(CHROMA_KEY)
+	spike_image = pygame.image.load('images/tiles/spike.png').convert()
+	spike_image.set_colorkey(CHROMA_KEY)
+	filter_image = pygame.image.load('images/tiles/boxfilter.png').convert()
+	filter_image.set_colorkey(CHROMA_KEY)
+	gravi_image = pygame.image.load('images/tiles/gravi_base.png').convert()
+	gravi_image.set_colorkey(CHROMA_KEY)
+	checkpoint_image = pygame.image.load('images/tiles/checkpoint_base.png').convert()
+	checkpoint_image.set_colorkey(CHROMA_KEY)
+	
 	
 	editor_screen = pygame.Surface((1024,576))
 	editor_screen.fill((175,167,124))
@@ -66,14 +77,14 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 			elif cuadro == 'J':
 				editor_screen.blit(jump_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'S':
-				pass
+				editor_screen.blit(spike_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'D':
-				pass
+				editor_screen.blit(door_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'F':
 				pass
 			elif cuadro == 'C':
 				pass
-			elif cuadro == 'G' and len(gravi_list) == 0:
+			elif cuadro == 'G':
 				pass
 			current_x1 += 1
 		current_y1 +=1
@@ -184,7 +195,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 				elif event.key == pygame.K_RETURN:
 					if cursor2_state == 'B1':
 						
-						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
+						finished_level, null, null, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
 						if EXIT_MENU:
 							return EXIT_GAME, MUTE_MUSIC
 						templvl = open('levels/custom/temp.txt', 'w')
@@ -198,7 +209,16 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							pygame.mixer.music.pause()
 					elif cursor2_state == 'B2':
 						if finished_level:
-							print 'GUADDAD'
+							archivo = open('levels/custom/' + lvl_name + '.txt', 'w')
+							for linea in data['mapa']:
+								archivo.write(linea + '\n')
+							archivo.write(':Fondo ' + data['fondo'] + '\n')
+							archivo.write(':Musica ' + data['musica'] + '\n')
+							archivo.write(':Pared ' + data['pared'] + '\n')
+							archivo.close()
+							print 'GUADADO'
+						else:
+							print 'NOOOOO'
 					elif cursor2_state == 'B3' and Confirmation():
 						EXIT_MENU = True
 					elif (current_x1, current_y1) in no_place:
@@ -211,32 +231,27 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						elif cursor2_state == 'J':
 							paste_image = jump_image
 						elif cursor2_state == 'S':
-							pass
+							paste_image = spike_image
 						elif cursor2_state == 'D':
-							pass
+							paste_image = door_image
 						elif cursor2_state == 'F':
-							pass
+							paste_image = filter_image
 						elif cursor2_state == 'C':
-							pass
+							paste_image = checkpoint_image
 						elif cursor2_state == 'G':
-							pass
+							paste_image = gravi_image
 						editor_screen.blit(paste_image, (current_x1*32,current_y1*32))
 						
-						#data['mapa'][current_x1][current_y1] = cursor2_state
 						templine = ''
 						temp_x = 0
-						#print current_x1
 						linea = data['mapa'][current_x1]
-						#print linea
 						for cuadro in data['mapa'][current_y1]:
-							#print cuadro
 							if temp_x == current_x1:
 								templine += cursor2_state
 							else:
 								templine += cuadro
 							temp_x += 1
-							#print templine
-						print templine
+						
 						data['mapa'][current_y1] = templine
 		#fsdfsdfsdfsdf
 		FPS = clock.get_fps()
