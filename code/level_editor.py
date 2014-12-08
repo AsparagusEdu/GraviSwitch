@@ -254,7 +254,6 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						
 						templine = ''
 						temp_x = 0
-						linea = data['mapa'][current_x1]
 						for cuadro in data['mapa'][current_y1]:
 							if temp_x == current_x1:
 								templine += cursor2_state
