@@ -45,23 +45,26 @@ Graphics
 External Resourcing
 - Matias Ruiz
 
-Music (from OpenGameArt.org)
+Music (OpenGameArt.org)
 - Bond Esque by BBandRage
 - Adventure HO! by BBandRage
 - Rock You by Snabisch
 - Jumping Bat by Snabisch
+
+Sound Effect rips (www.sounds-resource.com)
+- Mr Lange
 
 Testing
 - Isidora Quezada
 - "Zadaka"
 - Felipe "DiFroggy" Vasquez
 - Felipe Moscoso
-- Yerko
+- Yerko *Ingrese Apellido* :)
 - Francisco Amaro
 - Daniel Nahum
 - Cristian Arancibia
 - Pablo Saez
-- Gabriel...
+- Gabriel Como Se Llame :P
 
 
 '''

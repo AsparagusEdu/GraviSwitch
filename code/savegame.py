@@ -13,7 +13,7 @@ def save_read(save_num):
 		linea = linea.split('=')
 		if linea[0] == 'lastlevel':
 			lastlevel = int(linea[1])
-			if lastlevel == 14:
+			if lastlevel == 17:
 				lastlevel = 'COMPLETADO'
 	
 	return lastlevel

@@ -244,6 +244,7 @@ class Player(pygame.sprite.Sprite):
 		if len(hit_list) > 0:
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
+					sound.bounce.play()
 					self.spd_y = 6
 					self.air = True
 					self.jump_ani_frame = 24
@@ -253,6 +254,7 @@ class Player(pygame.sprite.Sprite):
 		if len(hit_list) > 0:
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
+					sound.bounce.play()
 					self.spd_y = -6
 					self.air = True
 					self.jump_ani_frame = 0
@@ -262,6 +264,7 @@ class Player(pygame.sprite.Sprite):
 		if len(hit_list) > 0:
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
+					sound.bounce.play()
 					self.bounce = True
 					self.spd_x = 4
 					self.air = True
@@ -272,6 +275,7 @@ class Player(pygame.sprite.Sprite):
 		if len(hit_list) > 0:
 			for hit in hit_list:
 				if type(hit) is Box.JumpBox:
+					sound.bounce.play()
 					self.bounce = True
 					self.spd_x = -4
 					self.air = True

@@ -9,6 +9,7 @@ cursorright = pygame.mixer.Sound('sound/effects/cursormoveright.wav')
 graviswitch = pygame.mixer.Sound('sound/effects/graviswitch2.wav')
 openmenu = pygame.mixer.Sound('sound/effects/openmenu.wav')
 jump = pygame.mixer.Sound('sound/effects/jump.wav')
+bounce = pygame.mixer.Sound('sound/effects/bounce.wav')
 
 itemget = pygame.mixer.Sound('sound/jingles/itemget.wav')
 
