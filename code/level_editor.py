@@ -53,7 +53,8 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	gravi_image.set_colorkey(CHROMA_KEY)
 	checkpoint_image = pygame.image.load('images/tiles/checkpoint_base.png').convert()
 	checkpoint_image.set_colorkey(CHROMA_KEY)
-	
+	eraser_image = pygame.image.load('images/tiles/blank.png').convert()
+	eraser_image.set_colorkey(CHROMA_KEY)
 	
 	editor_screen = pygame.Surface((1024,576))
 	editor_screen.fill((175,167,124))
@@ -98,9 +99,9 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	cursor_image1.set_colorkey(CHROMA_KEY)
 	cursor_rect1 = cursor_image1.get_rect()
 	
-	x2_pos = [1035, 1099,1037]
-	y2_pos = [69,133,197, 255,413,466,519]
-	states = [['W','B','F','G','B1','B2','B3'],['D','J','S','C','B1','B2','B3'],['W','B','F','G','B1','B2','B3']]
+	x2_pos = [1035, 1099, 1068, 1037]
+	y2_pos = [69,133,197, 255, 312, 413,466,519]
+	states = [['W','B','F','G',' ','B1','B2','B3'],['D','J','S','C','B1','B2','B3'],['W','B','F','G',' ','B1','B2','B3'], ['W','B','F','G',' ','B1','B2','B3']]
 	
 	current_x2 = 0
 	current_y2 = 0
@@ -156,7 +157,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					sound.cursorright.play()
 					if current_x2 == 1:
 						current_x2 = 0
-					elif current_x2 == 2:
+					elif current_x2 == 3 or current_x2 == 2:
 						pass
 					else:
 						current_x2 += 1
@@ -164,18 +165,22 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					sound.cursorright.play()
 					if current_x2 == 0:
 						current_x2 = 1
-					elif current_x2 == 2:
+					elif current_x2 == 3 or current_x2 == 2:
 						pass
 					else:
 						current_x2 -= 1		
 				elif event.key == pygame.K_UP:
 					sound.cursorright.play()
 					if current_y2 == 0:
-						current_y2 = 6
-						current_x2 = 2
+						current_y2 = 7
+						current_x2 = 3
 						cursor_image2 = cursor_image2b
 					elif current_y2 == 4:
 						current_x2 = 0
+						#cursor_image2 = cursor_image2a
+						current_y2 -=1
+					elif current_y2 == 5:
+						current_x2 = 2
 						cursor_image2 = cursor_image2a
 						current_y2 -=1
 					else:
@@ -185,8 +190,11 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					if current_y2 == 3:
 						current_x2 = 2
 						current_y2 +=1
+					elif current_y2 == 4:
+						current_x2 = 3
+						current_y2 +=1
 						cursor_image2 = cursor_image2b
-					elif current_y2 == 6:
+					elif current_y2 == 7:
 						current_y2 = 0
 						current_x2 = 0
 						cursor_image2 = cursor_image2a
@@ -240,6 +248,8 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							paste_image = checkpoint_image
 						elif cursor2_state == 'G':
 							paste_image = gravi_image
+						elif cursor2_state == ' ':
+							paste_image = eraser_image
 						editor_screen.blit(paste_image, (current_x1*32,current_y1*32))
 						
 						templine = ''
