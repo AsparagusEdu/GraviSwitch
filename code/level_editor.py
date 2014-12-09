@@ -69,9 +69,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 		data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/base_lvl.txt')
 	else:
 		data['mapa'], data['fondo'], data['musica'], data['pared'], data['graviswitch'], data['g_spin'], data['g_spin_spd'] = Read_File('custom/'+ lvl_name + '.txt')
-	
-	no_place = [] #Espacios prohibidos para colocar bloques.
-	
+		
 	current_y1 = 0
 	for linea in data['mapa']:
 		current_x1 = 0
@@ -80,7 +78,6 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 				editor_screen.blit(wall_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'P':
 				editor_screen.blit(player_image, (current_x1*32,current_y1*32))
-				no_place.append((current_x1,current_y1))
 			elif cuadro == 'B':
 				editor_screen.blit(box_image, (current_x1*32,current_y1*32))
 			elif cuadro == 'J':
@@ -107,9 +104,9 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	cursor_image1.set_colorkey(CHROMA_KEY)
 	cursor_rect1 = cursor_image1.get_rect()
 	
-	x2_pos = [1035, 1099, 1068, 1037]
+	x2_pos = [1035, 1099, 1037]
 	y2_pos = [69,133,197, 255, 312, 413,466,519]
-	states = [['W','B','F','G',' ','B1','B2','B3'],['D','J','S','C','B1','B2','B3'],['W','B','F','G',' ','B1','B2','B3'], ['W','B','F','G',' ','B1','B2','B3']]
+	states = [['W','B','F','G','P','B1','B2','B3'],['D','J','S','C', ' ','B1','B2','B3'], ['W','B','F','G',' ','B1','B2','B3']]
 	
 	current_x2 = 0
 	current_y2 = 0
@@ -120,6 +117,8 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 	cursor_image2 = cursor_image2a
 	cursor_rect2 = cursor_image2.get_rect()
 	cursor2_state = 'W'
+	
+	players_count = 1
 	
 	clock = pygame.time.Clock()
 	
@@ -181,25 +180,19 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 					sound.cursorright.play()
 					if current_y2 == 0:
 						current_y2 = 7
-						current_x2 = 3
-						cursor_image2 = cursor_image2b
-					elif current_y2 == 4:
-						current_x2 = 0
-						#cursor_image2 = cursor_image2a
-						current_y2 -=1
-					elif current_y2 == 5:
 						current_x2 = 2
+						cursor_image2 = cursor_image2b
+					elif current_y2 == 5:
+						current_x2 = 0
 						cursor_image2 = cursor_image2a
 						current_y2 -=1
 					else:
 						current_y2 -= 1
 				elif event.key == pygame.K_DOWN:
 					sound.cursorright.play()
-					if current_y2 == 3:
+					
+					if current_y2 == 4:
 						current_x2 = 2
-						current_y2 +=1
-					elif current_y2 == 4:
-						current_x2 = 3
 						current_y2 +=1
 						cursor_image2 = cursor_image2b
 					elif current_y2 == 7:
@@ -210,19 +203,21 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 						current_y2 += 1
 				elif event.key == pygame.K_RETURN:
 					if cursor2_state == 'B1':
-						
-						finished_level, null, null, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
-						if EXIT_MENU:
-							return EXIT_GAME, MUTE_MUSIC
-						templvl = open('levels/custom/temp.txt', 'w')
-						SCREEN.blit(fondo,(0,0))
-						pygame.display.flip()
-						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
-						prev_song = 's3kfileselect'
-						pygame.mixer.music.set_volume(1.0)
-						pygame.mixer.music.play(-1)
-						if MUTE_MUSIC:
-							pygame.mixer.music.pause()
+						if players_count == 1:
+							finished_level, null, null, MUTE_MUSIC, prev_song = Test_Level(data, templvl, MUTE_MUSIC)
+							if EXIT_MENU:
+								return EXIT_GAME, MUTE_MUSIC
+							templvl = open('levels/custom/temp.txt', 'w')
+							SCREEN.blit(fondo,(0,0))
+							pygame.display.flip()
+							music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
+							prev_song = 's3kfileselect'
+							pygame.mixer.music.set_volume(1.0)
+							pygame.mixer.music.play(-1)
+							if MUTE_MUSIC:
+								pygame.mixer.music.pause()
+						else:
+							sound.no.play()
 					elif cursor2_state == 'B2':
 						if finished_level:
 							archivo = open('levels/custom/custom' + str(lvl_num) + '.txt', 'w')
@@ -239,8 +234,8 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							#print 'NOOOOO'
 					elif cursor2_state == 'B3' and Confirmation():
 						EXIT_MENU = True
-					elif (current_x1, current_y1) in no_place:
-						print 'NOOOOOOO'
+					#elif players_count == 1 and data['mapa'][current_y1][current_x1] == 'P':
+						#sound.no.play()
 					else:
 						if cursor2_state == 'W':
 							paste_image = wall_image
@@ -258,8 +253,14 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							paste_image = checkpoint_image
 						elif cursor2_state == 'G':
 							paste_image = gravi_image
+						elif cursor2_state == 'P':
+							paste_image = player_image
+							editor_screen.blit(eraser_image, (current_x1*32,current_y1*32))
+							players_count += 1
 						elif cursor2_state == ' ':
 							paste_image = eraser_image
+							if data['mapa'][current_y1][current_x1] == 'P':
+								players_count -=1
 						editor_screen.blit(paste_image, (current_x1*32,current_y1*32))
 						
 						templine = ''
