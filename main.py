@@ -58,6 +58,7 @@ Sound Effect rips (www.sounds-resource.com)
 
 Testing
 - Isidora Quezada
+- Gabriela Quezada
 - "Zadaka"
 - Felipe "DiFroggy" Vasquez
 - Felipe Moscoso
@@ -66,7 +67,6 @@ Testing
 - Daniel Nahum
 - Cristian Arancibia
 - Pablo Saez
-- Gabriel Como Se Llame :P
-
+- Gabriel Gonzales
 
 '''
