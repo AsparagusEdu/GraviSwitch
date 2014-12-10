@@ -1,7 +1,7 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
-from misc_functions import show_fps
+from misc_functions import show_fps, set_joysticks
 
 def Confirmation(prev_screen = 0):
 		
@@ -15,10 +15,15 @@ def Confirmation(prev_screen = 0):
 	cursor_rect = cursor_image.get_rect()
 	
 	cursor_state = 1
+	
+	joysticks = set_joysticks()
+	for joy in joysticks:
+		joy.init()
 
 	clock = pygame.time.Clock()
 	
 	pause = True
+	axis = False
 	
 	while pause:
 		FPS = clock.get_fps()
@@ -48,6 +53,24 @@ def Confirmation(prev_screen = 0):
 				elif event.key == pygame.K_LEFT:
 					cursor_state -=1
 					sound.cursor.play()
-		
+			elif event.type == pygame.JOYBUTTONDOWN:
+				if event.button == 2:
+					if cursor_state == 0:
+						return True
+					elif cursor_state == 1:
+						return False
+			elif event.type == pygame.JOYAXISMOTION:
+				if event.axis == 0:
+					if joysticks[0].get_axis(0) <= -0.7 and not axis:
+						axis = True
+						cursor_state +=1
+						sound.cursor.play()
+					elif joysticks[0].get_axis(0) >= 0.7 and not axis:
+						axis = True
+						cursor_state -=1
+						sound.cursor.play()
+					else:
+						axis = False
+			
 		clock.tick(MAX_FPS)
 		

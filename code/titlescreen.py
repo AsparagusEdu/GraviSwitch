@@ -50,6 +50,8 @@ def Main_TitleScreen(MUTE_MUSIC): #Booleano
 				elif event.key == pygame.K_RETURN:
 					return False, False
 			elif event.type == pygame.JOYBUTTONDOWN:
+				if event.button == 3:
+					return True, True
 				return False, False
 			
 		SCREEN.blit(title, (0,0))

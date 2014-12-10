@@ -1,7 +1,7 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
-from misc_functions import show_fps
+from misc_functions import show_fps, set_joysticks
 import level
 
 def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla anterior para poder blitearse en ella.
@@ -17,6 +17,10 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 	
 	cursor_state = 1
 	demo = 1
+	
+	joysticks = set_joysticks()
+	for joy in joysticks:
+		joy.init()
 
 	clock = pygame.time.Clock()
 	
@@ -29,6 +33,7 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 		
 	EXIT_MENU = False
 	EXIT_GAME = False
+	axis = False
 	
 	while not EXIT_MENU:
 		
@@ -90,6 +95,35 @@ def Level_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla a
 				elif event.key == pygame.K_LEFT:
 					cursor_state -=1
 					sound.cursor.play()
+			elif event.type == pygame.JOYBUTTONDOWN:
+				if event.button == 2:
+					try:
+						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('level' + str(cursor_state), MUTE_MUSIC, prev_song, 'main/', 'NivComp')
+					except:
+						finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('base_lvl', MUTE_MUSIC, prev_song, 'custom/', 'NivComp')
+					
+					if EXIT_GAME:
+						return True, MUTE_MUSIC, prev_song
+					music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
+					pygame.mixer.music.set_volume(1.0)
+					pygame.mixer.music.play(-1)
+					if MUTE_MUSIC:
+						pygame.mixer.music.pause()
+					prev_song = 's3kfileselect'
+				elif event.button == 3:
+					return False, MUTE_MUSIC, prev_song
+			elif event.type == pygame.JOYAXISMOTION:
+				if event.axis == 0:
+					if joysticks[0].get_axis(0) <= -0.7 and not axis:
+						axis = True
+						cursor_state -=1
+						sound.cursor.play()
+					elif joysticks[0].get_axis(0) >= 0.7 and not axis:
+						axis = True
+						cursor_state +=1
+						sound.cursor.play()
+					else:
+						axis = False
 		
 		clock.tick(MAX_FPS)
 	return True, MUTE_MUSIC, prev_song

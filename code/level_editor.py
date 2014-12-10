@@ -273,6 +273,7 @@ def Edit_Level(lvl_num, MUTE_MUSIC):
 							temp_x += 1
 						
 						data['mapa'][current_y1] = templine
+			#if event.type == pygame.
 		#fsdfsdfsdfsdf
 		FPS = clock.get_fps()
 		if SHOW_FPS:

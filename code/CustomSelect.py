@@ -1,7 +1,7 @@
 import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 import sound
-from misc_functions import show_fps
+from misc_functions import show_fps, set_joysticks
 import level
 import level_editor
 
@@ -40,6 +40,7 @@ def Custom_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla 
 		
 	EXIT_MENU = False
 	EXIT_GAME = False
+	axis = False
 	
 	while not EXIT_MENU:
 		
@@ -52,6 +53,10 @@ def Custom_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla 
 		if SHOW_FPS:
 			#SCREEN.blit(prev_screen, (0,0))
 			show_fps(FPS)
+			
+		joysticks = set_joysticks()
+		for joy in joysticks:
+			joy.init()	
 			
 		SCREEN.blit(back, (0,0))
 		back2_rect.center = back_rect.center
@@ -114,6 +119,51 @@ def Custom_Select(MUTE_MUSIC, prev_song, prev_screen = 0): #Utiliza la pantalla 
 					else:
 						cursor_state = 0
 						cursor_image = cursor_image1
-		
+			elif event.type == pygame.JOYBUTTONDOWN:
+				if event.button == 2:
+					if cursor_state == 0:
+						try:
+							finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('custom' + str(lvl_state), MUTE_MUSIC, prev_song, 'custom/', 'NivComp')
+						except:
+							finished_level, EXIT_MENU, EXIT_GAME, MUTE_MUSIC, prev_song = level.Level('base_lvl', MUTE_MUSIC, prev_song, 'custom/', 'NivComp')
+						
+						if EXIT_GAME:
+							return True, MUTE_MUSIC, prev_song
+						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
+						pygame.mixer.music.set_volume(1.0)
+						pygame.mixer.music.play(-1)
+						if MUTE_MUSIC:
+							pygame.mixer.music.pause()
+						prev_song = 's3kfileselect'
+					else:
+						EXIT_GAME, MUTE_MUSIC = level_editor.Edit_Level(lvl_state, MUTE_MUSIC)
+				elif event.button == 3:
+					return False, MUTE_MUSIC, prev_song
+			elif event.type == pygame.JOYAXISMOTION:
+				if event.axis == 1:
+					if (joysticks[0].get_axis(1) >= 0.7 and not axis) or (joysticks[0].get_axis(1) <= -0.7 and not axis):
+						axis = True
+						sound.cursor.play
+						if cursor_state == 0:
+							cursor_state = 1
+							cursor_image = cursor_image2
+						else:
+							cursor_state = 0
+							cursor_image = cursor_image1
+					else:
+						axis = False
+						
+				elif event.axis == 0 and cursor_state == 0:
+					if joysticks[0].get_axis(0) >= 0.7 and not axis:
+						axis = True
+						lvl_state +=1
+						sound.cursor.play()
+					elif joysticks[0].get_axis(0) <= -0.7 and not axis:
+						axis = True
+						lvl_state -=1
+						sound.cursor.play()
+					else:
+						axis = False
+			
 		clock.tick(MAX_FPS)
 	return True, MUTE_MUSIC, prev_song

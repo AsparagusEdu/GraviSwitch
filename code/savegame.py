@@ -287,5 +287,7 @@ def save_menu(MUTE_MUSIC):
 					else:
 						cursor_state = 3
 						cursor_image = cursor_image3
+				else:
+					axis = False
 		clock.tick(MAX_FPS)
 	return True

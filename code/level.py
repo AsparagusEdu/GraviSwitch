@@ -184,7 +184,7 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
 				
-				elif event.button == 9:
+				elif event.button == 9 or event.button == 0:
 					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)
 					player.spd_x = 0
 					if not player.air:
@@ -329,8 +329,9 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 						clock = pygame.time.Clock() #Reloj
 						if event.type == pygame.QUIT:
 							return True, False, True, MUTE_MUSIC, prev_song
-						if event.type == pygame.KEYDOWN:
+						elif event.type == pygame.KEYDOWN or event.type == pygame.JOYBUTTONDOWN:
 							return True, False, False, MUTE_MUSIC, prev_song
+							
 						clock.tick(60)
 			else:
 				return True, True, False, MUTE_MUSIC, prev_song
