@@ -30,7 +30,8 @@ def set_joysticks():
 	joysticks = []
 	for i in range(0, pygame.joystick.get_count()):
 		joysticks.append(pygame.joystick.Joystick(i))
-		joysticks[-1].init()
-	return joysticks
+		#joysticks[-1].init()
+		#print 'GREAT'
+	return joysticks	
 	
 	

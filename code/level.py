@@ -3,7 +3,7 @@ import constants as C
 from load_level import load_level
 import sound
 from player import *
-from misc_functions import static_boxes, show_fps
+from misc_functions import static_boxes, show_fps, set_joysticks
 from PauseScreen import Pause_Screen
 from dead_player import DeadPlayer
 
@@ -12,6 +12,9 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 	C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0)) #Pantalla de carga
 	pygame.display.flip()
 	
+	joysticks = set_joysticks()
+	for joy in joysticks:
+		joy.init()
 	lvl_info, lvl_lists = load_level(lvl_source + nombre + '.txt') #Cargando nivel
 	
 	p_id = lvl_info[0] #Cargando datos del nivel.
@@ -141,7 +144,6 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 				
 				if graviswitch:
 					if event.key == pygame.K_w: #Controlando la gravedad
-						switch = True
 						if static_boxes(box_list):
 							sound.graviswitch.play()
 							gravity = 'N'
@@ -171,7 +173,103 @@ def Level(nombre, MUTE_MUSIC, prev_song, lvl_source, evento_final = None): #Arch
 					player.image = player.stand_image
 					if player.direction == 'Left':
 						player.image = pygame.transform.flip(player.image, True, False)
-
+			elif event.type == pygame.JOYBUTTONDOWN:
+				
+				if (event.button == 2 or event.button == 6 or event.button == 5) and player.touch_S(0) and not player.crouch:
+					sound.jump.play() #Salto en el suelo y sin agacharse
+					player.jump()
+				elif (event.button == 4 or event.button == 7 or event.button == 3) and player.touch_S(0) and player.spd_x == 0:
+					player.crouch = True #Agacharse en el suelo y quieto
+					player.image = player.crouch_image
+					if player.direction == 'Left':
+						player.image = pygame.transform.flip(player.image, True, False)
+				
+				elif event.button == 9:
+					pause, MUTE_MUSIC = Pause_Screen(NOFPS_SCREEN, MUTE_MUSIC)
+					player.spd_x = 0
+					if not player.air:
+						player.state = 'Stand'
+						player.image = player.stand_image
+					if pause == 'Continuar':
+						pass
+					elif pause == 'Reiniciar': #Reinicia todos los valores anteriores
+						pygame.mixer.music.fadeout(500)
+						C.SCREEN.blit(pygame.image.load('images/gui/loading.png'),(0,0))
+						pygame.display.flip()
+						if not lvl_info[5]:
+							player.graviswitch = False
+							graviswitch = False
+							for obj in gravi_list.sprites():
+								obj.reboot(gravity)
+						for obj in updatable_list.sprites():
+							gravity = 'S'
+							obj.reboot(gravity)
+						for obj in checkpoint_list.sprites():
+							obj.reboot()
+						
+						player.rect.x, player.rect.y = pos_x, pos_y
+						player.init_x, player.init_y = pos_x, pos_y
+						pygame.time.wait(1000) #Espera para simular la carga y semipenalizar al jugador por reiniciar.
+						pygame.mixer.music.play(-1)
+						pygame.mixer.music.pause()
+						if not MUTE_MUSIC:
+							
+							pygame.mixer.music.unpause()
+					elif pause == 'Menu':
+						return False, False, False, MUTE_MUSIC, prev_song
+					elif pause == 'Salir':
+						return False, False, True, MUTE_MUSIC, prev_song
+			elif event.type == pygame.JOYBUTTONUP:
+				if (event.button == 2 or event.button == 4 or event.button == 7 or event.button == 3) and player.crouch:
+					player.crouch = False
+					player.image = player.stand_image
+					if player.direction == 'Left':
+						player.image = pygame.transform.flip(player.image, True, False)
+			elif event.type == pygame.JOYAXISMOTION:
+				
+				if event.axis == 0:
+					if joysticks[0].get_axis(0) <= -0.5:
+						player.go_left()
+					elif joysticks[0].get_axis(0) >= 0.5:
+						player.go_right()
+					else:
+						player.stop()
+				elif event.axis == 1:
+					if joysticks[0].get_axis(1) >= 0.5:
+						player.crouch == True
+						player.image = player.crouch_image
+						if player.direction == 'Left':
+							player.image = pygame.transform.flip(player.image, True, False)
+					elif -0.5 < joysticks[0].get_axis(1) < 0.5:
+						player.crouch == False
+					elif joysticks[0].get_axis(1) <= -0.5:
+						player.crouch == False
+						player.jump()
+				if graviswitch:
+					if event.axis == 2:
+						if joysticks[0].get_axis(2) <= -0.7:
+							if static_boxes(box_list):
+								sound.graviswitch.play()
+								gravity = 'O'
+								print 'Gravedad - O'
+						elif joysticks[0].get_axis(2) >= 0.7:
+							if static_boxes(box_list):
+								sound.graviswitch.play()
+								gravity = 'E'
+								print 'Gravedad - E'
+					elif event.axis == 3:
+						if joysticks[0].get_axis(3) <= -0.7:
+							if static_boxes(box_list):
+								sound.graviswitch.play()
+								gravity = 'N'
+								print 'Gravedad - N'
+						elif joysticks[0].get_axis(3) >= 0.7:
+							if static_boxes(box_list):
+								sound.graviswitch.play()
+								gravity = 'S'
+								print 'Gravedad - S'
+				#if 		
+			
 		FPS = clock.get_fps()
 		
 		if static_boxes(box_list):

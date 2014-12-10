@@ -1,6 +1,6 @@
 import pygame
 from constants import SCREEN, MAX_FPS, SHOW_FPS
-from misc_functions import show_fps
+from misc_functions import show_fps, set_joysticks
 def Demo_TitleScreen():
 	title = pygame.image.load('images/demo/titlescreen.png').convert()
 	'''
@@ -8,6 +8,8 @@ def Demo_TitleScreen():
 		music = pygame.mixer.music.load('sound/music/cheetah.mp3')
 		pygame.mixer.music.play(-1)
 	'''
+	
+	
 	clock = pygame.time.Clock()
 	over = False
 	while not over:
@@ -31,6 +33,10 @@ def Main_TitleScreen(MUTE_MUSIC): #Booleano
 	pygame.mixer.music.play(-1)
 	if MUTE_MUSIC:
 		pygame.mixer.music.pause()
+		
+	joysticks = set_joysticks()
+	for joy in joysticks:
+		joy.init()	
 	
 	clock = pygame.time.Clock()
 	over = False
@@ -38,12 +44,14 @@ def Main_TitleScreen(MUTE_MUSIC): #Booleano
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				return True, True
-			if event.type == pygame.KEYDOWN:
+			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					return True, True
 				elif event.key == pygame.K_RETURN:
 					return False, False
-				
+			elif event.type == pygame.JOYBUTTONDOWN:
+				return False, False
+			
 		SCREEN.blit(title, (0,0))
 		FPS = clock.get_fps()
 		if SHOW_FPS:

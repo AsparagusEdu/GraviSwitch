@@ -143,8 +143,11 @@ class Player(pygame.sprite.Sprite):
 					self.air = False
 					self.walk_ani_frame = 0
 					self.image = self.stand_image
+					if self.crouch:
+						self.image = self.crouch_image
 					if self.direction == 'Left':
 						self.image = pygame.transform.flip(self.image, True, False)
+					
 			else:
 				self.dead = True
 				sound.dead.play()
@@ -168,6 +171,8 @@ class Player(pygame.sprite.Sprite):
 				self.air = False
 				self.walk_ani_frame = 0
 				self.image = self.stand_image
+				if self.crouch:
+						self.image = self.crouch_image
 				if self.direction == 'Left':
 					self.image = pygame.transform.flip(self.image, True, False)
 			elif bloxy.spd_y < 0 and self.spd_y > 0: #BUGFIX para que el jugador pueda caer de una caja en movimiento a otra
@@ -310,6 +315,7 @@ class Player(pygame.sprite.Sprite):
 					self.spd_x = 0
 					self.state = 'Stand'
 					self.image = self.stand_image
+					
 					if not MUTE_MUSIC:
 						pygame.mixer.music.unpause()
 					
@@ -330,6 +336,8 @@ class Player(pygame.sprite.Sprite):
 					self.air = False
 					self.walk_ani_frame = 0
 					self.image = self.stand_image
+					if self.crouch:
+						self.image = self.crouch_image
 					if self.direction == 'Left':
 						self.image = pygame.transform.flip(self.image, True, False)
 				elif self.spd_y < 0 or block.spd_y > 0:

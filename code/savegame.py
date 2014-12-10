@@ -2,7 +2,7 @@ import pygame
 from constants import SCREEN, SCREEN_HEIGHT, SCREEN_WIDTH, MAX_FPS, CHROMA_KEY, SHOW_FPS
 from confirmation import Confirmation
 import sound
-from misc_functions import show_fps
+from misc_functions import show_fps, set_joysticks
 from Adventure import Adventure
 from CustomSelect import Custom_Select
 
@@ -23,6 +23,10 @@ def save_menu(MUTE_MUSIC):
 	save1 = save_read(1)
 	save2 = save_read(2)
 	save3 = save_read(3)
+	
+	joysticks = set_joysticks()
+	for joy in joysticks:
+		joy.init()
 	
 	background = pygame.image.load('images/backgrounds/fondo_marble2.png').convert()
 	
@@ -75,6 +79,7 @@ def save_menu(MUTE_MUSIC):
 	clock = pygame.time.Clock()
 	
 	EXIT_GAME = False
+	axis = False
 	
 	while not EXIT_GAME:
 		FPS = clock.get_fps()
@@ -187,7 +192,100 @@ def save_menu(MUTE_MUSIC):
 						print 'MUSIC - ON'
 						MUTE_MUSIC = False
 						pygame.mixer.music.unpause()
-				
-		
+			elif event.type == pygame.JOYBUTTONDOWN:
+				if event.button == 2:
+					if cursor_state == 0: #Valores relleno
+						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(1, MUTE_MUSIC, prev_song, save1)
+						save1 = save_read(1)
+						if save1 == 'COMPLETADO':
+							text1 = 'COMPLETADO'
+						else:
+							text1 = 'Nivel ' + str(int(save1) +1)
+						text1_i = fonty.render(text1, False, (255,255,255))
+						text1_r = text1_i.get_rect()
+					elif cursor_state == 1:
+						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(2, MUTE_MUSIC, prev_song, save2)
+						save2 = save_read(2)
+						if save2 == 'COMPLETADO':
+							text2 = 'COMPLETADO'
+						else:
+							text2 = 'Nivel ' + str(int(save2) +1)
+						text2_i = fonty.render(text2, False, (255,255,255))
+						text2_r = text2_i.get_rect()
+					elif cursor_state == 2: #Archivo 3
+						EXIT_GAME, MUTE_MUSIC, prev_song = Adventure(3, MUTE_MUSIC, prev_song, save3)
+						save3 = save_read(3)
+						if save3 == 'COMPLETADO':
+							text3 = 'COMPLETADO'
+						else:
+							text3 = 'Nivel ' + str(int(save3) +1)
+						text3_i = fonty.render(text3, False, (255,255,255))
+						text3_r = text3_i.get_rect()
+					elif cursor_state == 3: #Volver
+						EXIT_GAME = True
+					elif cursor_state == 4: #Editor de niveles
+						EXIT_GAME, MUTE_MUSIC, prev_song = Custom_Select(MUTE_MUSIC, prev_song)
+					if prev_song != 's3kfileselect':
+						music = pygame.mixer.music.load('sound/music/JumpingBat.wav')
+						pygame.mixer.music.set_volume(1.0)
+						pygame.mixer.music.play(-1)
+						prev_song = 's3kfileselect'
+						if MUTE_MUSIC:
+							pygame.mixer.music.pause()
+				elif event.button == 3:
+					cursor_state = 3
+					cursor_image = cursor_image3
+			elif event.type == pygame.JOYAXISMOTION:
+				if event.axis == 0:
+					if joysticks[0].get_axis(0) <= -0.7 and not axis:
+						axis = True
+						sound.cursor.play()
+						if cursor_state == 0:
+							cursor_state = 2
+						elif cursor_state == 1:
+							cursor_state = 0
+						elif cursor_state == 2:
+							cursor_state = 1
+						elif cursor_state == 3:
+							cursor_state = 4
+							cursor_image = cursor_image2
+						elif cursor_state == 4:
+							cursor_state = 3
+							cursor_image = cursor_image3
+					elif joysticks[0].get_axis(0) >= 0.7 and not axis:
+						sound.cursor.play()
+						axis = True
+						if cursor_state == 0:
+							cursor_state = 1
+						elif cursor_state == 1:
+							cursor_state = 2
+						elif cursor_state == 2:
+							cursor_state = 0
+						elif cursor_state == 3:
+							cursor_state = 4
+							cursor_image = cursor_image2
+						elif cursor_state == 4:
+							cursor_state = 3
+							cursor_image = cursor_image3
+					else:
+						axis = False
+				elif event.axis == 1 and (joysticks[0].get_axis(1) >= 0.7 or joysticks[0].get_axis(1) <= -0.7) and not axis:
+					axis = True
+					sound.cursor.play()
+					if cursor_state == 0:
+						cursor_state = 3
+						cursor_image = cursor_image3
+					elif cursor_state == 1 or cursor_state == 2:
+						cursor_state = 4
+						cursor_image = cursor_image2
+					elif cursor_state == 3:
+						cursor_state = 0
+						cursor_image = cursor_image1
+					elif cursor_state == 4:
+						cursor_state = 2
+						cursor_image = cursor_image1
+					else:
+						cursor_state = 3
+						cursor_image = cursor_image3
 		clock.tick(MAX_FPS)
 	return True
