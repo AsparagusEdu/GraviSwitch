@@ -1,21 +1,21 @@
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-WWWF                        FWWW
-WWW P  D                    BWWW
-WWWF   W          F         FWWW
-WWW              FJF         WWW
-WWW               F          WWW
-WWW                          WWW
-WWW           F              WWW
-WWW          FJF             WWW
-WWW           F              WWW
-WWW                          WWW
-WWW       F                  WWW
-WWW      FJF                 WWW
-WWW       F                  WWW
-WWW  F                       WWW
-WWW FJF                      WWW 
-WWWSSSSSSSSSSSSSSSSSSSSSSSSSSWWW
-WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+    WWWWWWWWWWWWWWWWWWWW       
+    WSSSJFJFJFJFJFJFJFJW       
+    WSS F F F F F F F FW        
+    WS               P W       
+    WS                 W       
+    WS  FJFJFJFJFJFJFJFW        
+    WS   FJFJFJFJFJFJFJW        
+    WS    F F F F F F FW        
+    WS                 WWWWW    
+    WS                     W    
+    WS                     W    
+    WSF                   FW   
+    WSB                    W    
+    WSSSSSSSSSSSSSSSSSSS  FW    
+    WFF                  F W    
+    WDB                   SW     
+    WWSSSSSSSSSSSSSSSSSSSSSW    
+    WWWWWWWWWWWWWWWWWWWWWWWW    
 :Fondo fondo_marble2.png
 :Musica AdventureHO2.mp3
 :Pared marble.png

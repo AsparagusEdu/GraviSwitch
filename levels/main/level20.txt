@@ -1,0 +1,23 @@
+WP  WWWWWWWWWWWWWWWWWWWWWWWWWWWW
+W   WWWWWWWWWWWWWWWWWWWWWWWWWWWW                            
+W   WWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WW WWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+WWFJFF    F                  WWW
+W  FJ F                       WW
+W FFFF                       DWW
+WFJJF                        WWW
+WFJF    F                     WW
+WFJF FF           FF        F WW
+WFJF  F          FFJF         WW
+SFJF  F            F      F   WW
+WWF   F    F F S         FJF  WW
+WWB   FF    FJF           F   WW
+WWF  FF   F SF                WW
+WW                            WW
+WW                            WW
+SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+:Fondo fondo_marble2.png
+:Musica AdventureHO2.mp3
+:Pared marble.png
+#:Graviswitch False
+#:G_Spin 4
