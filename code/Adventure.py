@@ -31,7 +31,7 @@ def Adventure(save_num, MUTE_MUSIC, prev_song, lvl = 0):
 			lvl += 1
 		if EXIT_GAME: #Si en algun momento se necesita salir del juego
 			return True, MUTE_MUSIC, prev_song
-		elif lvl > 17: #Ultimo nivel del modo aventura
+		elif lvl > 22: #Ultimo nivel del modo aventura
 			return False, MUTE_MUSIC, prev_song
 		
 		clock.tick(MAX_FPS)
